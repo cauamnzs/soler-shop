@@ -15,56 +15,59 @@ const FluidBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    // Motor de Física "Effervescente": 80 partículas pulsantes
-    const generateParticles = Array.from({ length: 80 }).map((_, i) => ({
+    // Detecta se é mobile para não fritar o celular e manter a elegância
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 30 : 80; // No celular 30 bolinhas já dão o efeito sem pesar
+
+    const generateParticles = Array.from({ length: count }).map((_, i) => ({
       id: i,
-      size: Math.random() * 2.8 + 0.8, // Tamanhos variados (0.8 a 3.6px)
+      size: Math.random() * (isMobile ? 2 : 2.8) + 0.8,
       x: Math.random() * 100,
-      y: Math.random() * 110 + 10,
-      duration: Math.random() * 18 + 18, // Velocidade variada (18 a 36 seg)
-      delay: Math.random() * -30, // Já nascem em posições diferentes no load
-      drift: (Math.random() - 0.5) * 40, // Deriva lateral caótica
+      // O segredo do mobile: espalhar o nascimento em 150vh para elas virem de "fora" da tela
+      y: Math.random() * 150, 
+      duration: Math.random() * 15 + 20, 
+      delay: Math.random() * -30, 
+      drift: (Math.random() - 0.5) * (isMobile ? 20 : 40),
     }));
     
     setParticles(generateParticles);
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[-1] bg-[#faf9f6] pointer-events-none overflow-hidden">
+    // Usamos h-[100dvh] que é a unidade moderna para ignorar a barra do navegador no celular
+    <div className="fixed inset-0 z-[-1] bg-[#faf9f6] pointer-events-none overflow-hidden h-[100dvh] w-full">
       
-      {/* CAMADA 1: A Seda Líquida Original (Sutil e Equilibrada) */}
-      
-      {/* Esfera Esquerda: Dourado Sutil */}
+      {/* Esfera Esquerda (Dourada) */}
       <motion.div
-        className="absolute -top-[15%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#d4af37]/12 blur-[120px]"
-        animate={{ x: ["0%", "15%", "0%"], y: ["0%", "20%", "0%"], scale: [1, 1.1, 1] }}
+        className="absolute -top-[10%] -left-[20%] w-[100vw] md:w-[70vw] h-[100vw] md:h-[70vw] rounded-full bg-[#d4af37]/10 blur-[80px] md:blur-[120px]"
+        animate={{ x: ["0%", "10%", "0%"], y: ["0%", "15%", "0%"] }}
         transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
       />
       
-      {/* Esfera Direita: Rosa Pêssego Suave (O Rosa que você queria de volta) */}
+      {/* Esfera Direita (Rosa) */}
       <motion.div
-        className="absolute top-[30%] -right-[15%] w-[65vw] h-[65vw] rounded-full bg-[#e8a892]/15 blur-[140px]"
-        animate={{ x: ["0%", "-20%", "0%"], y: ["0%", "-15%", "0%"], scale: [1, 1.2, 1] }}
+        className="absolute top-[20%] -right-[20%] w-[100vw] md:w-[65vw] h-[100vw] md:h-[65vw] rounded-full bg-[#e8a892]/12 blur-[80px] md:blur-[140px]"
+        animate={{ x: ["0%", "-15%", "0%"], y: ["0%", "-10%", "0%"] }}
         transition={{ duration: 30, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
-      {/* CAMADA 2: A Física do "Pó de Ouro" Efervescente */}
+      {/* Partículas Efervescentes */}
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-gold/80"
+          className="absolute rounded-full bg-gold/60"
           style={{ 
             width: p.size, 
             height: p.size, 
             left: `${p.x}vw`, 
             top: `${p.y}vh`,
-            boxShadow: `0 0 ${p.size * 5}px rgba(212, 175, 55, 0.7)` 
+            boxShadow: `0 0 ${p.size * 3}px rgba(212, 175, 55, 0.5)` 
           }}
           animate={{
-            y: ["0vh", "-120vh"], // Sobem mais
+            y: ["0vh", "-150vh"], // Sobem mais para garantir que cruzam a tela inteira do celular
             x: ["0vw", `${p.drift}vw`],
-            opacity: [0, 1, 0.4, 1, 0], // Pulsação de brilho mantida
-            scale: [0, 1.2, 0.8, 1.2, 0], // Pulsação de escala mantida
+            opacity: [0, 0.8, 0.3, 0.8, 0],
+            scale: [0, 1, 0.7, 1, 0],
           }}
           transition={{ 
             duration: p.duration, 
@@ -75,11 +78,11 @@ const FluidBackground = () => {
         />
       ))}
 
-      {/* CAMADA 3: Ruído Premium Infinito (Blindagem anti-corte) */}
+      {/* Ruído Premium (Tamanho maior para mobile não ver a emenda) */}
       <div 
-        className="absolute -inset-[250px] opacity-[0.06] mix-blend-multiply pointer-events-none"
+        className="absolute -inset-[300px] opacity-[0.05] mix-blend-multiply pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
         }}
       />
