@@ -61,7 +61,8 @@ const FluidBackground = () => {
             height: p.size, 
             left: `${p.x}vw`, 
             top: `${p.y}vh`,
-            boxShadow: `0 0 ${p.size * 3}px rgba(212, 175, 55, 0.5)` 
+            boxShadow: `0 0 ${p.size * 3}px rgba(212, 175, 55, 0.5)`,
+            willChange: "transform, opacity",
           }}
           animate={{
             y: ["0vh", "-150vh"], // Sobem mais para garantir que cruzam a tela inteira do celular
