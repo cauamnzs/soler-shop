@@ -40,7 +40,7 @@ const HeroSection = () => {
       {/* Background Image com Efeito Zoom e Parallax */}
       <motion.div
         className="absolute inset-0 z-0"
-        style={{ y: backgroundY }}
+        style={{ y: backgroundY, willChange: "transform" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
         <motion.img
@@ -48,7 +48,7 @@ const HeroSection = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
           src={heroImage}
-          alt="Soler Shop Luxury Perfume"
+          alt="Frasco de perfume de luxo Soler Shop com iluminação cinematográfica"
           className="w-full h-full object-cover object-center"
         />
       </motion.div>
@@ -56,7 +56,7 @@ const HeroSection = () => {
       {/* Conteúdo (Textos e Botão) */}
       <motion.div
         className="relative z-20 max-w-7xl mx-auto section-padding w-full py-16 md:py-24"
-        style={{ y: textY, opacity }}
+        style={{ y: textY, opacity, willChange: "transform, opacity" }}
       >
         <motion.div
           className="max-w-2xl"
@@ -66,14 +66,14 @@ const HeroSection = () => {
         >
           <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4 md:mb-6">
             <span className="w-8 h-[1px] bg-gold block"></span>
-            <p className="text-gold font-body text-xs md:text-sm uppercase tracking-[0.3em]">
+            <p className="text-gold font-body text-xs md:text-sm uppercase tracking-[0.4em]">
               Santos / Ilhabela — Envio Nacional
             </p>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground leading-[1.05] mb-6 md:mb-8 tracking-tight"
+            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground leading-[1.05] mb-6 md:mb-8"
           >
             Sua Dose Diária de <br />
             <span className="italic text-gold font-light">Luxo</span> e Cuidado
@@ -91,10 +91,10 @@ const HeroSection = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             href="#products"
-            className="group relative inline-flex items-center gap-4 bg-gold text-background px-8 py-4 uppercase tracking-[0.2em] font-medium text-sm transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+            className="group relative inline-flex items-center gap-4 bg-gold text-background px-8 py-4 uppercase tracking-[0.2em] font-medium text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
           >
             Explorar Produtos
-            <span className="text-lg leading-none font-light group-hover:translate-x-1 transition-transform">→</span>
+            <span className="text-lg leading-none font-light group-hover:translate-x-1 transition-transform duration-500 ease-lux">→</span>
           </motion.a>
         </motion.div>
       </motion.div>

@@ -1,106 +1,114 @@
-import { motion, Variants } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
 import { ShieldCheck, Sparkles, MapPin, Truck } from "lucide-react";
+import { triggerShockwave } from "./FluidBackground";
 
 const highlights = [
-  { icon: ShieldCheck, title: "100% Originais", desc: "Todos os produtos são importados autênticos com origem verificada" },
-  { icon: Sparkles, title: "Curadoria Especial", desc: "Cada item é selecionado pessoalmente por qualidade e elegância" },
-  { icon: MapPin, title: "Santos & Ilhabela", desc: "Nascidos no litoral de São Paulo, inspirados pelo sol e mar" },
-  { icon: Truck, title: "Envio Rápido", desc: "Entrega confiável e segura para todo o território nacional" },
+  { 
+    icon: ShieldCheck, 
+    title: "100% Originais", 
+    desc: "Cada fragrância em nosso catálogo passa por um rigoroso processo de autenticação. Trabalhamos apenas com lotes verificados das casas mais prestigiadas do mundo." 
+  },
+  { 
+    icon: Sparkles, 
+    title: "Curadoria Especial", 
+    desc: "Nossa seleção não é baseada em tendências passageiras, mas em composições atemporais que definem presença e sofisticação." 
+  },
+  { 
+    icon: MapPin, 
+    title: "Herança Litorânea", 
+    desc: "Nascidos entre o charme de Santos e a exclusividade de Ilhabela, trazemos a leveza do mar aliada ao luxo cosmopolita." 
+  },
+  { 
+    icon: Truck, 
+    title: "Logística White-Glove", 
+    desc: "Sua encomenda é tratada como uma obra de arte. Embalagem reforçada e envio prioritário para garantir a integridade do frasco." 
+  },
 ];
 
-const WhyChoose = () => {
-  // Animação do cabeçalho
-  const headerVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
-    },
-  };
+const FeatureCard = ({ item, index }: { item: typeof highlights[0], index: number }) => {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { margin: "-45% 0px -45% 0px" });
 
-  // Cascata para os diferenciais
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  // Animação de cada ícone (surgindo e crescendo levemente)
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9] },
-    },
-  };
+  useEffect(() => {
+    if (isInView) {
+      triggerShockwave(0.5 + index * 0.1);
+    }
+  }, [isInView, index]);
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
-      {/* Linha decorativa de fundo (opcional, dá um charme) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-24 bg-gradient-to-b from-transparent to-gold/20" />
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0.2, x: 20 }}
+      animate={{ 
+        opacity: isInView ? 1 : 0.2, 
+        x: isInView ? 0 : 20,
+        scale: isInView ? 1 : 0.95
+      }}
+      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+      className="min-h-[60vh] flex flex-col justify-center py-12"
+    >
+      <div className={`w-16 h-16 mb-8 flex items-center justify-center rounded-full border transition-colors duration-700 ${isInView ? "border-gold bg-gold/5 text-gold" : "border-foreground/10 text-muted-foreground"}`}>
+        <item.icon strokeWidth={1} size={32} />
+      </div>
+      
+      <h3 className={`font-heading text-3xl md:text-5xl mb-6 transition-colors duration-700 ${isInView ? "text-foreground" : "text-muted-foreground/40"}`}>
+        {item.title}
+      </h3>
+      
+      <p className={`font-body text-lg md:text-xl leading-relaxed font-light max-w-md transition-colors duration-700 ${isInView ? "text-muted-foreground" : "text-muted-foreground/20"}`}>
+        {item.desc}
+      </p>
+      
+      {isInView && (
+        <motion.div 
+          initial={{ width: 0 }} 
+          animate={{ width: "100px" }} 
+          className="h-[1px] bg-gold mt-8" 
+        />
+      )}
+    </motion.article>
+  );
+};
 
-      <div className="max-w-7xl mx-auto section-padding relative z-10">
+const WhyChoose = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section ref={containerRef} className="relative w-full py-24 md:py-48">
+      <div className="max-w-7xl mx-auto section-padding flex flex-col md:flex-row gap-12 md:gap-24">
         
-        {/* Cabeçalho */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={headerVariants}
-          className="flex flex-col items-center mb-16 md:mb-24"
-        >
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-center text-foreground mb-4 tracking-tight">
-            A Experiência <span className="italic text-gold font-light">Soler</span>
-          </h2>
-          <p className="text-center text-muted-foreground font-body text-sm md:text-base uppercase tracking-[0.2em] max-w-lg mx-auto font-light">
-            Mais do que uma loja, um estilo de vida
-          </p>
-        </motion.div>
+        {/* Título Fixo (Sticky) */}
+        <div className="w-full md:w-1/2 md:h-screen md:sticky md:top-0 flex flex-col justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-md"
+          >
+            <span className="text-gold font-body text-xs uppercase tracking-[0.5em] mb-6 block">The Soler Heritage</span>
+            <h2 className="font-heading text-5xl md:text-8xl text-foreground mb-8 leading-tight">
+              A Experiência <br />
+              <span className="italic font-light text-gold">Soler</span>
+            </h2>
+            <div className="w-24 h-[1px] bg-gold mb-8"></div>
+            <p className="font-body text-muted-foreground text-lg font-light leading-relaxed">
+              Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Grade de Diferenciais */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-12"
-        >
-          {highlights.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={itemVariants}
-              className="flex flex-col items-center text-center group cursor-default"
-            >
-              {/* Ícone com borda animada */}
-              <div className="relative w-20 h-20 mb-6 flex items-center justify-center rounded-full border border-foreground/10 bg-transparent
-                transition-all duration-500 ease-out group-hover:border-gold/50 group-hover:bg-gold/5"
-              >
-                {/* Brilho interno sutil no hover */}
-                <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-opacity duration-500" />
-                <item.icon
-                  strokeWidth={1.5}
-                  size={32}
-                  className="text-muted-foreground group-hover:text-gold transition-colors duration-500 relative z-10"
-                />
-              </div>
-
-              {/* Textos */}
-              <h3 className="font-heading text-lg md:text-xl text-foreground mb-3 transition-colors duration-300 group-hover:text-gold">
-                {item.title}
-              </h3>
-              <p className="font-body text-sm text-muted-foreground font-light leading-relaxed max-w-[250px]">
-                {item.desc}
-              </p>
-            </motion.div>
+        {/* Scrolling Narrativo */}
+        <div className="w-full md:w-1/2">
+          {highlights.map((item, index) => (
+            <FeatureCard key={item.title} item={item} index={index} />
           ))}
-        </motion.div>
+        </div>
 
       </div>
+      
+      {/* Background Decor (Opcional - Linha vertical de progresso) */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-gold/10 to-transparent hidden lg:block" />
     </section>
   );
 };

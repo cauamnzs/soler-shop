@@ -47,7 +47,7 @@ const Footer = () => {
 
           {/* Navegação */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-heading text-sm uppercase tracking-[0.2em] mb-6 text-primary-foreground/90">
+            <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               Navegação
             </h4>
             <div className="flex flex-col space-y-3">
@@ -55,7 +55,7 @@ const Footer = () => {
                 <a
                   key={link}
                   href="#"
-                  className="font-body text-sm text-primary-foreground/50 font-light w-fit transition-all duration-300 hover:text-gold hover:translate-x-1"
+                  className="font-body text-sm text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1"
                 >
                   {link}
                 </a>
@@ -65,7 +65,7 @@ const Footer = () => {
 
           {/* Redes Sociais */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-heading text-sm uppercase tracking-[0.2em] mb-6 text-primary-foreground/90">
+            <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               Conecte-se
             </h4>
             <div className="flex gap-4">
@@ -73,21 +73,21 @@ const Footer = () => {
                 href="https://instagram.com/solershop_"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-500 ease-out"
+                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Instagram"
               >
                 <Instagram size={20} strokeWidth={1.5} />
               </a>
               <a
                 href="#"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-500 ease-out"
+                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Facebook"
               >
                 <Facebook size={20} strokeWidth={1.5} />
               </a>
               <a
                 href="#"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-500 ease-out"
+                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Email"
               >
                 <Mail size={20} strokeWidth={1.5} />
@@ -97,7 +97,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-heading text-sm uppercase tracking-[0.2em] mb-6 text-primary-foreground/90">
+            <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               The Soler Club
             </h4>
             <p className="font-body text-sm text-primary-foreground/50 mb-5 font-light">
@@ -107,11 +107,11 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Seu endereço de e-mail"
-                className="w-full bg-transparent border-b border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 focus:outline-none focus:border-gold transition-colors"
+                className="w-full bg-transparent border-b border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 focus:outline-none focus:border-gold transition-lux duration-500 ease-lux"
               />
               <button
                 type="submit"
-                className="absolute right-0 text-gold uppercase tracking-wider font-body text-xs hover:text-primary-foreground transition-colors"
+                className="absolute right-0 text-gold uppercase tracking-wider font-body text-xs hover:text-primary-foreground transition-lux duration-500 ease-lux"
               >
                 Assinar
               </button>

@@ -65,10 +65,10 @@ const ProductGrid = () => {
           className="flex flex-col items-center mb-16 md:mb-24"
         >
           <span className="w-8 h-[1px] bg-gold block mb-6"></span>
-          <h2 className="font-heading text-4xl md:text-5xl text-center text-foreground mb-4 tracking-tight">
+          <h2 className="font-heading text-4xl md:text-5xl text-center text-foreground mb-4">
             Nossos <span className="italic text-gold font-light">Favoritos</span>
           </h2>
-          <p className="text-center text-muted-foreground font-body text-sm md:text-base uppercase tracking-[0.2em] font-light">
+          <p className="text-center text-muted-foreground font-body text-sm md:text-base uppercase tracking-[0.4em] font-light">
             Seleção exclusiva de importados
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ const ProductGrid = () => {
               <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-sm mb-5">
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={`Imagem do produto ${product.name}`}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
                 />

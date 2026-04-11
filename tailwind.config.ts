@@ -92,6 +92,13 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      transitionTimingFunction: {
+        lux: "cubic-bezier(0.23, 1, 0.32, 1)",
+      },
+      boxShadow: {
+        lux: "0 10px 40px -10px rgba(212, 175, 55, 0.1)",
+        "lux-hover": "0 20px 50px -12px rgba(212, 175, 55, 0.2)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
