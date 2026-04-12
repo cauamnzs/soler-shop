@@ -34,7 +34,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4 md:p-8">
+        <div className="fixed inset-0 z-[9980] flex items-center justify-center p-4 md:p-8">
           {/* Overlay com Blur Intenso */}
           <motion.div
             initial={{ opacity: 0 }}

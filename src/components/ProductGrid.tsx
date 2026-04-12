@@ -52,7 +52,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="py-16 md:py-24 bg-transparent">
+    <section id="products" className="py-12 md:py-20 bg-transparent">
       <div className="max-w-7xl mx-auto section-padding">
         
         {/* Cabeçalho */}
@@ -61,7 +61,7 @@ const ProductGrid = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={headerVariants}
-          className="flex flex-col items-center mb-12 md:mb-20"
+          className="flex flex-col items-center mb-10 md:mb-16"
         >
           <span className="w-8 h-[1px] bg-gold block mb-6"></span>
           <h2 className="font-heading text-4xl md:text-5xl text-center text-foreground mb-4">

@@ -9,7 +9,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#faf9f6]/60 backdrop-blur-xl border-t border-t-white/20 border-b border-b-black/5 shadow-lux transition-all duration-500 ease-lux">
+    <header className="sticky top-0 z-[9970] bg-[#faf9f6]/60 backdrop-blur-xl border-t border-t-white/20 border-b border-b-black/5 shadow-lux transition-all duration-500 ease-lux">
       <div className="max-w-7xl mx-auto section-padding">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}

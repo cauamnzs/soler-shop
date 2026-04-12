@@ -110,16 +110,16 @@ const SensationVibes = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full py-16 md:py-24 overflow-hidden bg-transparent">
+    <section ref={containerRef} className="relative w-full py-12 md:py-20 overflow-hidden bg-transparent">
       {/* Gradiente de Integração */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-0" />
       
-      <div className="max-w-7xl mx-auto section-padding relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col items-center text-center mb-12 md:mb-20"
+          className="flex flex-col items-center text-center mb-10 md:mb-16 px-4 sm:px-6 lg:px-8 xl:px-16"
         >
           <motion.div variants={headerVariants} className="flex flex-col items-center gap-6">
             <span className="text-gold font-body text-[10px] uppercase tracking-[0.8em]">Curadoria de Sensações</span>
@@ -138,7 +138,7 @@ const SensationVibes = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex md:grid md:grid-cols-2 gap-6 md:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0"
+          className="flex md:grid md:grid-cols-2 gap-6 md:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-4 sm:px-6 lg:px-8 xl:px-16"
         >
           {vibes.map((vibe, index) => (
             <VibeModule key={vibe.id} vibe={vibe} index={index} />

@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-mot
 import { useEffect, useState, memo } from "react";
 
 const CustomCursor = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [hoverType, setHoverType] = useState<string | null>(null);
@@ -15,6 +16,12 @@ const CustomCursor = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Só ativa se for um dispositivo com ponteiro preciso (mouse)
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) return;
+
+    setIsVisible(true);
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -50,8 +57,10 @@ const CustomCursor = () => {
     };
   }, [mouseX, mouseY]);
 
+  if (!isVisible) return null;
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9999] hidden md:block">
+    <div className="fixed inset-0 pointer-events-none z-[9990] hidden md:block">
       {/* O Anel Externo (Outer Ring) */}
       <motion.div
         className="absolute w-8 h-8 border border-gold/40 rounded-full"

@@ -24,7 +24,7 @@ const Preloader = () => {
             opacity: 0,
             transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
           }}
-          className="fixed inset-0 z-[10000] bg-background flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center overflow-hidden"
         >
           {/* Névoa Dourada de Fundo */}
           <motion.div

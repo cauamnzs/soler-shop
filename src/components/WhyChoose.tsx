@@ -67,11 +67,11 @@ const WhyChoose = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="relative w-full py-16 md:py-24 bg-transparent overflow-visible">
+    <section ref={containerRef} className="relative w-full py-12 md:py-20 bg-transparent overflow-visible">
       {/* Seamless Glass Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent backdrop-blur-[1px] pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto section-padding flex flex-col md:flex-row gap-12 md:gap-24 relative z-10">
+      <div className="max-w-7xl mx-auto section-padding flex flex-col md:flex-row gap-10 md:gap-24 relative z-10">
         
         {/* Título Fixo (Sticky) - Editorial Minimalista */}
         <div className="w-full md:w-1/2 md:h-[60vh] md:sticky md:top-[20vh] flex flex-col justify-center">
