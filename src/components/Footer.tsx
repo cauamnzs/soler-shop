@@ -18,7 +18,7 @@ const Footer = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -34,7 +34,7 @@ const Footer = () => {
         >
           {/* Marca / Sobre */}
           <motion.div variants={itemVariants} className="flex flex-col">
-            <a href="/" className="flex items-center gap-3 mb-6 inline-block">
+            <a href="/" data-cursor-label="Início" className="flex items-center gap-3 mb-6 inline-block">
               <img src={solerLogo} alt="Soler Shop" className="h-12 w-12 brightness-0 invert opacity-90" />
               <span className="font-heading text-2xl tracking-wide text-primary-foreground">
                 Soler <span className="italic font-light">Shop</span>
@@ -55,6 +55,7 @@ const Footer = () => {
                 <a
                   key={link}
                   href="#"
+                  data-cursor-label="Explorar"
                   className="font-body text-sm text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1"
                 >
                   {link}
@@ -73,6 +74,7 @@ const Footer = () => {
                 href="https://instagram.com/solershop_"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cursor-label="Instagram"
                 className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Instagram"
               >
@@ -80,6 +82,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
+                data-cursor-label="Facebook"
                 className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Facebook"
               >
@@ -87,6 +90,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
+                data-cursor-label="Email"
                 className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
                 aria-label="Email"
               >

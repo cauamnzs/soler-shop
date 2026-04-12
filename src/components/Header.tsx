@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import solerLogo from "@/assets/soler-logo.png";
 
 // Categorias atualizadas com a Promoção no final para o destaque visual
@@ -13,7 +13,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto section-padding">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
+          <a href="/" data-cursor-label="Início" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
             <img src={solerLogo} alt="Soler Shop" className="h-9 w-9 md:h-11 md:w-11 transition-lux duration-500 group-hover:scale-105" />
             <div className="leading-tight">
               <span className="font-heading text-lg md:text-xl font-semibold tracking-wide text-foreground">
@@ -31,6 +31,7 @@ const Header = () => {
               <a
                 key={link}
                 href="#"
+                data-cursor-label="Explorar"
                 className="text-sm font-body font-medium tracking-wide text-muted-foreground
                   hover:text-gold transition-lux duration-500 relative
                   after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full
@@ -46,15 +47,6 @@ const Header = () => {
           <div className="flex items-center gap-1 sm:gap-3 md:gap-5">
             <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
               <Search size={20} />
-            </button>
-            <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500 hidden sm:block" aria-label="Minha Conta">
-              <User size={20} />
-            </button>
-            <button className="p-2 relative text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Carrinho de Compras">
-              <ShoppingBag size={20} />
-              <span className="absolute top-1 right-1 bg-gold text-primary-foreground text-[10px] font-body font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full min-w-[18px] min-h-[18px] shadow-lux">
-                3
-              </span>
             </button>
             <button
               className="p-2 lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500"

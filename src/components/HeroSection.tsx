@@ -27,7 +27,7 @@ const HeroSection = () => {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -101,6 +101,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
             href="#products"
+            data-cursor-label="Explorar"
             className="group relative inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-5 md:py-4 uppercase tracking-[0.2em] font-medium text-xs md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
           >
             Explorar Produtos
@@ -113,7 +114,7 @@ const HeroSection = () => {
           className="hidden md:block w-1/2 h-[60vh] relative z-30"
           style={{ y: imageOverlapY, willChange: "transform" }}
         >
-          <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-sm border border-white/10 shadow-2xl overflow-hidden group">
+          <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-xl border border-white/10 shadow-2xl overflow-hidden group">
             <img 
               src={heroImage} 
               alt="Frasco de perfume detalhe" 

@@ -103,7 +103,7 @@ const InstagramFeed = () => {
               href="https://instagram.com/solershop_"
               target="_blank"
               rel="noopener noreferrer"
-              className="aspect-square overflow-hidden rounded-sm group relative block bg-gold/5 border border-white/5"
+              className="aspect-square overflow-hidden rounded-xl group relative block bg-gold/5 border border-white/5"
             >
               <img
                 src={photo}

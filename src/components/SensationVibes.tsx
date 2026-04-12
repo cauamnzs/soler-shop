@@ -1,42 +1,9 @@
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef, memo } from "react";
-import vibe1 from "@/assets/cat-fragrances.jpg";
-import vibe2 from "@/assets/cat-bodycare.jpg";
-import vibe3 from "@/assets/cat-lips.jpg";
-import vibe4 from "@/assets/hero-perfume.jpg"; // Usando a imagem do hero para a 4ª vibe clássica
+import { vibes } from "@/data/mockData";
+import { Vibe } from "@/types";
 
-const vibes = [
-  {
-    id: "vibe-1",
-    title: "Ocaso Romântico",
-    description: "Dourado Quente e Âmbar. Uma fragrância que captura o último raio de sol.",
-    image: vibe1,
-    color: "rgba(212, 175, 55, 0.15)",
-  },
-  {
-    id: "vibe-2",
-    title: "Amanhecer Fresco",
-    description: "Cítrico e Off-White. A pureza do orvalho matinal em um frasco de cristal.",
-    image: vibe2,
-    color: "rgba(250, 249, 246, 0.15)",
-  },
-  {
-    id: "vibe-3",
-    title: "Mistério Noturno",
-    description: "Amadeirado e Prata. O enigma das noites cosmopolitas revelado.",
-    image: vibe3,
-    color: "rgba(0, 0, 0, 0.2)",
-  },
-  {
-    id: "vibe-4",
-    title: "Aura Clássica",
-    description: "Neutro e Dourado suave. A quintessência da elegância atemporal.",
-    image: vibe4,
-    color: "rgba(212, 175, 55, 0.1)",
-  }
-];
-
-const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) => {
+const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   
   // Garantir que os hooks de scroll e transform estão sendo chamados no topo do sub-componente
@@ -52,11 +19,19 @@ const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) =
   if (!vibe) return null;
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { 
+      opacity: 0, 
+      scale: 0.96,
+      z: -20
+    },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      scale: 1,
+      z: 0,
+      transition: { 
+        duration: 0.9, 
+        ease: [0.16, 1, 0.3, 1] 
+      },
     },
   };
 
@@ -64,6 +39,7 @@ const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) =
     <motion.div
       ref={ref}
       variants={itemVariants}
+      data-cursor-label="Sentir"
       style={{ 
         scale, 
         opacity, 
@@ -71,7 +47,7 @@ const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) =
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-full aspect-[4/5] md:aspect-[1/1] group overflow-hidden rounded-sm border border-white/5 shadow-2xl bg-black/5"
+      className="relative w-full aspect-[4/5] md:aspect-[1/1] group overflow-hidden rounded-xl border border-white/5 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none w-[85vw] md:w-full"
     >
       {/* Imagem de Fundo com Zoom sutil no Hover */}
       <motion.img
@@ -89,7 +65,7 @@ const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) =
 
       {/* Painel de Vidro com Legenda (Posicionamento Padronizado: Inferior Esquerdo) */}
       <div className="absolute bottom-0 left-0 w-full p-6 md:p-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
-        <div className="p-6 md:p-8 bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl rounded-sm">
+        <div className="p-6 md:p-8 bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl rounded-xl">
           <span className="text-gold font-body text-[10px] uppercase tracking-[0.6em] mb-3 block opacity-80">
             Vibe 0{index + 1}
           </span>
@@ -127,8 +103,8 @@ const SensationVibes = () => {
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.15,
-        delayChildren: 0.2
+        staggerChildren: 0.2,
+        delayChildren: 0.1
       },
     },
   };
@@ -156,13 +132,13 @@ const SensationVibes = () => {
           </motion.div>
         </motion.div>
 
-        {/* Grid Simétrico 2x2 com Staggering */}
+        {/* Grid Simétrico 2x2 com Staggering e Carrossel Mobile */}
         <motion.div 
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+          className="flex md:grid md:grid-cols-2 gap-6 md:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0"
         >
           {vibes.map((vibe, index) => (
             <VibeModule key={vibe.id} vibe={vibe} index={index} />

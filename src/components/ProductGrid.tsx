@@ -1,28 +1,24 @@
 import { motion, Variants } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
-import prodPerfume from "@/assets/prod-perfume1.jpg";
-import prodScrub from "@/assets/prod-scrub1.jpg";
-import prodEarrings from "@/assets/prod-earrings.jpg";
-import prodLipgloss from "@/assets/prod-lipgloss.jpg";
-import prodLotion from "@/assets/prod-lotion.jpg";
-import prodGiftset from "@/assets/prod-giftset.jpg";
-import prodMistSuperberry from "@/assets/prod-mist-superberry.jpg";
-import prodMistCollection from "@/assets/prod-mist-collection.jpg";
-import prodMistRichHoney from "@/assets/prod-mist-richhoney.jpg";
-
-const products = [
-  { name: "Perfume Xerjoff Velvet", price: "R$ 489,00", image: prodPerfume, tag: "Mais Vendido" },
-  { name: "Esfoliante Peppermint Pearl", price: "R$ 129,00", image: prodScrub, tag: null },
-  { name: "Brincos Solar Soler", price: "R$ 89,00", image: prodEarrings, tag: "Novo" },
-  { name: "Gloss Pink Mimosa", price: "R$ 69,00", image: prodLipgloss, tag: null },
-  { name: "Hidratante Corporal Rose Silk", price: "R$ 159,00", image: prodLotion, tag: null },
-  { name: "Kit Presente Fragrâncias", price: "R$ 699,00", image: prodGiftset, tag: "Limitado" },
-  { name: "Body Mist Super Berry", price: "R$ 79,00", image: prodMistSuperberry, tag: "Novo" },
-  { name: "Kit Body Mists Pink", price: "R$ 259,00", image: prodMistCollection, tag: null },
-  { name: "Body Mist Rich Honey", price: "R$ 79,00", image: prodMistRichHoney, tag: null },
-];
+import { Eye } from "lucide-react";
+import { products } from "@/data/mockData";
+import { useState, memo } from "react";
+import { Product } from "@/types";
+import ProductModal from "./ProductModal";
 
 const ProductGrid = () => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    // Não limpa o selectedProduct imediatamente para manter a animação de saída estável
+  };
+
   // Animação de entrada do título
   const headerVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -88,6 +84,8 @@ const ProductGrid = () => {
             <motion.div
               key={product.name}
               variants={itemVariants}
+              data-cursor-label="Explorar"
+              onClick={() => openModal(product)}
               style={{ 
                 willChange: "transform, opacity",
                 backfaceVisibility: "hidden",
@@ -96,7 +94,7 @@ const ProductGrid = () => {
               className="group cursor-pointer flex flex-col"
             >
               {/* Box da Imagem */}
-              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-sm mb-5">
+              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5">
                 <img
                   src={product.image}
                   alt={`Imagem do produto ${product.name}`}
@@ -106,19 +104,23 @@ const ProductGrid = () => {
                 
                 {/* Tag de Destaque */}
                 {product.tag && (
-                  <span className="absolute top-4 left-4 bg-background/80 backdrop-blur-md text-foreground text-[10px] font-body font-medium uppercase tracking-[0.15em] px-3 py-1.5 rounded-sm border border-foreground/5">
+                  <span className="absolute top-4 left-4 bg-background/80 backdrop-blur-md text-foreground text-[10px] font-body font-medium uppercase tracking-[0.15em] px-3 py-1.5 rounded-full border border-foreground/5">
                     {product.tag}
                   </span>
                 )}
                 
-                {/* Botão de Adicionar ao Carrinho (Efeito Vidro) */}
+                {/* Botão de Detalhes (Catálogo) */}
                 <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openModal(product);
+                  }}
                   className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background/70 backdrop-blur-md border border-foreground/10 text-foreground p-3.5 sm:p-3 rounded-full
                     opacity-100 sm:opacity-0 translate-y-0 sm:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0
                     transition-all duration-500 ease-out hover:bg-gold hover:text-background hover:border-gold hover:scale-110 shadow-lg active:scale-95"
-                  aria-label={`Adicionar ${product.name} ao carrinho`}
+                  aria-label={`Ver detalhes de ${product.name}`}
                 >
-                  <ShoppingBag size={20} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
+                  <Eye size={20} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
                 </button>
               </div>
 
@@ -148,9 +150,16 @@ const ProductGrid = () => {
           </a>
         </motion.div>
 
+        {/* Modal de Detalhes Cinematográfico */}
+        <ProductModal 
+          product={selectedProduct} 
+          isOpen={isModalOpen} 
+          onClose={closeModal} 
+        />
+
       </div>
     </section>
   );
 };
 
-export default ProductGrid;
+export default memo(ProductGrid);
