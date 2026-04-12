@@ -12,8 +12,9 @@ const HeroSection = () => {
   });
 
   // Criando o efeito Parallax (fundo e texto movem em velocidades diferentes)
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const imageOverlapY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   // Regras de animação em Cascata (Stagger)
@@ -35,14 +36,19 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative w-full min-h-[85vh] flex items-center overflow-hidden bg-background">
+    <section ref={ref} className="relative w-full min-h-[90dvh] md:min-h-[80vh] flex items-center overflow-visible bg-transparent mb-[-5vh] md:mb-[-10vh] z-10">
       
       {/* Background Image com Efeito Zoom e Parallax */}
       <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y: backgroundY, willChange: "transform" }}
+        className="absolute inset-0 z-0 overflow-hidden"
+        style={{ 
+          y: backgroundY, 
+          willChange: "transform",
+          maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
+        }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-background/90 via-background/80 to-transparent z-10" />
         <motion.img
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -54,34 +60,32 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Conteúdo (Textos e Botão) */}
-      <motion.div
-        className="relative z-20 max-w-7xl mx-auto section-padding w-full py-16 md:py-24"
-        style={{ y: textY, opacity, willChange: "transform, opacity" }}
-      >
+      <div className="relative z-20 max-w-7xl mx-auto section-padding w-full flex flex-col md:flex-row items-center gap-12 py-12 md:py-24">
         <motion.div
-          className="max-w-2xl"
+          className="w-full md:w-1/2 mt-12 md:mt-0"
+          style={{ y: textY, opacity, willChange: "transform, opacity" }}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4 md:mb-6">
             <span className="w-8 h-[1px] bg-gold block"></span>
-            <p className="text-gold font-body text-xs md:text-sm uppercase tracking-[0.4em]">
+            <p className="text-gold font-body text-[10px] md:text-sm uppercase tracking-[0.4em]">
               Santos / Ilhabela — Envio Nacional
             </p>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground leading-[1.05] mb-6 md:mb-8"
+            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground leading-[1.1] md:leading-[1.05] mb-6 md:mb-8"
           >
-            Sua Dose Diária de <br />
-            <span className="italic text-gold font-light">Luxo</span> e Cuidado
+            Sua Dose Diária de <br className="hidden sm:block" />
+            <span className="italic font-light text-gold">Luxo</span> e Cuidado
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="font-body text-muted-foreground text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-md font-light"
+            className="font-body text-muted-foreground text-sm md:text-lg leading-relaxed mb-8 md:mb-10 max-w-md font-light"
           >
             Trabalhamos com as marcas mais desejadas do mundo. Descubra perfumes, body splashes e esfoliantes 100% originais.
           </motion.p>
@@ -89,15 +93,30 @@ const HeroSection = () => {
           <motion.a
             variants={itemVariants}
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: 0.96 }}
             href="#products"
-            className="group relative inline-flex items-center gap-4 bg-gold text-background px-8 py-4 uppercase tracking-[0.2em] font-medium text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-5 md:py-4 uppercase tracking-[0.2em] font-medium text-xs md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
           >
             Explorar Produtos
             <span className="text-lg leading-none font-light group-hover:translate-x-1 transition-transform duration-500 ease-lux">→</span>
           </motion.a>
         </motion.div>
-      </motion.div>
+
+        {/* Imagem Flutuante com Overlap (Quebra a linha horizontal) */}
+        <motion.div 
+          className="hidden md:block w-1/2 h-[60vh] relative z-30"
+          style={{ y: imageOverlapY, willChange: "transform" }}
+        >
+          <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-sm border border-white/10 shadow-2xl overflow-hidden group">
+            <img 
+              src={heroImage} 
+              alt="Frasco de perfume detalhe" 
+              className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-1000"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

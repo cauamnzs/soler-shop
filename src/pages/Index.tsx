@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import CategoryCards from "@/components/CategoryCards";
+import SensationVibes from "@/components/SensationVibes";
 import ProductGrid from "@/components/ProductGrid";
 import WhyChoose from "@/components/WhyChoose";
 import InstagramFeed from "@/components/InstagramFeed";
@@ -49,7 +49,7 @@ const Index = () => {
       <Header />
       <main className="relative z-10">
         <HeroSection />
-        <CategoryCards />
+        <SensationVibes />
         <ProductGrid />
         <WhyChoose />
         <InstagramFeed />

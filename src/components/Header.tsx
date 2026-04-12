@@ -43,21 +43,21 @@ const Header = () => {
           </nav>
 
           {/* Icons */}
-          <div className="flex items-center gap-3 md:gap-5">
-            <button className="text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
+          <div className="flex items-center gap-1 sm:gap-3 md:gap-5">
+            <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
               <Search size={20} />
             </button>
-            <button className="text-muted-foreground hover:text-gold transition-lux duration-500 hidden sm:block" aria-label="Minha Conta">
+            <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500 hidden sm:block" aria-label="Minha Conta">
               <User size={20} />
             </button>
-            <button className="relative text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Carrinho de Compras">
+            <button className="p-2 relative text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Carrinho de Compras">
               <ShoppingBag size={20} />
-              <span className="absolute -top-1.5 -right-1.5 bg-gold text-primary-foreground text-[10px] font-body font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full min-w-[18px] min-h-[18px] shadow-lux">
+              <span className="absolute top-1 right-1 bg-gold text-primary-foreground text-[10px] font-body font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full min-w-[18px] min-h-[18px] shadow-lux">
                 3
               </span>
             </button>
             <button
-              className="lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500"
+              className="p-2 lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Fechar Menu" : "Abrir Menu"}
             >
@@ -69,13 +69,14 @@ const Header = () => {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <nav className="lg:hidden bg-background border-t border-border animate-fade-up">
-          <div className="section-padding py-4 flex flex-col gap-3">
+        <nav className="lg:hidden bg-[#faf9f6] border-t border-black/5 animate-fade-up shadow-xl">
+          <div className="section-padding py-6 flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link}
                 href="#"
-                className="text-sm font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-2 transition-colors"
+                className="text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-black/5 last:border-0 transition-colors"
+                onClick={() => setMobileOpen(false)}
               >
                 {link === "Promoção" ? <span className="text-destructive font-semibold">{link}</span> : link}
               </a>

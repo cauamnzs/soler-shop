@@ -53,7 +53,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="py-20 md:py-32">
+    <section id="products" className="py-24 md:py-32 bg-transparent">
       <div className="max-w-7xl mx-auto section-padding">
         
         {/* Cabeçalho */}
@@ -105,12 +105,12 @@ const ProductGrid = () => {
                 
                 {/* Botão de Adicionar ao Carrinho (Efeito Vidro) */}
                 <button
-                  className="absolute bottom-4 right-4 bg-background/70 backdrop-blur-md border border-foreground/10 text-foreground p-3 rounded-full
-                    opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0
-                    transition-all duration-500 ease-out hover:bg-gold hover:text-background hover:border-gold hover:scale-110 shadow-lg"
+                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background/70 backdrop-blur-md border border-foreground/10 text-foreground p-3.5 sm:p-3 rounded-full
+                    opacity-100 sm:opacity-0 translate-y-0 sm:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0
+                    transition-all duration-500 ease-out hover:bg-gold hover:text-background hover:border-gold hover:scale-110 shadow-lg active:scale-95"
                   aria-label={`Adicionar ${product.name} ao carrinho`}
                 >
-                  <ShoppingBag size={18} strokeWidth={1.5} />
+                  <ShoppingBag size={20} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
                 </button>
               </div>
 
