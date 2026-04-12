@@ -34,7 +34,12 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0], index: numbe
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.2, y: 30 }}
-      transition={{ duration: 1, ease: [0.2, 0.65, 0.3, 0.9] }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      style={{ 
+        willChange: "transform, opacity",
+        backfaceVisibility: "hidden",
+        transform: "translateZ(0)"
+      }}
       className="min-h-[40vh] md:min-h-[50vh] flex flex-col justify-center py-12 md:py-20"
     >
       <div className={`w-12 h-12 mb-8 flex items-center justify-center transition-colors duration-700 ${isInView ? "text-gold" : "text-gold/30"}`}>

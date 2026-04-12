@@ -31,7 +31,7 @@ const HeroSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -63,7 +63,13 @@ const HeroSection = () => {
       <div className="relative z-20 max-w-7xl mx-auto section-padding w-full flex flex-col md:flex-row items-center gap-12 py-12 md:py-24">
         <motion.div
           className="w-full md:w-1/2 mt-12 md:mt-0"
-          style={{ y: textY, opacity, willChange: "transform, opacity" }}
+          style={{ 
+            y: textY, 
+            opacity, 
+            willChange: "transform, opacity",
+            backfaceVisibility: "hidden",
+            transform: "translateZ(0)"
+          }}
           variants={containerVariants}
           initial="hidden"
           animate="visible"

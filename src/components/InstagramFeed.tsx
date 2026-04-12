@@ -29,7 +29,7 @@ const InstagramFeed = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -38,7 +38,7 @@ const InstagramFeed = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: { staggerChildren: 0.15 },
     },
   };
 
@@ -49,7 +49,7 @@ const InstagramFeed = () => {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -95,6 +95,11 @@ const InstagramFeed = () => {
             <motion.a
               key={i}
               variants={itemVariants}
+              style={{ 
+                willChange: "transform, opacity",
+                backfaceVisibility: "hidden",
+                transform: "translateZ(0)"
+              }}
               href="https://instagram.com/solershop_"
               target="_blank"
               rel="noopener noreferrer"

@@ -51,10 +51,26 @@ const VibeModule = ({ vibe, index }: { vibe: typeof vibes[0], index: number }) =
   // Fallback para caso os dados estejam ausentes (mesmo sendo constantes)
   if (!vibe) return null;
 
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
     <motion.div
       ref={ref}
-      style={{ scale, opacity, willChange: "transform, opacity" }}
+      variants={itemVariants}
+      style={{ 
+        scale, 
+        opacity, 
+        willChange: "transform, opacity",
+        backfaceVisibility: "hidden",
+        transform: "translateZ(0)"
+      }}
       className="relative w-full aspect-[4/5] md:aspect-[1/1] group overflow-hidden rounded-sm border border-white/5 shadow-2xl bg-black/5"
     >
       {/* Imagem de Fundo com Zoom sutil no Hover */}
@@ -102,7 +118,18 @@ const SensationVibes = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1.2, ease: [0.23, 1, 0.32, 1] },
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const gridVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      },
     },
   };
 
@@ -129,12 +156,18 @@ const SensationVibes = () => {
           </motion.div>
         </motion.div>
 
-        {/* Grid Simétrico 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        {/* Grid Simétrico 2x2 com Staggering */}
+        <motion.div 
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+        >
           {vibes.map((vibe, index) => (
             <VibeModule key={vibe.id} vibe={vibe} index={index} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

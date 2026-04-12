@@ -29,7 +29,7 @@ const ProductGrid = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -38,7 +38,10 @@ const ProductGrid = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 },
+      transition: { 
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      },
     },
   };
 
@@ -48,7 +51,7 @@ const ProductGrid = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -85,6 +88,11 @@ const ProductGrid = () => {
             <motion.div
               key={product.name}
               variants={itemVariants}
+              style={{ 
+                willChange: "transform, opacity",
+                backfaceVisibility: "hidden",
+                transform: "translateZ(0)"
+              }}
               className="group cursor-pointer flex flex-col"
             >
               {/* Box da Imagem */}
