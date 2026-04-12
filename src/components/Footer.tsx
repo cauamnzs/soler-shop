@@ -24,13 +24,13 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-primary-foreground overflow-hidden relative z-50">
-      <div className="max-w-7xl mx-auto section-padding py-16 md:py-24">
+      <div className="max-w-7xl mx-auto section-padding py-12 md:py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16"
         >
           {/* Marca / Sobre */}
           <motion.div variants={itemVariants} className="flex flex-col">

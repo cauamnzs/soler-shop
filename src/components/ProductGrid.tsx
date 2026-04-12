@@ -52,7 +52,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="py-24 md:py-32 bg-transparent">
+    <section id="products" className="py-16 md:py-24 bg-transparent">
       <div className="max-w-7xl mx-auto section-padding">
         
         {/* Cabeçalho */}
@@ -61,7 +61,7 @@ const ProductGrid = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={headerVariants}
-          className="flex flex-col items-center mb-16 md:mb-24"
+          className="flex flex-col items-center mb-12 md:mb-20"
         >
           <span className="w-8 h-[1px] bg-gold block mb-6"></span>
           <h2 className="font-heading text-4xl md:text-5xl text-center text-foreground mb-4">
@@ -143,7 +143,7 @@ const ProductGrid = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-center mt-16 md:mt-24"
+          className="text-center mt-12 md:mt-20"
         >
           <a href="#" className="inline-block border-b border-gold text-gold font-body text-xs md:text-sm uppercase tracking-[0.2em] pb-1 hover:text-foreground hover:border-foreground transition-colors duration-300">
             Explorar Catálogo Completo

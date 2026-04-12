@@ -54,7 +54,7 @@ const InstagramFeed = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-32 overflow-hidden bg-transparent">
+    <section ref={containerRef} className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       {/* Seamless Glass Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/[0.01] to-transparent backdrop-blur-[1px] pointer-events-none" />
       
@@ -66,7 +66,7 @@ const InstagramFeed = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={headerVariants}
-          className="text-center mb-16 md:mb-24 flex flex-col items-center"
+          className="text-center mb-12 md:mb-20 flex flex-col items-center"
         >
           <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">Social Curatorship</span>
           <h2 className="font-heading text-4xl md:text-6xl text-foreground mb-6 tracking-tight">
