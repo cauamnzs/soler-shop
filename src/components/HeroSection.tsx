@@ -59,10 +59,9 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Conteúdo (Textos e Botão) */}
-      <div className="relative z-20 max-w-7xl mx-auto section-padding w-full flex flex-col md:flex-row items-center gap-12 py-12 md:py-24">
+      <div className="relative z-20 max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center gap-8 lg:gap-12 py-8 md:py-16 lg:py-24">
         <motion.div
-          className="w-full md:w-1/2 mt-12 md:mt-0"
+          className="w-full md:w-3/5 lg:w-1/2 mt-8 md:mt-0"
           style={{ 
             y: textY, 
             opacity, 
@@ -76,14 +75,14 @@ const HeroSection = () => {
         >
           <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4 md:mb-6">
             <span className="w-8 h-[1px] bg-gold block"></span>
-            <p className="text-gold font-body text-[10px] md:text-sm uppercase tracking-[0.4em]">
+            <p className="text-gold font-body text-[10px] md:text-xs lg:text-sm uppercase tracking-[0.4em] whitespace-nowrap">
               Santos / Ilhabela — Envio Nacional
             </p>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground leading-[1.1] md:leading-[1.05] mb-6 md:mb-8"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 break-words"
           >
             Sua Dose Diária de <br className="hidden sm:block" />
             <span className="italic font-light text-gold">Luxo</span> e Cuidado
@@ -91,7 +90,7 @@ const HeroSection = () => {
 
           <motion.p
             variants={itemVariants}
-            className="font-body text-muted-foreground text-sm md:text-lg leading-relaxed mb-8 md:mb-10 max-w-md font-light"
+            className="font-body text-muted-foreground text-sm md:text-base lg:text-lg leading-relaxed mb-8 md:mb-10 max-w-md font-light"
           >
             Trabalhamos com as marcas mais desejadas do mundo. Descubra perfumes, body splashes e esfoliantes 100% originais.
           </motion.p>
@@ -109,9 +108,8 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
-        {/* Imagem Flutuante com Overlap (Quebra a linha horizontal) */}
         <motion.div 
-          className="hidden md:block w-1/2 h-[60vh] relative z-30"
+          className="hidden md:block w-full md:w-2/5 lg:w-1/2 h-[40vh] lg:h-[60vh] relative z-30"
           style={{ y: imageOverlapY, willChange: "transform" }}
         >
           <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-xl border border-white/10 shadow-2xl overflow-hidden group">

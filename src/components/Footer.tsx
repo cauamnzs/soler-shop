@@ -30,17 +30,17 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 lg:gap-16"
         >
           {/* Marca / Sobre */}
           <motion.div variants={itemVariants} className="flex flex-col">
             <a href="/" data-cursor-label="Início" className="flex items-center gap-3 mb-6 inline-block">
-              <img src={solerLogo} alt="Soler Shop" className="h-12 w-12 brightness-0 invert opacity-90" />
-              <span className="font-heading text-2xl tracking-wide text-primary-foreground">
+              <img src={solerLogo} alt="Soler Shop" className="h-10 w-10 md:h-12 md:w-12 brightness-0 invert opacity-90" />
+              <span className="font-heading text-xl md:text-2xl tracking-wide text-primary-foreground">
                 Soler <span className="italic font-light">Shop</span>
               </span>
             </a>
-            <p className="font-body text-sm text-primary-foreground/50 leading-relaxed font-light">
+            <p className="font-body text-xs md:text-sm text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
               Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina diária.
             </p>
           </motion.div>

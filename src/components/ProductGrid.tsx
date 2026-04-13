@@ -61,13 +61,13 @@ const ProductGrid = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={headerVariants}
-          className="flex flex-col items-center mb-10 md:mb-16"
+          className="flex flex-col items-center mb-10 md:mb-16 px-4"
         >
           <span className="w-8 h-[1px] bg-gold block mb-6"></span>
-          <h2 className="font-heading text-4xl md:text-5xl text-center text-foreground mb-4">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-foreground mb-4 break-words">
             Nossos <span className="italic text-gold font-light">Favoritos</span>
           </h2>
-          <p className="text-center text-muted-foreground font-body text-sm md:text-base uppercase tracking-[0.4em] font-light">
+          <p className="text-center text-muted-foreground font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.4em] font-light max-w-lg">
             Seleção exclusiva de importados
           </p>
         </motion.div>
@@ -78,7 +78,7 @@ const ProductGrid = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12 md:gap-x-8 md:gap-y-16"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16"
         >
           {products.map((product) => (
             <motion.div
@@ -145,9 +145,14 @@ const ProductGrid = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-center mt-12 md:mt-20"
         >
-          <a href="#" className="inline-block border-b border-gold text-gold font-body text-xs md:text-sm uppercase tracking-[0.2em] pb-1 hover:text-foreground hover:border-foreground transition-colors duration-300">
-            Explorar Catálogo Completo
-          </a>
+          <div className="group">
+            <a href="#" className="inline-block border-b border-gold text-gold font-body text-xs md:text-sm uppercase tracking-[0.2em] pb-1 hover:text-foreground hover:border-foreground transition-colors duration-300 relative
+              after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full
+              after:h-[1px] after:bg-gold after:scale-x-0 after:origin-right
+              after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left">
+              Explorar Catálogo Completo
+            </a>
+          </div>
         </motion.div>
 
         {/* Modal de Detalhes Cinematográfico */}

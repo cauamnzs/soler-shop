@@ -88,24 +88,24 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
             </div>
 
             {/* Coluna de Conteúdo */}
-            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-card">
-              <div className="mb-8">
-                <span className="text-gold font-body text-[10px] uppercase tracking-[0.4em] mb-4 block opacity-60">
+            <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-card">
+              <div className="mb-6 md:mb-8">
+                <span className="text-gold font-body text-[10px] uppercase tracking-[0.4em] mb-3 md:mb-4 block opacity-60">
                   {product.category} — Ref: {product.id}
                 </span>
-                <h2 className="font-heading text-3xl md:text-5xl text-foreground mb-4 leading-tight">
+                <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-tight break-words">
                   {product.name}
                 </h2>
-                <p className="text-2xl font-body font-medium text-foreground/80 mb-6">
+                <p className="text-xl md:text-2xl font-body font-medium text-foreground/80 mb-4 md:mb-6">
                   {product.price}
                 </p>
-                <p className="font-body text-muted-foreground text-sm md:text-base leading-relaxed font-light">
+                <p className="font-body text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed font-light line-clamp-4 md:line-clamp-none">
                   {product.description}
                 </p>
               </div>
 
               {/* Gatilhos de Escassez e Confiança */}
-              <div className="grid grid-cols-1 gap-4 mb-10">
+              <div className="grid grid-cols-1 gap-3 md:gap-4 mb-8 md:mb-10">
                 <div className="flex items-center gap-4 text-muted-foreground/60">
                   <ShieldCheck size={18} className="text-gold" strokeWidth={1.5} />
                   <span className="text-xs uppercase tracking-widest font-body">Autenticidade 100% Garantida</span>
@@ -123,7 +123,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
               {/* CTA Final (WhatsApp) */}
               <button
                 onClick={handleWhatsAppClick}
-                className="group relative flex items-center justify-center gap-4 bg-gold text-background w-full py-5 rounded-xl uppercase tracking-[0.3em] font-bold text-xs transition-all duration-500 hover:bg-gold-dark hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative flex items-center justify-center gap-4 bg-gold text-background w-full py-5 rounded-xl uppercase tracking-[0.3em] font-bold text-xs transition-all duration-500 hover:bg-gold-dark hover:shadow-gold-glow hover:scale-[1.02] active:scale-[0.98]"
               >
                 <MessageCircle size={18} />
                 Desejo esta experiência

@@ -98,6 +98,8 @@ export default {
       boxShadow: {
         lux: "0 10px 40px -10px rgba(212, 175, 55, 0.1)",
         "lux-hover": "0 20px 50px -12px rgba(212, 175, 55, 0.2)",
+        "soft-depth": "0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)",
+        "gold-glow": "0 0 15px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.2)"
       },
     },
   },

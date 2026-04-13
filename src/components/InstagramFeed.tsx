@@ -66,17 +66,20 @@ const InstagramFeed = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={headerVariants}
-          className="text-center mb-10 md:mb-16 flex flex-col items-center"
+          className="text-center mb-10 md:mb-16 flex flex-col items-center px-4"
         >
           <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">Social Curatorship</span>
-          <h2 className="font-heading text-4xl md:text-6xl text-foreground mb-6 tracking-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 tracking-tight break-words">
             Da Comunidade <span className="italic text-gold font-light">Soler</span>
           </h2>
           <a
             href="https://instagram.com/solershop_"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 text-muted-foreground/60 font-body text-xs hover:text-gold transition-colors duration-500 uppercase tracking-[0.3em]"
+            className="group inline-flex items-center gap-3 text-muted-foreground/60 font-body text-[10px] sm:text-xs hover:text-gold transition-colors duration-500 uppercase tracking-[0.3em] relative
+              after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full
+              after:h-[1px] after:bg-gold after:scale-x-0 after:origin-right
+              after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left"
           >
             <Instagram size={14} className="group-hover:scale-110 transition-transform duration-500" />
             Siga-nos @solershop_
@@ -89,7 +92,7 @@ const InstagramFeed = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
         >
           {photos.map((photo, i) => (
             <motion.a
@@ -109,7 +112,7 @@ const InstagramFeed = () => {
                 src={photo}
                 alt={`Foto da comunidade Soler Shop ${i + 1}`}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
+                className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
               />
               
               {/* Máscara e Ícone no Hover */}

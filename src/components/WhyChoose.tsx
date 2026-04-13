@@ -71,30 +71,30 @@ const WhyChoose = () => {
       {/* Seamless Glass Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent backdrop-blur-[1px] pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto section-padding flex flex-col md:flex-row gap-10 md:gap-24 relative z-10">
+      <div className="max-w-screen-2xl mx-auto section-padding flex flex-col lg:flex-row gap-8 lg:gap-16 xl:gap-24 relative z-10">
         
-        {/* Título Fixo (Sticky) - Editorial Minimalista */}
-        <div className="w-full md:w-1/2 md:h-[60vh] md:sticky md:top-[20vh] flex flex-col justify-center">
+        {/* Coluna 1 (Esquerda): Título Fixo (Sticky) - Editorial Minimalista */}
+        <div className="w-full lg:w-1/2 md:h-[60vh] lg:sticky lg:top-[20vh] flex flex-col justify-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.2, 0.65, 0.3, 0.9] }}
-            className="max-w-md"
+            className="max-w-md lg:max-w-none"
           >
-            <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">The Soler Heritage</span>
-            <h2 className="font-heading text-5xl md:text-7xl lg:text-8xl text-foreground mb-8 leading-[1.1]">
-              A Experiência <br />
+            <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block whitespace-nowrap">The Soler Heritage</span>
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground mb-8 leading-[1.1] break-words">
+              A Experiência <br className="hidden lg:block" />
               <span className="italic font-light text-gold">Soler</span>
             </h2>
-            <p className="font-body text-muted-foreground/70 text-base md:text-lg font-light leading-relaxed">
+            <p className="font-body text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-lg lg:max-w-xl">
               Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.
             </p>
           </motion.div>
         </div>
 
-        {/* Scrolling Narrativo - Limpo */}
-        <div className="w-full md:w-1/2 flex flex-col">
+        {/* Coluna 2 (Direita): Scrolling Narrativo - Cards de Ícones */}
+        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           {highlights.map((item, index) => (
             <FeatureCard key={item.title} item={item} index={index} />
           ))}

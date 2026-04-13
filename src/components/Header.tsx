@@ -10,32 +10,32 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-[9970] bg-[#faf9f6]/60 backdrop-blur-xl border-t border-t-white/20 border-b border-b-black/5 shadow-lux transition-all duration-500 ease-lux">
-      <div className="max-w-7xl mx-auto section-padding">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <a href="/" data-cursor-label="Início" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
-            <img src={solerLogo} alt="Soler Shop" className="h-9 w-9 md:h-11 md:w-11 transition-lux duration-500 group-hover:scale-105" />
+            <img src={solerLogo} alt="Soler Shop" className="h-9 w-9 md:h-11 md:w-11 lg:h-12 lg:w-12 transition-lux duration-500 group-hover:scale-105" />
             <div className="leading-tight">
-              <span className="font-heading text-lg md:text-xl font-semibold tracking-wide text-foreground">
+              <span className="font-heading text-lg md:text-xl lg:text-2xl font-semibold tracking-wide text-foreground whitespace-nowrap">
                 Soler Shop
               </span>
-              <span className="hidden sm:block text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body">
+              <span className="hidden sm:block text-[10px] lg:text-xs uppercase tracking-[0.3em] text-muted-foreground font-body whitespace-nowrap">
                 Importados
               </span>
             </div>
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link}
                 href="#"
                 data-cursor-label="Explorar"
-                className="text-sm font-body font-medium tracking-wide text-muted-foreground
-                  hover:text-gold transition-lux duration-500 relative
+                className="text-xs xl:text-sm font-body font-medium tracking-wide text-muted-foreground
+                  hover:text-gold transition-lux duration-500 relative whitespace-nowrap
                   after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full
-                  after:h-[1.5px] after:bg-gold after:scale-x-0 after:origin-right
+                  after:h-[1px] after:bg-gold after:scale-x-0 after:origin-right
                   after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left"
               >
                 {link === "Promoção" ? <span className="text-destructive font-semibold">{link}</span> : link}
@@ -44,7 +44,7 @@ const Header = () => {
           </nav>
 
           {/* Icons */}
-          <div className="flex items-center gap-1 sm:gap-3 md:gap-5">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
             <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
               <Search size={20} />
             </button>
@@ -62,7 +62,7 @@ const Header = () => {
       {/* Mobile Nav */}
       {mobileOpen && (
         <nav className="lg:hidden bg-[#faf9f6] border-t border-black/5 animate-fade-up shadow-xl">
-          <div className="section-padding py-6 flex flex-col gap-1">
+          <div className="px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-1">
             {navLinks.map((link) => (
               <a
                 key={link}
