@@ -52,8 +52,13 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="py-12 md:py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto section-padding">
+    <section id="products" className="relative py-12 md:py-20 bg-background/50">
+      {/* Fade superior suave - continuação de SensationVibes */}
+      <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
+      {/* Fade inferior suave - transição para WhyChoose */}
+      <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
+      
+      <div className="max-w-7xl mx-auto section-padding relative z-10">
         
         {/* Cabeçalho */}
         <motion.div
@@ -91,13 +96,15 @@ const ProductGrid = () => {
                 backfaceVisibility: "hidden",
                 transform: "translateZ(0)"
               }}
-              className="group cursor-pointer flex flex-col"
+              className="group cursor-pointer flex flex-col transition-transform duration-500 ease-out hover:-translate-y-1"
             >
               {/* Box da Imagem */}
-              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5">
+              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm group-hover:shadow-lg transition-shadow duration-500">
                 <img
                   src={product.image}
                   alt={`Imagem do produto ${product.name}`}
+                  width="600"
+                  height="600"
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
                 />

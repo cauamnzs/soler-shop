@@ -59,12 +59,12 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
               y: 10,
               transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
             }}
-            className="relative w-full max-w-5xl bg-card border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+            className="relative w-full max-w-5xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
           >
             {/* Botão de Fechar */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-black/40 text-white rounded-full transition-colors backdrop-blur-md"
+              className="absolute top-4 right-4 z-50 p-2 bg-muted/50 hover:bg-muted text-foreground rounded-full transition-colors backdrop-blur-md"
               aria-label="Fechar Modal"
             >
               <X size={20} />
@@ -81,7 +81,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
                 className="w-full h-full object-cover"
               />
               {product.tag && (
-                <span className="absolute top-6 left-6 bg-gold text-background text-[10px] font-body font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-lg">
+                <span className="absolute top-6 left-6 bg-gold text-gold-foreground text-[10px] font-body font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-lg">
                   {product.tag}
                 </span>
               )}

@@ -95,12 +95,12 @@ const CustomCursor = () => {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ 
           opacity: hoverType ? 1 : 0, 
-          scale: hoverType ? 1 : 0,
-          x: mouseX.get(),
-          y: mouseY.get() 
+          scale: hoverType ? 1 : 0
         }}
         className="absolute text-[8px] uppercase tracking-[0.3em] font-body font-bold text-gold pointer-events-none"
         style={{
+          x: mouseX,
+          y: mouseY,
           translateX: "50%",
           translateY: "50%",
           marginLeft: "20px",

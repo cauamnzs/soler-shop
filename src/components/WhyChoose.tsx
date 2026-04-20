@@ -67,9 +67,11 @@ const WhyChoose = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="relative w-full py-12 md:py-20 bg-transparent overflow-visible">
-      {/* Seamless Glass Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent backdrop-blur-[1px] pointer-events-none" />
+    <section ref={containerRef} className="relative w-full py-16 md:py-24 lg:py-32 bg-background/50 overflow-visible">
+      {/* Fade superior suave - continuação de ProductGrid */}
+      <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
+      {/* Fade inferior suave - transição para InstagramFeed */}
+      <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
       
       <div className="max-w-screen-2xl mx-auto section-padding flex flex-col lg:flex-row gap-8 lg:gap-16 xl:gap-24 relative z-10">
         

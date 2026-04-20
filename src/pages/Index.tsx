@@ -26,21 +26,22 @@ const Index = () => {
       infinite: false,
     });
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
 
   return (
-    // Removemos o bg-background daqui e deixamos transparente!
-    <div className="min-h-screen relative selection:bg-gold/20 overflow-x-hidden">
+    <div className="min-h-screen relative bg-background selection:bg-gold/20 overflow-x-hidden">
       
       {/* Camada Zero: O Carregamento Visionário */}
       <Preloader />
@@ -55,7 +56,12 @@ const Index = () => {
       <CustomCursor />
       
       {/* Overlay de Grain Global (Textura Analógica) — reduzido no dark */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div 
+        className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        }}
+      />
       
       {/* Camada 3: O Site em si */}
       <Header />

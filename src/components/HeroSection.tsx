@@ -36,7 +36,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative w-full min-h-[85dvh] md:min-h-[75vh] flex items-center overflow-hidden bg-transparent mb-[-2vh] md:mb-[-5vh] z-10">
+    <section ref={ref} className="relative w-full min-h-[85dvh] md:min-h-[75vh] flex items-center overflow-hidden bg-transparent z-10">
       
       {/* Background Image com Efeito Zoom e Parallax */}
       <motion.div
@@ -44,8 +44,8 @@ const HeroSection = () => {
         style={{ 
           y: backgroundY, 
           willChange: "transform",
-          maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
+          maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)"
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-background/90 via-background/80 to-transparent z-10" />
@@ -122,6 +122,9 @@ const HeroSection = () => {
           </div>
         </motion.div>
       </div>
+      
+      {/* Fade inferior suave para transição contínua */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-48 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none z-20" />
     </section>
   );
 };
