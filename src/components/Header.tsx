@@ -1,16 +1,52 @@
 import { useState } from "react";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 import solerLogo from "@/assets/soler-logo.png";
 
 // Categorias atualizadas com a Promoção no final para o destaque visual
 const navLinks = ["Perfumes", "Body Lotion", "Body Splash", "Esfoliantes", "Kits", "Variedades", "Promoção"];
 
+// Theme Toggle Component
+const ThemeToggle = () => {
+  const { theme, toggleTheme, mounted } = useTheme();
+  
+  // Prevent hydration mismatch - render placeholder until mounted
+  if (!mounted) {
+    return (
+      <div className="w-9 h-9" />
+    );
+  }
+  
+  return (
+    <button
+      onClick={toggleTheme}
+      className="relative p-2 text-muted-foreground hover:text-gold transition-lux duration-500 rounded-lg hover:bg-gold/10"
+      aria-label={theme === "light" ? "Ativar modo escuro" : "Ativar modo claro"}
+    >
+      <div className="relative w-5 h-5">
+        <Sun 
+          size={20} 
+          className={`absolute inset-0 transition-all duration-500 ${theme === "light" ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-90 scale-0"}`}
+        />
+        <Moon 
+          size={20} 
+          className={`absolute inset-0 transition-all duration-500 ${theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"}`}
+        />
+      </div>
+    </button>
+  );
+};
+
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-[9970] bg-[#faf9f6]/60 backdrop-blur-xl border-t border-t-white/20 border-b border-b-black/5 shadow-lux transition-all duration-500 ease-lux">
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-[9970] transition-all duration-500 ease-lux" style={{ backdropFilter: 'blur(24px) saturate(180%)', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}>
+      {/* Glass surface */}
+      <div className="absolute inset-0 bg-white/50 dark:bg-black/30 border-b border-white/30 dark:border-white/[0.08] shadow-[0_1px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_20px_rgba(0,0,0,0.3)]" />
+      {/* Top edge highlight */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent" />
+      <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <a href="/" data-cursor-label="Início" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
@@ -48,6 +84,7 @@ const Header = () => {
             <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
               <Search size={20} />
             </button>
+            <ThemeToggle />
             <button
               className="p-2 lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -59,15 +96,15 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav — Glass Panel */}
       {mobileOpen && (
-        <nav className="lg:hidden bg-[#faf9f6] border-t border-black/5 animate-fade-up shadow-xl">
-          <div className="px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-1">
+        <nav className="lg:hidden animate-fade-up border-t border-white/20 dark:border-white/[0.06]" style={{ backdropFilter: 'blur(32px) saturate(180%)', WebkitBackdropFilter: 'blur(32px) saturate(180%)' }}>
+          <div className="relative bg-white/40 dark:bg-black/30 px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-1 shadow-xl">
             {navLinks.map((link) => (
               <a
                 key={link}
                 href="#"
-                className="text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-black/5 last:border-0 transition-colors"
+                className="text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {link === "Promoção" ? <span className="text-destructive font-semibold">{link}</span> : link}

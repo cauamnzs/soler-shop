@@ -54,8 +54,8 @@ const Index = () => {
       {/* Camada Visionária: O Cursor Personalizado (Apenas Desktop) */}
       <CustomCursor />
       
-      {/* Overlay de Grain Global (Textura Analógica) */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      {/* Overlay de Grain Global (Textura Analógica) — reduzido no dark */}
+      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       
       {/* Camada 3: O Site em si */}
       <Header />

@@ -6,43 +6,52 @@
 
 @layer base {
   :root {
-    --background: 40 20% 97%;
-    --foreground: 30 10% 15%;
+    --background: 38 25% 96%;
+    --foreground: 25 15% 10%;
 
-    --card: 40 20% 99%;
-    --card-foreground: 30 10% 15%;
+    --card: 40 30% 98%;
+    --card-foreground: 25 15% 10%;
 
-    --popover: 40 20% 99%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 40 30% 98%;
+    --popover-foreground: 25 15% 10%;
 
-    --primary: 40 60% 50%;
-    --primary-foreground: 40 20% 97%;
+    --primary: 40 72% 45%;
+    --primary-foreground: 40 30% 98%;
 
-    --secondary: 30 30% 93%;
-    --secondary-foreground: 30 10% 25%;
+    --secondary: 32 35% 92%;
+    --secondary-foreground: 25 15% 18%;
 
-    --muted: 30 15% 94%;
-    --muted-foreground: 30 8% 50%;
+    --muted: 35 18% 93%;
+    --muted-foreground: 25 10% 40%;
 
-    --accent: 15 50% 88%;
-    --accent-foreground: 15 40% 30%;
+    --accent: 18 55% 88%;
+    --accent-foreground: 18 45% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 30 20% 90%;
-    --input: 30 20% 90%;
-    --ring: 40 60% 50%;
+    --border: 32 25% 86%;
+    --input: 32 25% 86%;
+    --ring: 40 72% 45%;
 
     --radius: 0.5rem;
 
-    --gold: 40 70% 48%;
-    --gold-light: 40 60% 65%;
-    --gold-dark: 40 70% 38%;
-    --peach: 15 60% 90%;
-    --peach-dark: 15 45% 75%;
-    --cream: 40 30% 96%;
-    --warm-gray: 30 8% 60%;
+    /* Premium Gold Palette */
+    --gold: 40 78% 46%;
+    --gold-light: 42 65% 62%;
+    --gold-dark: 38 80% 36%;
+    --gold-muted: 40 35% 68%;
+    
+    /* Supporting Colors */
+    --peach: 18 65% 90%;
+    --peach-dark: 18 50% 72%;
+    --cream: 38 35% 95%;
+    --warm-gray: 25 10% 52%;
+    
+    /* Luxury Accents */
+    --champagne: 43 45% 84%;
+    --ivory: 40 30% 94%;
+    --charcoal: 25 12% 18%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -54,26 +63,52 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* Dark Premium Theme — Smooth & Clean */
   .dark {
-    --background: 30 10% 8%;
-    --foreground: 40 20% 95%;
-    --card: 30 10% 10%;
-    --card-foreground: 40 20% 95%;
-    --popover: 30 10% 10%;
-    --popover-foreground: 40 20% 95%;
-    --primary: 40 60% 50%;
-    --primary-foreground: 30 10% 8%;
-    --secondary: 30 10% 15%;
-    --secondary-foreground: 40 20% 90%;
-    --muted: 30 10% 18%;
-    --muted-foreground: 30 10% 60%;
-    --accent: 15 30% 20%;
-    --accent-foreground: 15 40% 85%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 30 10% 20%;
-    --input: 30 10% 20%;
-    --ring: 40 60% 50%;
+    --background: 220 10% 7%;
+    --foreground: 40 15% 93%;
+    
+    --card: 220 8% 11%;
+    --card-foreground: 40 15% 93%;
+    
+    --popover: 220 8% 11%;
+    --popover-foreground: 40 15% 93%;
+    
+    --primary: 40 70% 50%;
+    --primary-foreground: 220 10% 7%;
+    
+    --secondary: 220 8% 15%;
+    --secondary-foreground: 40 12% 85%;
+    
+    --muted: 220 6% 18%;
+    --muted-foreground: 220 5% 55%;
+    
+    --accent: 18 20% 20%;
+    --accent-foreground: 18 35% 85%;
+    
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 6% 16%;
+    --input: 220 6% 15%;
+    --ring: 40 70% 50%;
+    
+    /* Dark Gold Palette */
+    --gold: 40 70% 50%;
+    --gold-light: 42 55% 62%;
+    --gold-dark: 38 75% 40%;
+    --gold-muted: 40 20% 50%;
+    
+    /* Dark Supporting */
+    --peach: 18 20% 22%;
+    --peach-dark: 18 18% 32%;
+    --cream: 220 8% 13%;
+    --warm-gray: 220 5% 42%;
+    
+    /* Dark Luxury Accents */
+    --champagne: 43 22% 50%;
+    --ivory: 220 6% 18%;
+    --charcoal: 40 8% 90%;
   }
 }
 
