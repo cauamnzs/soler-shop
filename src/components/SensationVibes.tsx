@@ -45,7 +45,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none w-[85vw] md:w-full"
+      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none"
     >
       <motion.img
         src={vibe.image}
@@ -59,19 +59,19 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         style={{ backgroundColor: vibe.color }}
       />
 
-      <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 lg:p-24 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
-        <div className="p-8 md:p-12 lg:p-16 bg-black/40 backdrop-blur-md border border-white/10 shadow-soft-depth rounded-3xl">
+      <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
+        <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/40 backdrop-blur-md border border-white/10 shadow-soft-depth rounded-2xl md:rounded-3xl">
           <span className="text-gold font-body text-xs md:text-sm uppercase tracking-[0.6em] mb-4 block opacity-80">
             Vibe 0{index + 1}
           </span>
-          <h3 className="font-heading text-3xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+          <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-4 md:mb-6 leading-tight">
             {vibe.title.split(' ').map((word, i) => (
               <span key={i} className={i === 1 ? "italic font-light text-gold" : ""}>
                 {word}{' '}
               </span>
             ))}
           </h3>
-          <p className="font-body text-white/90 text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl">
+          <p className="font-body text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl">
             {vibe.description}
           </p>
           <div className="w-16 h-[1px] bg-gold/60 mt-8 group-hover:w-32 transition-all duration-700" />
@@ -105,10 +105,10 @@ const SensationVibes = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full py-12 md:py-20 overflow-hidden bg-transparent">
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-0" />
+    <section ref={containerRef} className="relative w-full py-16 md:py-24 lg:py-32 overflow-hidden bg-transparent">
+      <div className="absolute top-0 left-0 w-full h-24 md:h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-0" />
       
-      <div className="max-w-screen-2xl mx-auto relative z-10">
+      <div className="max-w-screen-2xl mx-auto relative z-10 pt-8 md:pt-12">
         <motion.div
           initial="hidden"
           whileInView="visible"

@@ -36,7 +36,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative w-full min-h-[85dvh] md:min-h-[75vh] flex items-center overflow-visible bg-transparent mb-[-2vh] md:mb-[-5vh] z-10">
+    <section ref={ref} className="relative w-full min-h-[85dvh] md:min-h-[75vh] flex items-center overflow-hidden bg-transparent mb-[-2vh] md:mb-[-5vh] z-10">
       
       {/* Background Image com Efeito Zoom e Parallax */}
       <motion.div
