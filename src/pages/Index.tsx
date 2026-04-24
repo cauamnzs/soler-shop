@@ -12,7 +12,8 @@ import Footer from "@/components/Footer";
 import Spotlight from "@/components/Spotlight";
 import FluidBackground from "@/components/FluidBackground"; 
 import CustomCursor from "@/components/CustomCursor"; 
-import Preloader from "@/components/Preloader"; 
+import Preloader from "@/components/Preloader";
+import SearchModal from "@/components/SearchModal";
 
 // Tipo global para controle do Lenis
 declare global {
@@ -78,6 +79,7 @@ const Index = () => {
 
       {/* Camada Zero: O Carregamento Visionário */}
       <Preloader />
+      <SearchModal />
       
       {/* Camada 1: O Fundo Líquido Vivo — desktop only */}
       {!isMobileDevice && <FluidBackground />}

@@ -1,6 +1,6 @@
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Eye } from "lucide-react";
-import { useState, memo } from "react";
+import { useState, memo, useMemo } from "react";
 import { Product } from "@/types";
 import ProductModal from "./ProductModal";
 import { useProducts } from "@/hooks/useProducts";
@@ -9,6 +9,19 @@ const ProductGrid = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: products = [], isLoading, isError } = useProducts();
+  const [activeFilter, setActiveFilter] = useState("Todos");
+
+  const filterOptions = useMemo(() => {
+    if (!products.length) return ["Todos"];
+    const cats = [...new Set(products.map(p => p.category).filter(Boolean))] as string[];
+    const tags = [...new Set(products.map(p => p.tag).filter(Boolean))] as string[];
+    return ["Todos", ...cats, ...tags];
+  }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    if (activeFilter === "Todos") return products;
+    return products.filter(p => p.category === activeFilter || p.tag === activeFilter);
+  }, [products, activeFilter]);
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
@@ -82,6 +95,38 @@ const ProductGrid = () => {
           </p>
         </motion.div>
 
+        {/* Filter Pills */}
+        {!isLoading && !isError && filterOptions.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex flex-wrap gap-2 justify-center mb-10 md:mb-14 px-4"
+          >
+            {filterOptions.map(filter => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`relative px-4 py-2 rounded-full font-body text-[11px] uppercase tracking-[0.2em] transition-colors duration-300 overflow-hidden ${
+                  activeFilter === filter
+                    ? "text-background"
+                    : "text-muted-foreground hover:text-foreground border border-foreground/10 hover:border-gold/30"
+                }`}
+              >
+                {activeFilter === filter && (
+                  <motion.span
+                    layoutId="filter-active-pill"
+                    className="absolute inset-0 bg-gold rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                  />
+                )}
+                <span className="relative">{filter}</span>
+              </button>
+            ))}
+          </motion.div>
+        )}
+
         {/* Skeleton de Carregamento */}
         {isLoading && (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16">
@@ -113,10 +158,13 @@ const ProductGrid = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16 group/grid"
         >
-          {products.map((product) => (
+          <AnimatePresence mode="popLayout">
+          {filteredProducts.map((product) => (
             <motion.div
               key={product.id}
               variants={itemVariants}
+              layout
+              exit={{ opacity: 0, scale: 0.88, transition: { duration: 0.22 } }}
               data-cursor-label="Explorar"
               onClick={() => openModal(product)}
               className="group cursor-pointer flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 group-hover/grid:opacity-50 hover:!opacity-100"
@@ -144,7 +192,11 @@ const ProductGrid = () => {
                       ? "bg-gold/15 text-gold border-gold/25"
                       : "bg-background/80 text-foreground/80 border-foreground/8 backdrop-blur-md"
                   }`}>
-                    {product.tag}
+                    {product.tag === "Novo" ? (
+                      <span className="inline-flex items-center gap-1">
+                        Novo<span className="text-[7px] animate-pulse opacity-60">✦</span>
+                      </span>
+                    ) : product.tag}
                   </span>
                 )}
                 
@@ -177,6 +229,7 @@ const ProductGrid = () => {
               </div>
             </motion.div>
           ))}
+          </AnimatePresence>
         </motion.div>
 
         {/* Botão Ver Todos */}

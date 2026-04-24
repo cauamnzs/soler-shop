@@ -32,11 +32,18 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen || !product) return;
+    const prev = document.title;
+    document.title = `${product.name} — Soler Shop`;
+    return () => { document.title = prev; };
+  }, [isOpen, product]);
 
   if (!product) return null;
 
   // Função para gerar o link do WhatsApp com os dados do produto
   const handleWhatsAppClick = () => {
+    try { navigator.vibrate?.(12); } catch {}
     const message = `Olá! Gostaria de consultar a disponibilidade do ${product.name} (Ref: ${product.id}) que vi no catálogo Soler Shop.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5513991234567?text=${encodedMessage}`, "_blank");

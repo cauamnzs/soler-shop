@@ -93,7 +93,11 @@ const Header = () => {
 
           {/* Icons */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
-            <button className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500" aria-label="Pesquisar">
+            <button
+              className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500"
+              aria-label="Pesquisar"
+              onClick={() => window.dispatchEvent(new CustomEvent("soler:search:open"))}
+            >
               <Search size={20} />
             </button>
             <ThemeToggle />
