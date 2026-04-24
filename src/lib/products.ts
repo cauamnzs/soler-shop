@@ -40,7 +40,7 @@ const mapRowToProduct = (row: ProductRow): Product => ({
 
 export async function fetchProducts(): Promise<Product[]> {
   const { data, error } = await supabase
-    .from("products")
+    .from("catalog_products")
     .select("sku, name, brand, price, image_url, description, is_active")
     .eq("is_active", true)
     .order("name", { ascending: true });
