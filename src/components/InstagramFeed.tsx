@@ -1,6 +1,6 @@
-import { motion, Variants, useScroll, useTransform } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Instagram } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import insta1 from "@/assets/insta-1.jpg";
 import insta2 from "@/assets/insta-2.jpg";
 import insta3 from "@/assets/insta-3.jpg";
@@ -12,16 +12,6 @@ const photos = [insta1, insta2, insta3, insta4, insta5, insta6];
 
 const InstagramFeed = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  // O feed agora flui organicamente sem disparos de shockwave (foco em Ambient Noise)
-  useEffect(() => {
-    // Scroll progress disponível para futuras animações de scroll síncronas
-  }, [scrollYProgress]);
 
   // Animação do cabeçalho
   const headerVariants: Variants = {
@@ -100,11 +90,6 @@ const InstagramFeed = () => {
             <motion.a
               key={i}
               variants={itemVariants}
-              style={{ 
-                willChange: "transform, opacity",
-                backfaceVisibility: "hidden",
-                transform: "translateZ(0)"
-              }}
               href="https://instagram.com/solershop_"
               target="_blank"
               rel="noopener noreferrer"

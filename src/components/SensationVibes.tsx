@@ -3,6 +3,8 @@ import { useRef, memo } from "react";
 import { vibes } from "@/data/mockData";
 import { Vibe } from "@/types";
 
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   
@@ -38,7 +40,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       ref={ref}
       variants={itemVariants}
       data-cursor-label="Sentir"
-      style={{ 
+      style={IS_MOBILE ? {} : { 
         scale, 
         opacity, 
         willChange: "transform, opacity",
@@ -58,7 +60,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       <motion.img
         src={vibe.image}
         alt={vibe.title}
-        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
       />
       
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
@@ -68,7 +70,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       />
 
       <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
-        <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/40 backdrop-blur-md border border-white/10 shadow-soft-depth rounded-2xl md:rounded-3xl">
+        <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/65 md:bg-black/40 md:backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl">
           <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.4em] px-3 py-1 rounded-full mb-5">
             Vibe 0{index + 1}
           </span>

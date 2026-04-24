@@ -119,11 +119,6 @@ const ProductGrid = () => {
               variants={itemVariants}
               data-cursor-label="Explorar"
               onClick={() => openModal(product)}
-              style={{ 
-                willChange: "transform, opacity",
-                backfaceVisibility: "hidden",
-                transform: "translateZ(0)"
-              }}
               className="group cursor-pointer flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 group-hover/grid:opacity-50 hover:!opacity-100"
             >
               {/* Box da Imagem */}

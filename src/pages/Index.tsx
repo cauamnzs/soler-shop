@@ -24,11 +24,14 @@ declare global {
   }
 }
 
+const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const Index = () => {
   const lenisRef = useRef<Lenis | null>(null);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
+    if (window.innerWidth < 768) return; // Native touch scroll is smoother on mobile
     const lenis = new Lenis({
       duration: 1.5,
       lerp: 0.07,
@@ -76,22 +79,24 @@ const Index = () => {
       {/* Camada Zero: O Carregamento Visionário */}
       <Preloader />
       
-      {/* Camada 1: O Fundo Líquido Vivo */}
-      <FluidBackground /> 
+      {/* Camada 1: O Fundo Líquido Vivo — desktop only */}
+      {!isMobileDevice && <FluidBackground />}
       
-      {/* Camada 2: A Lanterna do Mouse */}
-      <Spotlight />
+      {/* Camada 2: A Lanterna do Mouse — desktop only (no mouse on mobile) */}
+      {!isMobileDevice && <Spotlight />}
 
       {/* Camada Visionária: O Cursor Personalizado (Apenas Desktop) */}
       <CustomCursor />
       
-      {/* Overlay de Grain Global (Textura Analógica) — reduzido no dark */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
-      />
+      {/* Overlay de Grain Global — desktop only (expensive fixed SVG filter) */}
+      {!isMobileDevice && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}
+        />
+      )}
       
       {/* Camada 3: O Site em si */}
       <Header />

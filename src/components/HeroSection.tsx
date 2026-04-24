@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView, Variants } from "framer-motion";
 import heroImage from "@/assets/hero-perfume.jpg";
 
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const CountUp = ({ end, suffix, duration = 1300 }: { end: number; suffix: string; duration?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
@@ -65,8 +67,7 @@ const HeroSection = () => {
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
         style={{ 
-          y: backgroundY, 
-          willChange: "transform",
+          y: IS_MOBILE ? "0%" : backgroundY,
           maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)"
         }}
@@ -85,7 +86,7 @@ const HeroSection = () => {
       <div className="relative z-20 max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center gap-8 lg:gap-12 py-8 md:py-16 lg:py-24">
         <motion.div
           className="w-full md:w-3/5 lg:w-1/2 mt-8 md:mt-0"
-          style={{ 
+          style={IS_MOBILE ? {} : { 
             y: textY, 
             opacity, 
             willChange: "transform, opacity",
