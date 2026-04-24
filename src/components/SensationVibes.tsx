@@ -47,7 +47,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none transition-colors duration-700"
+      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 md:hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none transition-colors duration-700"
     >
       {/* Watermark number */}
       <span
@@ -65,11 +65,11 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
       <div 
-        className="absolute inset-0 backdrop-blur-[1px] mix-blend-overlay opacity-40 group-hover:opacity-65 pointer-events-none transition-opacity duration-700"
+        className="absolute inset-0 md:backdrop-blur-[1px] mix-blend-overlay opacity-40 md:group-hover:opacity-65 pointer-events-none transition-opacity duration-700"
         style={{ backgroundColor: vibe.color }}
       />
 
-      <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
+      <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-700 ease-lux">
         <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/65 md:bg-black/40 md:backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl">
           <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.4em] px-3 py-1 rounded-full mb-5">
             Vibe 0{index + 1}
@@ -85,8 +85,8 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
             {vibe.description}
           </p>
           <div className="flex items-center justify-between mt-6 md:mt-8">
-            <div className="h-[1px] bg-gold/60 w-16 group-hover:w-24 transition-all duration-700" />
-            <span className="font-body text-transparent group-hover:text-white/50 text-[10px] uppercase tracking-[0.3em] transition-colors duration-500">
+            <div className="h-[1px] bg-gold/60 w-20 md:w-16 md:group-hover:w-24 transition-all duration-700" />
+            <span className="font-body text-white/25 md:text-transparent md:group-hover:text-white/50 text-[10px] uppercase tracking-[0.3em] transition-colors duration-500">
               Explorar →
             </span>
           </div>

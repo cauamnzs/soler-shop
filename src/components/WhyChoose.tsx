@@ -2,6 +2,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ShieldCheck, Sparkles, MapPin, Truck } from "lucide-react";
 
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const highlights = [
   { 
     icon: ShieldCheck, 
@@ -35,9 +37,12 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      style={{ willChange: "transform, opacity" }}
+      style={IS_MOBILE ? {} : { willChange: "transform, opacity" }}
       className="relative p-8 lg:p-10 rounded-2xl border border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
     >
+      {/* Shimmer sweep on hover */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-lux pointer-events-none" />
+
       {/* Watermark number */}
       <span
         className="absolute -top-3 right-5 font-heading font-bold leading-none select-none pointer-events-none text-[6.5rem] lg:text-[8rem] text-foreground/[0.035]"
@@ -47,7 +52,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       </span>
 
       {/* Icon */}
-      <div className="w-11 h-11 mb-7 flex items-center justify-center text-gold group-hover:scale-110 transition-transform duration-500">
+      <div className="w-11 h-11 mb-7 flex items-center justify-center text-gold group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.55)] transition-all duration-500">
         <item.icon strokeWidth={1} size={28} />
       </div>
 
