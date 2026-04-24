@@ -2,6 +2,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, MessageCircle, ShieldCheck, Truck, Zap } from "lucide-react";
 import { Product } from "@/types";
 import { memo, useEffect } from "react";
+import { createPortal } from "react-dom";
+
+// Tipo global Lenis control
+declare global {
+  interface Window {
+    lenisControl?: {
+      stop: () => void;
+      start: () => void;
+    };
+  }
+}
 
 interface ProductModalProps {
   product: Product | null;
@@ -10,17 +21,17 @@ interface ProductModalProps {
 }
 
 const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
-  // Previne o scroll do corpo quando o modal está aberto
+  // Modal é uma "telinha" sobre a página - scroll da página continua funcionando (catálogo)
+  // Não bloqueamos o scroll do body, apenas adicionamos ESC para fechar
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
+    if (!isOpen) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
     };
-  }, [isOpen]);
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
+
 
   if (!product) return null;
 
@@ -31,17 +42,18 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
     window.open(`https://wa.me/5513991234567?text=${encodedMessage}`, "_blank");
   };
 
-  return (
+  // Portal: renderiza direto em document.body, escapando todos stacking contexts
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[9980] flex items-center justify-center p-4 md:p-8">
-          {/* Overlay com Blur Intenso */}
+        <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4 md:p-8">
+          {/* Overlay sólido - barreira visual absoluta (portal garante isolamento total) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-background/80 backdrop-blur-xl"
+            className="absolute inset-0 bg-background/90 backdrop-blur-2xl"
           />
 
           {/* Container do Modal */}
@@ -59,7 +71,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
               y: 10,
               transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
             }}
-            className="relative w-full max-w-5xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+            className="relative w-full max-w-5xl bg-card border border-border rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] flex flex-col md:flex-row"
           >
             {/* Botão de Fechar */}
             <button
@@ -139,6 +151,8 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default memo(ProductModal);

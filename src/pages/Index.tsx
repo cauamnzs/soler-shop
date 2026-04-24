@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -8,11 +8,23 @@ import WhyChoose from "@/components/WhyChoose";
 import InstagramFeed from "@/components/InstagramFeed";
 import Footer from "@/components/Footer";
 import Spotlight from "@/components/Spotlight";
-import FluidBackground from "@/components/FluidBackground"; // <-- Importamos a seda líquida
-import CustomCursor from "@/components/CustomCursor"; // <-- O Novo Cursor Visionary
-import Preloader from "@/components/Preloader"; // <-- A Entrada Cinematográfica
+import FluidBackground from "@/components/FluidBackground"; 
+import CustomCursor from "@/components/CustomCursor"; 
+import Preloader from "@/components/Preloader"; 
+
+// Tipo global para controle do Lenis
+declare global {
+  interface Window {
+    lenisControl?: {
+      stop: () => void;
+      start: () => void;
+    };
+  }
+}
 
 const Index = () => {
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.5,
@@ -26,6 +38,14 @@ const Index = () => {
       infinite: false,
     });
 
+    lenisRef.current = lenis;
+
+    // Expõe controle global para modais pausarem o scroll
+    window.lenisControl = {
+      stop: () => lenis.stop(),
+      start: () => lenis.start(),
+    };
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -36,6 +56,7 @@ const Index = () => {
 
     return () => {
       cancelAnimationFrame(rafId);
+      delete window.lenisControl;
       lenis.destroy();
     };
   }, []);

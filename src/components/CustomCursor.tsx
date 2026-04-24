@@ -16,10 +16,7 @@ const CustomCursor = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Só ativa se for um dispositivo com ponteiro preciso (mouse)
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    if (isTouch) return;
-
+    // Mostra cursor em desktop (mobile tem touch nativo)
     setIsVisible(true);
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -60,7 +57,7 @@ const CustomCursor = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9990] hidden md:block">
+    <div className="fixed inset-0 pointer-events-none z-[99999] hidden md:block">
       {/* O Anel Externo (Outer Ring) */}
       <motion.div
         className="absolute w-8 h-8 border border-gold/40 rounded-full"
