@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import solerLogo from "@/assets/soler-logo.png";
@@ -39,15 +39,22 @@ const ThemeToggle = () => {
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-[9970] transition-all duration-500 ease-lux" style={{ backdropFilter: 'blur(24px) saturate(180%)', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}>
+    <header className={`sticky top-0 z-[9970] transition-all duration-500 ease-lux ${scrolled ? 'shadow-[0_4px_32px_rgba(0,0,0,0.14)] dark:shadow-[0_4px_32px_rgba(0,0,0,0.5)]' : ''}`} style={{ backdropFilter: 'blur(24px) saturate(180%)', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}>
       {/* Glass surface */}
-      <div className="absolute inset-0 bg-white/50 dark:bg-black/30 border-b border-white/30 dark:border-white/[0.08] shadow-[0_1px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_20px_rgba(0,0,0,0.3)]" />
+      <div className={`absolute inset-0 transition-all duration-500 border-b border-white/30 dark:border-white/[0.08] ${scrolled ? 'bg-white/75 dark:bg-black/55' : 'bg-white/50 dark:bg-black/30'} shadow-[0_1px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_20px_rgba(0,0,0,0.3)]`} />
       {/* Top edge highlight */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent" />
       <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
+        <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-14 md:h-16 lg:h-18' : 'h-16 md:h-20 lg:h-24'}`}>
           {/* Logo */}
           <a href="/" data-cursor-label="Início" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
             <img src={solerLogo} alt="Soler Shop" className="h-9 w-9 md:h-11 md:w-11 lg:h-12 lg:w-12 transition-lux duration-500 group-hover:scale-105" />
@@ -74,7 +81,12 @@ const Header = () => {
                   after:h-[1px] after:bg-gold after:scale-x-0 after:origin-right
                   after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left"
               >
-                {link === "Promoção" ? <span className="text-destructive font-semibold">{link}</span> : link}
+                {link === "Promoção" ? (
+                  <span className="relative text-destructive font-semibold">
+                    {link}
+                    <span className="absolute -top-1 -right-2.5 w-1.5 h-1.5 bg-destructive rounded-full animate-pulse" />
+                  </span>
+                ) : link}
               </a>
             ))}
           </nav>
@@ -104,10 +116,16 @@ const Header = () => {
               <a
                 key={link}
                 href="#"
-                className="text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-colors"
+                className="flex items-center justify-between text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-all duration-300 group/nav hover:pl-1"
                 onClick={() => setMobileOpen(false)}
               >
-                {link === "Promoção" ? <span className="text-destructive font-semibold">{link}</span> : link}
+                {link === "Promoção" ? (
+                  <span className="relative text-destructive font-semibold">
+                    {link}
+                    <span className="absolute -top-1 -right-2.5 w-1.5 h-1.5 bg-destructive rounded-full animate-pulse" />
+                  </span>
+                ) : link}
+                <span className="text-gold text-sm opacity-0 -translate-x-1 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300">→</span>
               </a>
             ))}
           </div>

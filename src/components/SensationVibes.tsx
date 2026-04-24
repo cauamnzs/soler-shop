@@ -45,8 +45,16 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none"
+      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none transition-colors duration-700"
     >
+      {/* Watermark number */}
+      <span
+        className="absolute top-6 right-7 font-heading font-bold leading-none select-none pointer-events-none z-20 text-white/[0.07] text-[5rem] lg:text-[7rem]"
+        aria-hidden="true"
+      >
+        0{index + 1}
+      </span>
+
       <motion.img
         src={vibe.image}
         alt={vibe.title}
@@ -55,13 +63,13 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
       <div 
-        className="absolute inset-0 backdrop-blur-[1px] mix-blend-overlay opacity-40 pointer-events-none"
+        className="absolute inset-0 backdrop-blur-[1px] mix-blend-overlay opacity-40 group-hover:opacity-65 pointer-events-none transition-opacity duration-700"
         style={{ backgroundColor: vibe.color }}
       />
 
       <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-lux">
         <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/40 backdrop-blur-md border border-white/10 shadow-soft-depth rounded-2xl md:rounded-3xl">
-          <span className="text-gold font-body text-xs md:text-sm uppercase tracking-[0.6em] mb-4 block opacity-80">
+          <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.4em] px-3 py-1 rounded-full mb-5">
             Vibe 0{index + 1}
           </span>
           <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-4 md:mb-6 leading-tight">
@@ -74,7 +82,12 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
           <p className="font-body text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl">
             {vibe.description}
           </p>
-          <div className="w-16 h-[1px] bg-gold/60 mt-8 group-hover:w-32 transition-all duration-700" />
+          <div className="flex items-center justify-between mt-6 md:mt-8">
+            <div className="h-[1px] bg-gold/60 w-16 group-hover:w-24 transition-all duration-700" />
+            <span className="font-body text-transparent group-hover:text-white/50 text-[10px] uppercase tracking-[0.3em] transition-colors duration-500">
+              Explorar →
+            </span>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -129,17 +142,21 @@ const SensationVibes = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div 
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="flex md:grid md:grid-cols-2 gap-8 lg:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-4 sm:px-6 lg:px-12 xl:px-20"
-        >
-          {vibes.map((vibe, index) => (
-            <VibeModule key={vibe.id} vibe={vibe} index={index} />
-          ))}
-        </motion.div>
+        <div className="relative">
+          <motion.div 
+            variants={gridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex md:grid md:grid-cols-2 gap-8 lg:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-4 sm:px-6 lg:px-12 xl:px-20"
+          >
+            {vibes.map((vibe, index) => (
+              <VibeModule key={vibe.id} vibe={vibe} index={index} />
+            ))}
+          </motion.div>
+          {/* Mobile scroll hint — fade gradient on the right */}
+          <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-background via-background/60 to-transparent pointer-events-none z-10 md:hidden" />
+        </div>
       </div>
     </section>
   );

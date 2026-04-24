@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { ShieldCheck, Sparkles, MapPin, Truck } from "lucide-react";
 
 const highlights = [
@@ -25,78 +25,82 @@ const highlights = [
   },
 ];
 
-const FeatureCard = ({ item, index }: { item: typeof highlights[0], index: number }) => {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { margin: "-30% 0px -30% 0px", once: false });
+const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <motion.article
+    <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.2, y: 30 }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      style={{ 
-        willChange: "transform, opacity",
-        backfaceVisibility: "hidden",
-        transform: "translateZ(0)"
-      }}
-      className="min-h-[40vh] md:min-h-[50vh] flex flex-col justify-center py-12 md:py-20"
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      style={{ willChange: "transform, opacity" }}
+      className="relative p-8 lg:p-10 rounded-2xl border border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
     >
-      <div className={`w-12 h-12 mb-8 flex items-center justify-center transition-colors duration-700 ${isInView ? "text-gold" : "text-gold/30"}`}>
-        <item.icon strokeWidth={1} size={32} />
+      {/* Watermark number */}
+      <span
+        className="absolute -top-3 right-5 font-heading font-bold leading-none select-none pointer-events-none text-[6.5rem] lg:text-[8rem] text-foreground/[0.035]"
+        aria-hidden="true"
+      >
+        0{index + 1}
+      </span>
+
+      {/* Icon */}
+      <div className="w-11 h-11 mb-7 flex items-center justify-center text-gold group-hover:scale-110 transition-transform duration-500">
+        <item.icon strokeWidth={1} size={28} />
       </div>
-      
-      <h3 className={`font-heading text-3xl md:text-5xl mb-6 transition-colors duration-700 ${isInView ? "text-foreground" : "text-muted-foreground/30"} tracking-tight`}>
+
+      {/* Content */}
+      <h3 className="font-heading text-xl md:text-2xl lg:text-3xl text-foreground mb-4 tracking-tight">
         {item.title}
       </h3>
-      
-      <p className={`font-body text-base md:text-lg leading-relaxed font-light max-w-md transition-colors duration-700 ${isInView ? "text-muted-foreground/80" : "text-muted-foreground/20"}`}>
+      <p className="font-body text-muted-foreground/70 text-sm md:text-base leading-relaxed font-light">
         {item.desc}
       </p>
-      
-      <motion.div 
-        initial={{ width: 0 }} 
-        animate={isInView ? { width: "60px" } : { width: 0 }} 
-        className="h-[1px] bg-gold/30 mt-10" 
+
+      {/* Accent line */}
+      <motion.div
+        initial={{ width: 0 }}
+        animate={isInView ? { width: 48 } : {}}
+        transition={{ duration: 0.6, delay: index * 0.1 + 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="h-[1px] bg-gold/40 mt-8"
       />
-    </motion.article>
+    </motion.div>
   );
 };
 
 const WhyChoose = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section ref={containerRef} className="relative w-full py-16 md:py-24 lg:py-32 bg-background/50 overflow-visible">
-      {/* Fade superior suave - continuação de ProductGrid */}
+    <section className="relative w-full py-16 md:py-24 lg:py-32 bg-background/50 overflow-hidden">
+      {/* Fade superior */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
-      {/* Fade inferior suave - transição para InstagramFeed */}
+      {/* Fade inferior */}
       <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
-      
-      <div className="max-w-screen-2xl mx-auto section-padding flex flex-col lg:flex-row gap-8 lg:gap-16 xl:gap-24 relative z-10">
-        
-        {/* Coluna 1 (Esquerda): Título Fixo (Sticky) - Editorial Minimalista */}
-        <div className="w-full lg:w-1/2 md:h-[60vh] lg:sticky lg:top-[20vh] flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.2, 0.65, 0.3, 0.9] }}
-            className="max-w-md lg:max-w-none"
-          >
-            <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block whitespace-nowrap">The Soler Heritage</span>
-            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground mb-8 leading-[1.1] break-words">
-              A Experiência <br className="hidden lg:block" />
-              <span className="italic font-light text-gold">Soler</span>
-            </h2>
-            <p className="font-body text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-lg lg:max-w-xl">
-              Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.
-            </p>
-          </motion.div>
-        </div>
 
-        {/* Coluna 2 (Direita): Scrolling Narrativo - Cards de Ícones */}
-        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div className="max-w-screen-xl mx-auto section-padding relative z-10">
+
+        {/* Section Header — centralizado */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-14 md:mb-20"
+        >
+          <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">
+            The Soler Heritage
+          </span>
+          <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 leading-[1.1] break-words">
+            A Experiência <span className="italic font-light text-gold">Soler</span>
+          </h2>
+          <p className="font-body text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto">
+            Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.
+          </p>
+        </motion.div>
+
+        {/* Feature Cards — 2x2 grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
           {highlights.map((item, index) => (
             <FeatureCard key={item.title} item={item} index={index} />
           ))}

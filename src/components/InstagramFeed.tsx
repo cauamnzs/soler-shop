@@ -94,7 +94,7 @@ const InstagramFeed = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
         >
           {photos.map((photo, i) => (
             <motion.a
@@ -108,24 +108,29 @@ const InstagramFeed = () => {
               href="https://instagram.com/solershop_"
               target="_blank"
               rel="noopener noreferrer"
-              className="aspect-square overflow-hidden rounded-xl group relative block bg-gold/5 border border-white/5"
+              className={`overflow-hidden rounded-xl group relative block bg-gold/5 border border-white/5 hover:border-gold/20 transition-colors duration-500 ${
+                i === 0
+                  ? "aspect-square sm:aspect-auto sm:col-span-2 sm:row-span-2"
+                  : "aspect-square"
+              }`}
             >
               <img
                 src={photo}
                 alt={`Foto da comunidade Soler Shop ${i + 1}`}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105"
               />
-              
-              {/* Máscara e Ícone no Hover */}
-              <div className="absolute inset-0 bg-background/0 group-hover:bg-gold/10 transition-all duration-700 ease-out flex items-center justify-center backdrop-blur-0 group-hover:backdrop-blur-[2px]">
-                <div className="translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-out">
-                  <Instagram
-                    size={32}
-                    strokeWidth={1}
-                    className="text-white"
-                  />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-background/0 group-hover:bg-black/30 transition-all duration-700 ease-out flex items-center justify-center group-hover:backdrop-blur-[1px]">
+                <div className="translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                  <Instagram size={28} strokeWidth={1} className="text-white/80" />
                 </div>
+              </div>
+              {/* Photo counter */}
+              <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+                <span className="text-white/50 font-body text-[9px] uppercase tracking-[0.3em]">
+                  {String(i + 1).padStart(2, "0")}/{String(photos.length).padStart(2, "0")}
+                </span>
               </div>
             </motion.a>
           ))}

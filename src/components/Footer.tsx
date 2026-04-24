@@ -1,5 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import { Instagram, Facebook, Mail, CreditCard } from "lucide-react";
+import { Instagram, Facebook, Mail, CreditCard, MessageCircle, ArrowRight } from "lucide-react";
 import solerLogo from "@/assets/soler-logo.png";
 
 const Footer = () => {
@@ -24,6 +24,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-primary-foreground overflow-hidden relative z-50">
+      {/* Gold accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       <div className="max-w-7xl mx-auto section-padding py-10 md:py-16">
         <motion.div
           variants={containerVariants}
@@ -89,6 +91,16 @@ const Footer = () => {
                 <Facebook size={20} strokeWidth={1.5} />
               </a>
               <a
+                href="https://wa.me/5513991234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor-label="WhatsApp"
+                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={20} strokeWidth={1.5} />
+              </a>
+              <a
                 href="#"
                 data-cursor-label="Email"
                 className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
@@ -111,13 +123,14 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Seu endereço de e-mail"
-                className="w-full bg-transparent border-b border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 focus:outline-none focus:border-gold transition-lux duration-500 ease-lux"
+                className="w-full bg-transparent border-b border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-10 focus:outline-none focus:border-gold transition-all duration-500"
               />
               <button
                 type="submit"
-                className="absolute right-0 text-gold uppercase tracking-wider font-body text-xs hover:text-primary-foreground transition-lux duration-500 ease-lux"
+                aria-label="Assinar newsletter"
+                className="absolute right-0 bottom-2 w-7 h-7 flex items-center justify-center rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-background hover:border-gold transition-all duration-300 ease-lux"
               >
-                Assinar
+                <ArrowRight size={12} strokeWidth={2} />
               </button>
             </form>
           </motion.div>

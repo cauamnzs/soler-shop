@@ -76,10 +76,10 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
             {/* Botão de Fechar */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-50 p-2 bg-muted/50 hover:bg-muted text-foreground rounded-full transition-colors backdrop-blur-md"
+              className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center bg-background/60 hover:bg-gold/10 text-muted-foreground hover:text-gold border border-border/40 hover:border-gold/30 rounded-full transition-all duration-300 backdrop-blur-md"
               aria-label="Fechar Modal"
             >
-              <X size={20} />
+              <X size={18} strokeWidth={1.5} />
             </button>
 
             {/* Coluna da Imagem */}
@@ -108,7 +108,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
                 <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-tight break-words">
                   {product.name}
                 </h2>
-                <p className="text-xl md:text-2xl font-body font-medium text-foreground/80 mb-4 md:mb-6">
+                <p className="text-2xl md:text-3xl font-body font-semibold text-gradient-gold mb-4 md:mb-6">
                   {product.price}
                 </p>
                 <p className="font-body text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed font-light line-clamp-4 md:line-clamp-none">

@@ -1,6 +1,29 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView, Variants } from "framer-motion";
 import heroImage from "@/assets/hero-perfume.jpg";
+
+const CountUp = ({ end, suffix, duration = 1300 }: { end: number; suffix: string; duration?: number }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let startTime: number | null = null;
+    const tick = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * end));
+      if (progress < 1) requestAnimationFrame(tick);
+      else setCount(end);
+    };
+    const id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
+  }, [isInView, end, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -101,28 +124,67 @@ const HeroSection = () => {
             whileTap={{ scale: 0.96 }}
             href="#products"
             data-cursor-label="Explorar"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-5 md:py-4 uppercase tracking-[0.2em] font-medium text-xs md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
+            className="group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-5 md:py-4 uppercase tracking-[0.2em] font-medium text-xs md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
           >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-lux pointer-events-none" />
             Explorar Produtos
             <span className="text-lg leading-none font-light group-hover:translate-x-1 transition-transform duration-500 ease-lux">→</span>
           </motion.a>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-6 md:gap-8 pt-6 mt-4 border-t border-border/20"
+          >
+            {[
+              { end: 500, suffix: "+", label: "Produtos" },
+              { end: 100, suffix: "%", label: "Originais" },
+              { end: 4, suffix: " anos", label: "Experiência" },
+            ].map((stat, i) => (
+              <div key={i} className={`flex flex-col ${i === 2 ? "hidden sm:flex" : ""}`}>
+                <span className="font-heading text-xl md:text-2xl text-foreground font-semibold leading-none mb-1">
+                  <CountUp end={stat.end} suffix={stat.suffix} duration={1300} />
+                </span>
+                <span className="font-body text-[9px] uppercase tracking-[0.25em] text-muted-foreground/40">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
         <motion.div 
           className="hidden md:block w-full md:w-2/5 lg:w-1/2 h-[40vh] lg:h-[60vh] relative z-30"
           style={{ y: imageOverlapY, willChange: "transform" }}
         >
-          <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-xl border border-white/10 shadow-2xl overflow-hidden group">
+          <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-xl border border-white/10 group-hover:border-gold/30 shadow-2xl overflow-hidden group transition-colors duration-700">
             <img 
               src={heroImage} 
               alt="Frasco de perfume detalhe" 
               className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 z-10 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-700">
+              <span className="text-white/50 font-body text-[9px] uppercase tracking-[0.5em]">Premium Collection — Soler Shop</span>
+            </div>
           </div>
         </motion.div>
       </div>
       
+      {/* Indicador de Scroll */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 pointer-events-none"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.8, duration: 1 }}
+      >
+        <motion.div
+          className="w-[1px] h-8 bg-gradient-to-b from-gold/50 to-transparent"
+          animate={{ scaleY: [0, 1, 0], opacity: [0, 0.8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          style={{ transformOrigin: "top" }}
+        />
+      </motion.div>
+
       {/* Fade inferior suave para transição contínua */}
       <div className="absolute bottom-0 left-0 right-0 h-32 md:h-48 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none z-20" />
     </section>

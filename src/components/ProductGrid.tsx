@@ -69,7 +69,11 @@ const ProductGrid = () => {
           variants={headerVariants}
           className="flex flex-col items-center mb-10 md:mb-16 px-4"
         >
-          <span className="w-8 h-[1px] bg-gold block mb-6"></span>
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-6 h-[1px] bg-gold/60 block" />
+            <span className="w-1.5 h-1.5 bg-gold/60 rotate-45 inline-block" />
+            <span className="w-6 h-[1px] bg-gold/60 block" />
+          </div>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-foreground mb-4 break-words">
             Nossos <span className="italic text-gold font-light">Favoritos</span>
           </h2>
@@ -78,12 +82,19 @@ const ProductGrid = () => {
           </p>
         </motion.div>
 
-        {/* Grade de Produtos */}
+        {/* Skeleton de Carregamento */}
         {isLoading && (
-          <div className="text-center mb-10 md:mb-14">
-            <p className="text-muted-foreground font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.3em]">
-              Carregando catálogo...
-            </p>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="flex flex-col">
+                <div className="aspect-square rounded-xl animate-shimmer mb-5" />
+                <div className="flex flex-col items-center gap-2 px-2">
+                  <div className="h-3.5 w-2/3 rounded-full animate-shimmer" />
+                  <div className="h-3 w-1/2 rounded-full animate-shimmer" />
+                  <div className="h-4 w-1/3 rounded-full animate-shimmer" />
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
@@ -100,7 +111,7 @@ const ProductGrid = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16 group/grid"
         >
           {products.map((product) => (
             <motion.div
@@ -113,10 +124,10 @@ const ProductGrid = () => {
                 backfaceVisibility: "hidden",
                 transform: "translateZ(0)"
               }}
-              className="group cursor-pointer flex flex-col transition-transform duration-500 ease-out hover:-translate-y-1"
+              className="group cursor-pointer flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 group-hover/grid:opacity-50 hover:!opacity-100"
             >
               {/* Box da Imagem */}
-              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm group-hover:shadow-lg transition-shadow duration-500">
+              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-border/40 group-hover:border-gold/25">
                 <img
                   src={product.image}
                   alt={`Imagem do produto ${product.name}`}
@@ -126,10 +137,18 @@ const ProductGrid = () => {
                   decoding="async"
                   className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
                 />
+                {/* Shimmer sweep on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-lux z-[1] pointer-events-none" />
                 
                 {/* Tag de Destaque */}
                 {product.tag && (
-                  <span className="absolute top-4 left-4 bg-background/80 backdrop-blur-md text-foreground text-[10px] font-body font-medium uppercase tracking-[0.15em] px-3 py-1.5 rounded-full border border-foreground/5">
+                  <span className={`absolute top-3 left-3 backdrop-blur-md text-[10px] font-body font-medium uppercase tracking-[0.15em] px-3 py-1.5 rounded-full border ${
+                    product.tag === "Novo"
+                      ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/25"
+                      : product.tag === "Limitado"
+                      ? "bg-gold/15 text-gold border-gold/25"
+                      : "bg-background/80 text-foreground/80 border-foreground/8 backdrop-blur-md"
+                  }`}>
                     {product.tag}
                   </span>
                 )}
@@ -151,10 +170,13 @@ const ProductGrid = () => {
 
               {/* Textos do Produto (Minimalista) */}
               <div className="flex flex-col items-center text-center px-2">
-                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-2 transition-colors duration-300 group-hover:text-foreground">
+                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 group-hover:text-foreground">
                   {product.name}
                 </h3>
-                <p className="font-body text-base md:text-lg font-medium text-foreground group-hover:text-gold transition-colors duration-300">
+                <p className="font-body text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 mb-2">
+                  {product.category}
+                </p>
+                <p className="font-body text-base md:text-lg font-medium text-gold">
                   {product.price}
                 </p>
               </div>
@@ -170,14 +192,13 @@ const ProductGrid = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-center mt-12 md:mt-20"
         >
-          <div className="group">
-            <a href="#" className="inline-block border-b border-gold text-gold font-body text-xs md:text-sm uppercase tracking-[0.2em] pb-1 hover:text-foreground hover:border-foreground transition-colors duration-300 relative
-              after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full
-              after:h-[1px] after:bg-gold after:scale-x-0 after:origin-right
-              after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left">
-              Explorar Catálogo Completo
-            </a>
-          </div>
+          <a
+            href="#"
+            className="group inline-flex items-center gap-3 border border-gold/50 text-gold font-body text-xs md:text-sm uppercase tracking-[0.25em] px-8 py-4 rounded-full hover:bg-gold hover:text-background transition-all duration-500 ease-lux hover:shadow-lux-hover"
+          >
+            Explorar Catálogo Completo
+            <span className="group-hover:translate-x-1 transition-transform duration-500 text-base leading-none">→</span>
+          </a>
         </motion.div>
 
         {/* Modal de Detalhes Cinematográfico */}
