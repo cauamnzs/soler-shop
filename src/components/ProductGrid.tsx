@@ -1,13 +1,14 @@
 import { motion, Variants } from "framer-motion";
 import { Eye } from "lucide-react";
-import { products } from "@/data/mockData";
 import { useState, memo } from "react";
 import { Product } from "@/types";
 import ProductModal from "./ProductModal";
+import { useProducts } from "@/hooks/useProducts";
 
 const ProductGrid = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: products = [], isLoading, isError } = useProducts();
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
@@ -78,6 +79,22 @@ const ProductGrid = () => {
         </motion.div>
 
         {/* Grade de Produtos */}
+        {isLoading && (
+          <div className="text-center mb-10 md:mb-14">
+            <p className="text-muted-foreground font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.3em]">
+              Carregando catálogo...
+            </p>
+          </div>
+        )}
+
+        {isError && (
+          <div className="text-center mb-10 md:mb-14">
+            <p className="text-destructive font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.15em]">
+              Não foi possível carregar os produtos agora.
+            </p>
+          </div>
+        )}
+
         <motion.div
           variants={gridVariants}
           initial="hidden"
@@ -87,7 +104,7 @@ const ProductGrid = () => {
         >
           {products.map((product) => (
             <motion.div
-              key={product.name}
+              key={product.id}
               variants={itemVariants}
               data-cursor-label="Explorar"
               onClick={() => openModal(product)}
@@ -106,7 +123,8 @@ const ProductGrid = () => {
                   width="600"
                   height="600"
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
                 />
                 
                 {/* Tag de Destaque */}
