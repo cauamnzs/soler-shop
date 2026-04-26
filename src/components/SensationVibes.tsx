@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import { useRef, memo } from "react";
+import { useRef, memo, useEffect, useState, useCallback } from "react";
 import { vibes } from "@/data/mockData";
 import { Vibe } from "@/types";
 
@@ -40,6 +40,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
       ref={ref}
       variants={itemVariants}
       data-cursor-label="Sentir"
+      data-vibe-card="true"
       style={IS_MOBILE ? {} : { 
         scale, 
         opacity, 
@@ -47,11 +48,11 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-[85vw] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-3xl border border-white/5 md:hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center md:snap-align-none transition-colors duration-700"
+      className="relative w-[calc(100vw-2.5rem)] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-[1.75rem] md:rounded-3xl border border-white/5 md:hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center transition-colors duration-700"
     >
       {/* Watermark number */}
       <span
-        className="absolute top-6 right-7 font-heading font-bold leading-none select-none pointer-events-none z-20 text-white/[0.07] text-[5rem] lg:text-[7rem]"
+        className="absolute top-5 right-6 font-heading font-bold leading-none select-none pointer-events-none z-20 text-white/[0.07] text-[4.3rem] md:text-[5rem] lg:text-[7rem]"
         aria-hidden="true"
       >
         0{index + 1}
@@ -69,22 +70,22 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         style={{ backgroundColor: vibe.color }}
       />
 
-      <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 md:p-10 lg:p-16 translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-700 ease-lux">
-        <div className="p-6 sm:p-8 md:p-10 lg:p-12 bg-black/65 md:bg-black/40 md:backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl">
-          <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.4em] px-3 py-1 rounded-full mb-5">
+      <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 md:p-10 lg:p-16 translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-700 ease-lux">
+        <div className="p-5 sm:p-8 md:p-10 lg:p-12 bg-black/65 md:bg-black/40 md:backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl">
+          <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.35em] px-3 py-1 rounded-full mb-4 md:mb-5">
             Vibe 0{index + 1}
           </span>
-          <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-4 md:mb-6 leading-tight">
+          <h3 className="font-heading text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 md:mb-6 leading-tight">
             {vibe.title.split(' ').map((word, i) => (
               <span key={i} className={i === 1 ? "italic font-light text-gold" : ""}>
                 {word}{' '}
               </span>
             ))}
           </h3>
-          <p className="font-body text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl">
+          <p className="font-body text-white/90 text-[13px] sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl">
             {vibe.description}
           </p>
-          <div className="flex items-center justify-between mt-6 md:mt-8">
+          <div className="flex items-center justify-between mt-5 md:mt-8">
             <div className="h-[1px] bg-gold/60 w-20 md:w-16 md:group-hover:w-24 transition-all duration-700" />
             <span className="font-body text-white/25 md:text-transparent md:group-hover:text-white/50 text-[10px] uppercase tracking-[0.3em] transition-colors duration-500">
               Explorar →
@@ -98,6 +99,73 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
 
 const SensationVibes = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateActiveFromScroll = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    const cards = Array.from(
+      rail.querySelectorAll<HTMLElement>("[data-vibe-card='true']")
+    );
+    if (!cards.length) return;
+
+    const center = rail.scrollLeft + rail.clientWidth / 2;
+    let closest = 0;
+    let minDistance = Number.POSITIVE_INFINITY;
+
+    cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closest = index;
+      }
+    });
+
+    setActiveIndex((prev) => (prev === closest ? prev : closest));
+  }, []);
+
+  const scrollToVibe = useCallback((index: number) => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    const cards = Array.from(
+      rail.querySelectorAll<HTMLElement>("[data-vibe-card='true']")
+    );
+    const target = cards[index];
+    if (!target) return;
+
+    const left = target.offsetLeft - (rail.clientWidth - target.offsetWidth) / 2;
+    rail.scrollTo({ left, behavior: "smooth" });
+    setActiveIndex(index);
+  }, []);
+
+  useEffect(() => {
+    if (!IS_MOBILE) return;
+
+    const rail = railRef.current;
+    if (!rail) return;
+
+    let rafId: number | null = null;
+
+    const onScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateActiveFromScroll);
+    };
+
+    updateActiveFromScroll();
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateActiveFromScroll);
+
+    return () => {
+      rail.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateActiveFromScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [updateActiveFromScroll]);
 
   const headerVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -144,20 +212,51 @@ const SensationVibes = () => {
           </motion.div>
         </motion.div>
 
+        <div className="md:hidden px-5 mb-4 flex items-center justify-between">
+          <span className="font-body text-[10px] uppercase tracking-[0.32em] text-muted-foreground/55">Arraste para o lado</span>
+          <div className="flex items-center gap-1.5 text-gold/70" aria-hidden="true">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/40" />
+            <span className="w-8 h-[1px] bg-gold/40" />
+            <span className="text-xs">→</span>
+          </div>
+        </div>
+
         <div className="relative">
           <motion.div 
+            ref={railRef}
             variants={gridVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="flex md:grid md:grid-cols-2 gap-8 lg:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-4 sm:px-6 lg:px-12 xl:px-20"
+            className="flex md:grid md:grid-cols-2 gap-5 md:gap-8 lg:gap-12 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-5 sm:px-6 lg:px-12 xl:px-20"
           >
             {vibes.map((vibe, index) => (
               <VibeModule key={vibe.id} vibe={vibe} index={index} />
             ))}
+            <div className="w-1 flex-shrink-0 md:hidden" aria-hidden="true" />
           </motion.div>
-          {/* Mobile scroll hint — fade gradient on the right */}
-          <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-background via-background/60 to-transparent pointer-events-none z-10 md:hidden" />
+          <div className="md:hidden -mt-2 mb-3 flex items-center justify-center gap-2">
+            {vibes.map((vibe, index) => (
+              <button
+                key={vibe.id}
+                type="button"
+                onClick={() => scrollToVibe(index)}
+                aria-label={`Ir para vibe ${index + 1}`}
+                aria-current={activeIndex === index}
+                className="p-1"
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-all duration-300 ${
+                    activeIndex === index
+                      ? "w-6 bg-gold shadow-[0_0_10px_rgba(212,175,55,0.45)]"
+                      : "w-2 bg-foreground/20"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+          <div className="absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-background via-background/60 to-transparent pointer-events-none z-10 md:hidden" />
+          <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background via-background/60 to-transparent pointer-events-none z-10 md:hidden" />
         </div>
       </div>
     </section>

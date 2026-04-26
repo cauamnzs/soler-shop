@@ -78,13 +78,47 @@ const InstagramFeed = () => {
           </a>
         </motion.div>
 
+        {/* Stories mobile */}
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="md:hidden flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-3 -mx-1 px-1"
+        >
+          {photos.map((photo, i) => (
+            <motion.a
+              key={`mobile-${i}`}
+              variants={itemVariants}
+              href="https://instagram.com/solershop_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="snap-center shrink-0 w-[74vw] max-w-[300px] overflow-hidden rounded-2xl group relative block bg-gold/5 border border-white/10"
+            >
+              <div className="aspect-[3/4]">
+                <img
+                  src={photo}
+                  alt={`Foto da comunidade Soler Shop ${i + 1}`}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                <span className="text-white/70 font-body text-[9px] uppercase tracking-[0.28em]">
+                  Comunidade Soler
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </motion.div>
+
         {/* Grade de Fotos */}
         <motion.div
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
+          className="hidden md:grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
         >
           {photos.map((photo, i) => (
             <motion.a

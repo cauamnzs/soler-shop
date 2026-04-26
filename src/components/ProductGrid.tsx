@@ -102,13 +102,13 @@ const ProductGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex flex-wrap gap-2 justify-center mb-10 md:mb-14 px-4"
+            className="flex gap-2 md:gap-2.5 justify-start md:justify-center mb-10 md:mb-14 px-4 overflow-x-auto scrollbar-hide whitespace-nowrap"
           >
             {filterOptions.map(filter => (
               <button
                 key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`relative px-4 py-2 rounded-full font-body text-[11px] uppercase tracking-[0.2em] transition-colors duration-300 overflow-hidden ${
+                onClick={() => { try { navigator.vibrate?.(4); } catch {}; setActiveFilter(filter); }}
+                className={`touch-cta relative shrink-0 px-4 md:px-4.5 py-2.5 rounded-full font-body text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 overflow-hidden active:scale-[0.94] ${
                   activeFilter === filter
                     ? "text-background"
                     : "text-muted-foreground hover:text-foreground border border-foreground/10 hover:border-gold/30"
@@ -166,11 +166,11 @@ const ProductGrid = () => {
               layout
               exit={{ opacity: 0, scale: 0.88, transition: { duration: 0.22 } }}
               data-cursor-label="Explorar"
-              onClick={() => openModal(product)}
-              className="group cursor-pointer flex flex-col transition-all duration-300 ease-out hover:-translate-y-1 group-hover/grid:opacity-50 hover:!opacity-100"
+              className="touch-cta group cursor-pointer flex flex-col transition-all duration-300 ease-out md:hover:-translate-y-1 md:group-hover/grid:opacity-50 md:hover:!opacity-100 active:scale-[0.97]"
+              onClick={() => { try { navigator.vibrate?.(6); } catch {} ; openModal(product); }}
             >
               {/* Box da Imagem */}
-              <div className="relative aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-border/40 group-hover:border-gold/25">
+              <div className="relative aspect-[3/4] md:aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm md:group-hover:shadow-xl transition-all duration-500 border border-border/40 md:group-hover:border-gold/25">
                 <img
                   src={product.image}
                   alt={`Imagem do produto ${product.name}`}
@@ -178,10 +178,10 @@ const ProductGrid = () => {
                   height="600"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.2,0.65,0.3,0.9)] md:group-hover:scale-105"
                 />
                 {/* Shimmer sweep on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-lux z-[1] pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent -translate-x-full md:group-hover:translate-x-full transition-transform duration-1000 ease-lux z-[1] pointer-events-none" />
                 
                 {/* Tag de Destaque */}
                 {product.tag && (
@@ -207,8 +207,8 @@ const ProductGrid = () => {
                     openModal(product);
                   }}
                   className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background/70 backdrop-blur-md border border-foreground/10 text-foreground p-3.5 sm:p-3 rounded-full
-                    opacity-100 sm:opacity-0 translate-y-0 sm:translate-y-4 group-hover:opacity-100 group-hover:translate-y-0
-                    transition-all duration-500 ease-out hover:bg-gold hover:text-background hover:border-gold hover:scale-110 shadow-lg active:scale-95"
+                    opacity-100 sm:opacity-0 translate-y-0 sm:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0
+                    transition-all duration-500 ease-out md:hover:bg-gold md:hover:text-background md:hover:border-gold md:hover:scale-110 shadow-lg active:scale-95"
                   aria-label={`Ver detalhes de ${product.name}`}
                 >
                   <Eye size={20} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
@@ -217,7 +217,7 @@ const ProductGrid = () => {
 
               {/* Textos do Produto (Minimalista) */}
               <div className="flex flex-col items-center text-center px-2">
-                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 group-hover:text-foreground">
+                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 md:group-hover:text-foreground">
                   {product.name}
                 </h3>
                 <p className="font-body text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 mb-2">

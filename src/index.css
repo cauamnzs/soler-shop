@@ -120,15 +120,36 @@
     @apply overflow-x-hidden;
     width: 100%;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
+  }
+
+  /* Mobile: restores cursor on touch */
+  @media (pointer: coarse) {
+    body, a, button, [role="button"] {
+      cursor: auto !important;
+    }
+    /* Better text selection color on mobile */
+    ::selection {
+      background-color: hsl(var(--gold) / 0.35);
+    }
   }
   
   /* Esconder o cursor nativo no Desktop para o Custom Cursor brilhar */
   @media (pointer: fine) {
     body, a, button, [role="button"] {
       cursor: none !important;
+    }
+  }
+
+  /* Dark mode mobile: bump up foreground contrast slightly */
+  @media (max-width: 767px) {
+    .dark {
+      --foreground: 40 20% 96%;
+      --muted-foreground: 220 8% 65%;
+      --border: 220 8% 20%;
     }
   }
 
@@ -156,6 +177,12 @@
   }
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8 xl:px-16;
+  }
+  /* Touch-optimised buttons — instant response, no delay */
+  .touch-cta {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-dark via-gold to-gold-light;

@@ -6,6 +6,8 @@ import { useProducts } from "@/hooks/useProducts";
 import { Product } from "@/types";
 import ProductModal from "./ProductModal";
 
+const quickSuggestions = ["Perfume", "Body Splash", "Novo", "Limitado", "Promoção"];
+
 const SearchModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -78,7 +80,7 @@ const SearchModal = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -18, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-3xl mx-auto px-6 pt-20 pb-20"
+              className="max-w-3xl mx-auto px-5 sm:px-6 pt-16 md:pt-20 pb-20"
             >
               {/* Close */}
               <button
@@ -90,19 +92,19 @@ const SearchModal = () => {
               </button>
 
               {/* Label */}
-              <p className="text-gold/50 font-body text-[10px] uppercase tracking-[0.7em] mb-6">
+              <p className="text-gold/50 font-body text-[10px] uppercase tracking-[0.6em] md:tracking-[0.7em] mb-5 md:mb-6">
                 Buscar
               </p>
 
               {/* Input */}
-              <div className="relative mb-10 md:mb-14">
+              <div className="relative mb-6 md:mb-14">
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Nome, categoria..."
-                  className="w-full bg-transparent border-0 border-b-2 border-foreground/10 focus:border-gold text-foreground font-heading text-3xl sm:text-4xl md:text-5xl pb-4 focus:outline-none placeholder:text-muted-foreground/10 transition-colors duration-500 caret-gold"
+                  className="w-full bg-transparent border-0 border-b-2 border-foreground/10 focus:border-gold text-foreground font-heading text-[1.9rem] sm:text-4xl md:text-5xl pb-4 focus:outline-none placeholder:text-muted-foreground/10 transition-colors duration-500 caret-gold"
                   autoComplete="off"
                   spellCheck={false}
                 />
@@ -112,6 +114,21 @@ const SearchModal = () => {
                   strokeWidth={1.5}
                 />
               </div>
+
+              {!query.trim() && (
+                <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap mb-8 md:mb-10 -mx-1 px-1">
+                  {quickSuggestions.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => setQuery(suggestion)}
+                      className="shrink-0 px-4 py-2 rounded-full border border-foreground/10 bg-foreground/[0.02] text-muted-foreground hover:text-foreground hover:border-gold/30 transition-colors duration-300 font-body text-[10px] uppercase tracking-[0.2em]"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Results / States */}
               <AnimatePresence mode="wait">
