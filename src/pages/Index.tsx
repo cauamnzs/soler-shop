@@ -110,7 +110,7 @@ const Index = () => {
         {/* Brand Names Strip */}
         <div className="relative overflow-hidden py-5 md:py-6 border-y border-border/15 group">
           <div className="flex items-center gap-16 whitespace-nowrap"
-            style={{ animation: "marquee 26s linear infinite", animationPlayState: "running" }}
+            style={{ animation: "marquee 18s linear infinite", animationPlayState: "running" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
           >

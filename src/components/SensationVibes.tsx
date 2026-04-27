@@ -64,25 +64,25 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
       />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90" />
       <div 
         className="absolute inset-0 md:backdrop-blur-[1px] mix-blend-overlay opacity-40 md:group-hover:opacity-65 pointer-events-none transition-opacity duration-700"
         style={{ backgroundColor: vibe.color }}
       />
 
       <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 md:p-10 lg:p-16 translate-y-0 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-700 ease-lux">
-        <div className="p-4 sm:p-8 md:p-10 lg:p-12 bg-black/65 md:bg-black/40 md:backdrop-blur-md border border-white/10 rounded-xl md:rounded-3xl">
+        <div className="p-4 sm:p-8 md:p-10 lg:p-12 bg-black/75 md:bg-black/40 md:backdrop-blur-md border border-white/20 md:border-white/10 rounded-xl md:rounded-3xl">
           <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold font-body text-[9px] uppercase tracking-[0.35em] px-3 py-1 rounded-full mb-4 md:mb-5">
             Vibe 0{index + 1}
           </span>
-          <h3 className="font-heading text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 md:mb-6 leading-tight">
+          <h3 className="font-heading text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 md:mb-6 leading-tight">
             {vibe.title.split(' ').map((word, i) => (
               <span key={i} className={i === 1 ? "italic font-light text-gold" : ""}>
                 {word}{' '}
               </span>
             ))}
           </h3>
-          <p className="font-body text-white/90 text-[13px] sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl line-clamp-3 sm:line-clamp-none">
+          <p className="font-body text-white/95 text-[13px] sm:text-base md:text-lg lg:text-xl leading-relaxed font-medium tracking-wide max-w-2xl line-clamp-3 sm:line-clamp-none">
             {vibe.description}
           </p>
           <div className="flex items-center justify-between mt-5 md:mt-8">

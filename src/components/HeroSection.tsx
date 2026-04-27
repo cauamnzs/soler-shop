@@ -72,7 +72,7 @@ const HeroSection = () => {
           WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)"
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-background/90 via-background/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-background/95 via-background/85 to-transparent z-10" />
         <motion.img
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -106,7 +106,7 @@ const HeroSection = () => {
 
           <motion.h1
             variants={itemVariants}
-            className="font-heading text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.08] md:leading-[1.05] mb-5 md:mb-8 break-words"
+            className="font-heading text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.05] md:leading-[1.05] mb-5 md:mb-8 break-words"
           >
             Sua Dose Diária de <br className="hidden sm:block" />
             <span className="italic font-light text-gold">Luxo</span>
@@ -116,7 +116,7 @@ const HeroSection = () => {
 
           <motion.p
             variants={itemVariants}
-            className="font-body text-muted-foreground text-[13px] md:text-base lg:text-lg leading-relaxed mb-7 md:mb-10 max-w-md font-light line-clamp-2 md:line-clamp-none"
+            className="font-body text-muted-foreground text-[14px] md:text-base lg:text-lg leading-relaxed mb-7 md:mb-10 max-w-md font-medium line-clamp-2 md:line-clamp-none"
           >
             Trabalhamos com as marcas mais desejadas do mundo. Descubra perfumes, body splashes e esfoliantes 100% originais.
           </motion.p>
