@@ -102,7 +102,7 @@ const Index = () => {
       
       {/* Camada 3: O Site em si */}
       <Header />
-      <main className="relative z-10 pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-0">
+      <main className="relative z-10">
         <HeroSection />
         <SensationVibes />
         <ProductGrid />

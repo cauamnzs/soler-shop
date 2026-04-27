@@ -26,7 +26,7 @@ const Footer = () => {
     <footer className="bg-foreground text-primary-foreground overflow-hidden relative z-50">
       {/* Gold accent line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-      <div className="max-w-7xl mx-auto section-padding py-10 md:py-16 pb-28 md:pb-16">
+      <div className="max-w-7xl mx-auto section-padding py-10 md:py-16 pb-32 md:pb-16">
         <motion.div
           variants={containerVariants}
           initial="hidden"
