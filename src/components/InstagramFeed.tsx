@@ -44,7 +44,7 @@ const InstagramFeed = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative py-12 md:py-20 overflow-hidden bg-background/50">
+    <section id="instagram" ref={containerRef} className="relative py-12 md:py-20 overflow-hidden bg-background/50">
       {/* Fade superior suave - continuação de WhyChoose */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para Footer escuro */}

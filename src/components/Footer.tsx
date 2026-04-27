@@ -1,5 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import { Instagram, Facebook, Mail, CreditCard, MessageCircle, ArrowRight } from "lucide-react";
+import { Instagram, Mail, CreditCard, MessageCircle, ArrowRight } from "lucide-react";
 import solerLogo from "@/assets/soler-logo.png";
 
 const Footer = () => {
@@ -32,16 +32,17 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 lg:gap-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16"
         >
           {/* Marca / Sobre */}
           <motion.div variants={itemVariants} className="flex flex-col">
-            <a href="/" data-cursor-label="Início" className="flex items-center gap-3 mb-6 inline-block">
+            <a href="/" data-cursor-label="Início" className="touch-cta flex items-center gap-3 mb-5 inline-block active:opacity-80">
               <img src={solerLogo} alt="Soler Shop" className="h-10 w-10 md:h-12 md:w-12 brightness-0 invert opacity-90" />
               <span className="font-heading text-xl md:text-2xl tracking-wide text-primary-foreground">
                 Soler <span className="italic font-light">Shop</span>
               </span>
             </a>
+
             <p className="font-body text-xs md:text-sm text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
               Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina diária.
             </p>
@@ -53,14 +54,19 @@ const Footer = () => {
               Navegação
             </h4>
             <div className="flex flex-col space-y-3">
-              {["Sobre Nós", "Contato", "Perguntas Frequentes", "Envios e Devoluções"].map((link) => (
+              {[
+                { label: "Catálogo", href: "#products" },
+                { label: "Perfumes", href: "?filter=Perfumes#products" },
+                { label: "Body Splash", href: "?filter=Body%20Splash#products" },
+                { label: "Instagram", href: "#instagram" },
+              ].map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.label}
+                  href={link.href}
                   data-cursor-label="Explorar"
-                  className="font-body text-sm text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1"
+                  className="touch-cta font-body text-sm text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </div>
@@ -71,39 +77,31 @@ const Footer = () => {
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               Conecte-se
             </h4>
-            <div className="flex gap-4">
+            <div className="flex gap-3 flex-wrap">
               <a
                 href="https://instagram.com/solershop_"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="Instagram"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="Instagram"
               >
                 <Instagram size={20} strokeWidth={1.5} />
-              </a>
-              <a
-                href="#"
-                data-cursor-label="Facebook"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} strokeWidth={1.5} />
               </a>
               <a
                 href="https://wa.me/5513991234567"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="WhatsApp"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="WhatsApp"
               >
                 <MessageCircle size={20} strokeWidth={1.5} />
               </a>
               <a
-                href="#"
+                href="mailto:contato@solershop.com.br"
                 data-cursor-label="Email"
-                className="w-12 h-12 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="Email"
               >
                 <Mail size={20} strokeWidth={1.5} />
@@ -128,7 +126,7 @@ const Footer = () => {
               <button
                 type="submit"
                 aria-label="Assinar newsletter"
-                className="absolute right-0 bottom-2 w-7 h-7 flex items-center justify-center rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-background hover:border-gold transition-all duration-300 ease-lux"
+                className="touch-cta absolute right-0 bottom-2 w-8 h-8 flex items-center justify-center rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-background hover:border-gold transition-all duration-300 ease-lux active:scale-95"
               >
                 <ArrowRight size={12} strokeWidth={2} />
               </button>
@@ -144,14 +142,15 @@ const Footer = () => {
           transition={{ delay: 0.8, duration: 1 }}
           className="border-t border-primary-foreground/10 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
-          <div className="flex items-center gap-4 text-primary-foreground/30">
+          <div className="flex items-center gap-3 text-primary-foreground/30">
             <CreditCard size={24} strokeWidth={1} />
-            <span className="font-body text-xs tracking-wider uppercase">
+            <span className="font-body text-[11px] tracking-wider uppercase text-center sm:text-left">
               Pix • Visa • Mastercard
             </span>
           </div>
+
           <p className="font-body text-xs text-primary-foreground/30 tracking-wider font-light">
-            © 2026 SOLER SHOP. TODOS OS DIREITOS RESERVADOS.
+            2026 SOLER SHOP. TODOS OS DIREITOS RESERVADOS.
           </p>
         </motion.div>
       </div>

@@ -1,9 +1,16 @@
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Eye } from "lucide-react";
-import { useState, memo, useMemo } from "react";
+import { useState, memo, useMemo, useEffect } from "react";
 import { Product } from "@/types";
 import ProductModal from "./ProductModal";
 import { useProducts } from "@/hooks/useProducts";
+
+const normalizeFilter = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 
 const ProductGrid = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -22,6 +29,29 @@ const ProductGrid = () => {
     if (activeFilter === "Todos") return products;
     return products.filter(p => p.category === activeFilter || p.tag === activeFilter);
   }, [products, activeFilter]);
+
+  useEffect(() => {
+    const applyFilterFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get("filter") || params.get("brand") || params.get("category");
+      if (!requested) return;
+      const match = filterOptions.find(
+        (option) => normalizeFilter(option) === normalizeFilter(requested)
+      );
+      if (match) {
+        setActiveFilter((prev) => (prev === match ? prev : match));
+      }
+    };
+
+    applyFilterFromUrl();
+    window.addEventListener("popstate", applyFilterFromUrl);
+    window.addEventListener("hashchange", applyFilterFromUrl);
+
+    return () => {
+      window.removeEventListener("popstate", applyFilterFromUrl);
+      window.removeEventListener("hashchange", applyFilterFromUrl);
+    };
+  }, [filterOptions]);
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
@@ -148,6 +178,21 @@ const ProductGrid = () => {
             <p className="text-destructive font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.15em]">
               Não foi possível carregar os produtos agora.
             </p>
+          </div>
+        )}
+
+        {!isLoading && !isError && filteredProducts.length === 0 && (
+          <div className="text-center mb-10 md:mb-14">
+            <p className="text-muted-foreground font-body text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] mb-4">
+              Nenhum produto encontrado para {activeFilter}
+            </p>
+            <button
+              type="button"
+              onClick={() => setActiveFilter("Todos")}
+              className="touch-cta inline-flex items-center justify-center rounded-full border border-gold/40 text-gold px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] active:scale-[0.96]"
+            >
+              Ver todos
+            </button>
           </div>
         )}
 

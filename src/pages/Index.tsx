@@ -122,7 +122,7 @@ const Index = () => {
             ].map((brand, i) => (
               <a
                 key={i}
-                href="#products"
+                href={`?brand=${encodeURIComponent(brand)}#products`}
                 data-brand={brand}
                 onClick={() => { try { navigator.vibrate?.(4); } catch {} }}
                 className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.4em] text-foreground/20 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
