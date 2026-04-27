@@ -96,7 +96,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="relative scroll-mt-24 md:scroll-mt-28 py-12 md:py-20 bg-background/50">
+    <section id="products" className="relative scroll-mt-24 md:scroll-mt-28 py-12 md:py-20 bg-transparent">
       {/* Fade superior suave - continuação de SensationVibes */}
       <div className="absolute top-0 left-0 w-full h-48 md:h-64 bg-gradient-to-b from-background via-background/70 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para WhyChoose */}

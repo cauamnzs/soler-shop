@@ -77,7 +77,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
 
 const WhyChoose = () => {
   return (
-    <section className="relative w-full py-16 md:py-24 lg:py-32 bg-background/50 overflow-hidden">
+    <section className="relative w-full py-16 md:py-24 lg:py-32 bg-transparent overflow-hidden">
       {/* Fade superior */}
       <div className="absolute top-0 left-0 w-full h-48 md:h-64 bg-gradient-to-b from-background via-background/70 to-transparent pointer-events-none z-0" />
       {/* Fade inferior */}
