@@ -190,7 +190,7 @@ const SensationVibes = () => {
   return (
     <section ref={containerRef} className="relative w-full py-16 md:py-24 lg:py-32 overflow-hidden bg-background/50">
       {/* Fade superior suave - continuação do Hero */}
-      <div className="absolute top-0 left-0 w-full h-40 md:h-56 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 w-full h-48 md:h-64 bg-gradient-to-b from-background via-background/70 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para ProductGrid */}
       <div className="absolute bottom-0 left-0 w-full h-48 md:h-64 bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none z-0" />
       
