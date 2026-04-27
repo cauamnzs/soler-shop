@@ -242,7 +242,8 @@ const ProductGrid = () => {
         >
           <a
             href="#"
-            className="group inline-flex items-center gap-3 border border-gold/50 text-gold font-body text-xs md:text-sm uppercase tracking-[0.25em] px-8 py-4 rounded-full hover:bg-gold hover:text-background transition-all duration-500 ease-lux hover:shadow-lux-hover"
+            onClick={() => { try { navigator.vibrate?.(8); } catch {} }}
+            className="touch-cta group inline-flex items-center gap-3 border border-gold/50 text-gold font-body text-xs md:text-sm uppercase tracking-[0.25em] px-8 py-4 rounded-full hover:bg-gold hover:text-background transition-all duration-500 ease-lux hover:shadow-lux-hover active:scale-[0.97] active:bg-gold/10"
           >
             Explorar Catálogo Completo
             <span className="group-hover:translate-x-1 transition-transform duration-500 text-base leading-none">→</span>

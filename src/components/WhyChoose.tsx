@@ -38,7 +38,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={IS_MOBILE ? {} : { willChange: "transform, opacity" }}
-      className="relative p-8 lg:p-10 rounded-2xl border border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
+      className="relative p-5 sm:p-8 lg:p-10 rounded-2xl border border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
     >
       {/* Shimmer sweep on hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-lux pointer-events-none" />
@@ -52,7 +52,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       </span>
 
       {/* Icon */}
-      <div className="w-11 h-11 mb-7 flex items-center justify-center text-gold group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.55)] transition-all duration-500">
+      <div className="w-11 h-11 mb-5 md:mb-7 flex items-center justify-center text-gold group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.55)] transition-all duration-500">
         <item.icon strokeWidth={1} size={28} />
       </div>
 
@@ -60,7 +60,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       <h3 className="font-heading text-xl md:text-2xl lg:text-3xl text-foreground mb-4 tracking-tight">
         {item.title}
       </h3>
-      <p className="font-body text-muted-foreground/70 text-sm md:text-base leading-relaxed font-light">
+      <p className="font-body text-muted-foreground/70 text-sm md:text-base leading-relaxed font-light line-clamp-4 md:line-clamp-none">
         {item.desc}
       </p>
 
@@ -91,7 +91,7 @@ const WhyChoose = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-10 md:mb-20"
         >
           <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">
             The Soler Heritage

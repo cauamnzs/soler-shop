@@ -80,12 +80,12 @@ const SearchModal = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -18, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-3xl mx-auto px-5 sm:px-6 pt-16 md:pt-20 pb-20"
+              className="max-w-3xl mx-auto px-5 sm:px-6 pt-12 md:pt-20 pb-20"
             >
               {/* Close */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-foreground/5"
+                className="touch-cta absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-foreground/5 active:scale-90 active:bg-foreground/5"
                 aria-label="Fechar busca"
               >
                 <X size={20} strokeWidth={1.5} />
@@ -104,7 +104,7 @@ const SearchModal = () => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Nome, categoria..."
-                  className="w-full bg-transparent border-0 border-b-2 border-foreground/10 focus:border-gold text-foreground font-heading text-[1.9rem] sm:text-4xl md:text-5xl pb-4 focus:outline-none placeholder:text-muted-foreground/10 transition-colors duration-500 caret-gold"
+                  className="w-full bg-transparent border-0 border-b-2 border-foreground/10 focus:border-gold text-foreground font-heading text-[1.45rem] sm:text-4xl md:text-5xl pb-4 focus:outline-none placeholder:text-muted-foreground/10 transition-colors duration-500 caret-gold"
                   autoComplete="off"
                   spellCheck={false}
                 />
@@ -121,8 +121,8 @@ const SearchModal = () => {
                     <button
                       key={suggestion}
                       type="button"
-                      onClick={() => setQuery(suggestion)}
-                      className="shrink-0 px-4 py-2 rounded-full border border-foreground/10 bg-foreground/[0.02] text-muted-foreground hover:text-foreground hover:border-gold/30 transition-colors duration-300 font-body text-[10px] uppercase tracking-[0.2em]"
+                      onClick={() => { try { navigator.vibrate?.(4); } catch {}; setQuery(suggestion); }}
+                      className="touch-cta shrink-0 px-4 py-2.5 rounded-full border border-foreground/10 bg-foreground/[0.02] text-muted-foreground hover:text-foreground hover:border-gold/30 transition-colors duration-300 font-body text-[10px] uppercase tracking-[0.2em] active:scale-95 active:border-gold/40"
                     >
                       {suggestion}
                     </button>
@@ -154,8 +154,8 @@ const SearchModal = () => {
                             delay: i * 0.055,
                             ease: [0.16, 1, 0.3, 1],
                           }}
-                          onClick={() => handleProductClick(product)}
-                          className="text-left flex flex-col gap-2 p-3 rounded-xl border border-border/20 hover:border-gold/35 bg-background/40 hover:bg-gold/[0.03] transition-all duration-300 group"
+                          onClick={() => { try { navigator.vibrate?.(6); } catch {}; handleProductClick(product); }}
+                          className="touch-cta text-left flex flex-col gap-2 p-3 rounded-xl border border-border/20 hover:border-gold/35 bg-background/40 hover:bg-gold/[0.03] transition-all duration-300 group active:scale-[0.97]"
                         >
                           <div className="aspect-square rounded-lg overflow-hidden bg-secondary/10">
                             <img

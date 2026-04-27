@@ -108,18 +108,28 @@ const Index = () => {
         <ProductGrid />
 
         {/* Brand Names Strip */}
-        <div className="relative overflow-hidden py-7 border-y border-border/15" aria-hidden="true">
-          <div className="flex items-center gap-16 animate-marquee whitespace-nowrap">
+        <div className="relative overflow-hidden py-6 border-y border-border/15 group">
+          <div className="flex items-center gap-16 whitespace-nowrap"
+            style={{ animation: "marquee 26s linear infinite", animationPlayState: "running" }}
+            onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
+            onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
+          >
             {[
               "Victoria's Secret", "Bath & Body Works", "Sol de Janeiro",
               "Kayali", "Jo Malone", "Maison Margiela", "Dossier", "Fragrance.One",
               "Victoria's Secret", "Bath & Body Works", "Sol de Janeiro",
               "Kayali", "Jo Malone", "Maison Margiela", "Dossier", "Fragrance.One",
             ].map((brand, i) => (
-              <span key={i} className="inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.4em] text-foreground/15 italic flex-shrink-0">
+              <a
+                key={i}
+                href="#products"
+                data-brand={brand}
+                onClick={() => { try { navigator.vibrate?.(4); } catch {} }}
+                className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.4em] text-foreground/20 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
+              >
                 {brand}
                 <span className="text-gold/20 not-italic text-[8px]" aria-hidden="true">◆</span>
-              </span>
+              </a>
             ))}
           </div>
         </div>

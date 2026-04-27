@@ -19,8 +19,8 @@ const ThemeToggle = () => {
   
   return (
     <button
-      onClick={toggleTheme}
-      className="relative p-2 text-muted-foreground hover:text-gold transition-lux duration-500 rounded-lg hover:bg-gold/10"
+      onClick={() => { try { navigator.vibrate?.(5); } catch {}; toggleTheme(); }}
+      className="touch-cta relative p-2 text-muted-foreground hover:text-gold transition-lux duration-500 rounded-lg hover:bg-gold/10 active:scale-90"
       aria-label={theme === "light" ? "Ativar modo escuro" : "Ativar modo claro"}
     >
       <div className="relative w-5 h-5">
@@ -56,7 +56,7 @@ const Header = () => {
       <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-14 md:h-16 lg:h-18' : 'h-16 md:h-20 lg:h-24'}`}>
           {/* Logo */}
-          <a href="/" data-cursor-label="Início" className="flex items-center gap-2 shrink-0 group transition-lux duration-500">
+          <a href="/" data-cursor-label="Início" className="touch-cta flex items-center gap-2 shrink-0 group transition-lux duration-500 active:opacity-70">
             <img src={solerLogo} alt="Soler Shop" className="h-9 w-9 md:h-11 md:w-11 lg:h-12 lg:w-12 transition-lux duration-500 group-hover:scale-105" />
             <div className="leading-tight">
               <span className="font-heading text-lg md:text-xl lg:text-2xl font-semibold tracking-wide text-foreground whitespace-nowrap">
@@ -94,16 +94,16 @@ const Header = () => {
           {/* Icons */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
             <button
-              className="p-2 text-muted-foreground hover:text-gold transition-lux duration-500"
+              className="touch-cta p-2.5 text-muted-foreground hover:text-gold transition-lux duration-500 active:scale-90 active:text-gold"
               aria-label="Pesquisar"
-              onClick={() => window.dispatchEvent(new CustomEvent("soler:search:open"))}
+              onClick={() => { try { navigator.vibrate?.(6); } catch {}; window.dispatchEvent(new CustomEvent("soler:search:open")); }}
             >
               <Search size={20} />
             </button>
             <ThemeToggle />
             <button
-              className="p-2 lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              className="touch-cta p-2 lg:hidden text-muted-foreground hover:text-gold transition-lux duration-500 active:scale-90"
+              onClick={() => { try { navigator.vibrate?.(8); } catch {}; setMobileOpen(!mobileOpen); }}
               aria-label={mobileOpen ? "Fechar Menu" : "Abrir Menu"}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -120,8 +120,8 @@ const Header = () => {
               <a
                 key={link}
                 href="#"
-                className="flex items-center justify-between text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-all duration-300 group/nav hover:pl-1"
-                onClick={() => setMobileOpen(false)}
+                className="touch-cta flex items-center justify-between text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-all duration-300 group/nav hover:pl-1 active:text-gold active:pl-1"
+                onClick={() => { try { navigator.vibrate?.(5); } catch {}; setMobileOpen(false); }}
               >
                 {link === "Promoção" ? (
                   <span className="relative text-destructive font-semibold">

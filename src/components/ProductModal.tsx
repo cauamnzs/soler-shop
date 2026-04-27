@@ -1,7 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { X, MessageCircle, ShieldCheck, Truck, Zap } from "lucide-react";
 import { Product } from "@/types";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 // Tipo global Lenis control
@@ -20,7 +20,11 @@ interface ProductModalProps {
   onClose: () => void;
 }
 
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
+
 const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
+  const dragControls = useDragControls();
+  const touchStartY = useRef<number>(0);
   // Modal é uma "telinha" sobre a página - scroll da página continua funcionando (catálogo)
   // Não bloqueamos o scroll do body, apenas adicionamos ESC para fechar
   useEffect(() => {
@@ -28,8 +32,12 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEsc);
+    };
   }, [isOpen, onClose]);
 
   useEffect(() => {
@@ -65,32 +73,44 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
 
           {/* Container do Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            drag={IS_MOBILE ? "y" : false}
+            dragControls={dragControls}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0, bottom: 0.4 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 80 || info.velocity.y > 400) onClose();
+            }}
+            initial={{ opacity: 0, y: "100%" }}
             animate={{ 
               opacity: 1, 
-              scale: 1, 
               y: 0,
-              transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+              transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
             }}
             exit={{ 
               opacity: 0, 
-              scale: 0.9, 
-              y: 10,
-              transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+              y: "100%",
+              transition: { duration: 0.35, ease: [0.4, 0, 1, 1] }
             }}
-            className="relative w-full max-w-5xl bg-card border border-border rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] flex flex-col md:flex-row"
+            style={{ originY: 1 }}
+            className="relative w-full max-w-5xl bg-card border border-border md:rounded-2xl rounded-t-3xl shadow-2xl overflow-y-auto max-h-[92dvh] md:max-h-[90vh] flex flex-col md:flex-row mt-auto md:mt-0"
           >
+            {/* Drag handle — mobile only */}
+            <div className="md:hidden flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing"
+              onPointerDown={(e) => dragControls.start(e)}
+            >
+              <div className="w-10 h-1 rounded-full bg-foreground/15" />
+            </div>
             {/* Botão de Fechar */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center bg-background/60 hover:bg-gold/10 text-muted-foreground hover:text-gold border border-border/40 hover:border-gold/30 rounded-full transition-all duration-300 backdrop-blur-md"
+              className="touch-cta absolute top-4 right-4 z-50 w-11 h-11 flex items-center justify-center bg-background/60 hover:bg-gold/10 text-muted-foreground hover:text-gold border border-border/40 hover:border-gold/30 rounded-full transition-all duration-300 backdrop-blur-md active:scale-90"
               aria-label="Fechar Modal"
             >
               <X size={18} strokeWidth={1.5} />
             </button>
 
             {/* Coluna da Imagem */}
-            <div className="w-full md:w-1/2 h-[40vh] md:h-auto relative overflow-hidden bg-secondary/5">
+            <div className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-auto relative overflow-hidden bg-secondary/5 flex-shrink-0">
               <motion.img
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}

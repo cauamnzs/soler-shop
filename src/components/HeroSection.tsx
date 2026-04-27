@@ -127,7 +127,8 @@ const HeroSection = () => {
             whileTap={{ scale: 0.96 }}
             href="#products"
             data-cursor-label="Explorar"
-            className="group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-4.5 md:py-4 uppercase tracking-[0.2em] font-medium text-[11px] md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover"
+            onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
+            className="touch-cta group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-auto gap-4 bg-gold text-background px-8 py-4.5 md:py-4 uppercase tracking-[0.2em] font-medium text-[11px] md:text-sm transition-lux duration-500 shadow-lux hover:shadow-lux-hover active:brightness-90"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-lux pointer-events-none" />
             Explorar Produtos
@@ -173,9 +174,9 @@ const HeroSection = () => {
         </motion.div>
       </div>
       
-      {/* Indicador de Scroll */}
+      {/* Indicador de Scroll — hidden on mobile (overlaps content) */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 pointer-events-none"
+        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-30 pointer-events-none"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.8, duration: 1 }}

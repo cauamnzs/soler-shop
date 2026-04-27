@@ -72,8 +72,9 @@ const Preloader = () => {
   const [phase, setPhase] = useState<"entering" | "loading" | "exiting">("entering");
 
   useEffect(() => {
-    // Organic loading simulation
-    const duration = 3500;
+    // Organic loading simulation — shorter on mobile for better UX
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const duration = isMobile ? 2000 : 3500;
     const startTime = Date.now();
     
     const updateProgress = () => {

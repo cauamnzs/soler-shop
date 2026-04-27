@@ -48,7 +48,9 @@ const InstagramFeed = () => {
       {/* Fade superior suave - continuação de WhyChoose */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para Footer escuro */}
-      <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 bg-gradient-to-t from-foreground via-foreground/50 to-transparent pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-full h-48 md:h-64 pointer-events-none z-0"
+        style={{ background: "linear-gradient(to top, hsl(25,12%,13%) 0%, hsl(25,12%,13%,0.7) 35%, transparent 100%)" }}
+      />
       
       <div className="max-w-7xl mx-auto section-padding relative z-10">
         
@@ -93,19 +95,25 @@ const InstagramFeed = () => {
               href="https://instagram.com/solershop_"
               target="_blank"
               rel="noopener noreferrer"
-              className="snap-center shrink-0 w-[74vw] max-w-[300px] overflow-hidden rounded-2xl group relative block bg-gold/5 border border-white/10"
+              onClick={() => { try { navigator.vibrate?.(6); } catch {} }}
+              className="touch-cta snap-center shrink-0 w-[72vw] max-w-[290px] overflow-hidden rounded-2xl group relative block bg-gold/5 border border-white/10 active:scale-[0.98] transition-transform duration-75"
             >
               <div className="aspect-[3/4]">
                 <img
                   src={photo}
                   alt={`Foto da comunidade Soler Shop ${i + 1}`}
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                <span className="text-white/70 font-body text-[9px] uppercase tracking-[0.28em]">
-                  Comunidade Soler
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Instagram size={11} className="text-white/60" strokeWidth={1.5} />
+                  <span className="text-white/60 font-body text-[9px] tracking-[0.2em]">@solershop_</span>
+                </div>
+                <span className="text-white/40 font-body text-[8px] uppercase tracking-[0.28em]">
+                  {String(i + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
                 </span>
               </div>
             </motion.a>
