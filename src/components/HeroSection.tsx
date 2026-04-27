@@ -190,7 +190,7 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Fade inferior suave para transição contínua */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 md:h-48 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none z-20" />
     </section>
   );
 };
