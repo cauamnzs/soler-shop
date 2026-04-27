@@ -6,6 +6,16 @@ import solerLogo from "@/assets/soler-logo.png";
 // Categorias atualizadas com a Promoção no final para o destaque visual
 const navLinks = ["Perfumes", "Body Lotion", "Body Splash", "Esfoliantes", "Kits", "Variedades", "Promoção"];
 
+const navHrefMap: Record<string, string> = {
+  Perfumes: "?filter=Perfumes#products",
+  "Body Lotion": "?filter=Body%20Lotion#products",
+  "Body Splash": "?filter=Body%20Splash#products",
+  Esfoliantes: "?filter=Esfoliantes#products",
+  Kits: "?filter=Kits#products",
+  Variedades: "?filter=Variedades#products",
+  Promoção: "?filter=Promo%C3%A7%C3%A3o#products",
+};
+
 // Theme Toggle Component
 const ThemeToggle = () => {
   const { theme, toggleTheme, mounted } = useTheme();
@@ -73,7 +83,7 @@ const Header = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href="#"
+                href={navHrefMap[link] ?? "#products"}
                 data-cursor-label="Explorar"
                 className="text-xs xl:text-sm font-body font-medium tracking-wide text-muted-foreground
                   hover:text-gold transition-lux duration-500 relative whitespace-nowrap
@@ -119,7 +129,7 @@ const Header = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href="#"
+                href={navHrefMap[link] ?? "#products"}
                 className="touch-cta flex items-center justify-between text-base font-body font-medium tracking-wide text-muted-foreground hover:text-gold py-4 border-b border-foreground/5 last:border-0 transition-all duration-300 group/nav hover:pl-1 active:text-gold active:pl-1"
                 onClick={() => { try { navigator.vibrate?.(5); } catch {}; setMobileOpen(false); }}
               >

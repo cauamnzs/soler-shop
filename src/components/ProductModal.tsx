@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { X, MessageCircle, ShieldCheck, Truck, Zap } from "lucide-react";
 import { Product } from "@/types";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 // Tipo global Lenis control
@@ -24,18 +24,16 @@ const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
 
 const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
   const dragControls = useDragControls();
-  const touchStartY = useRef<number>(0);
-  // Modal é uma "telinha" sobre a página - scroll da página continua funcionando (catálogo)
-  // Não bloqueamos o scroll do body, apenas adicionamos ESC para fechar
   useEffect(() => {
     if (!isOpen) return;
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleEsc);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", handleEsc);
     };
   }, [isOpen, onClose]);
@@ -74,6 +72,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
           {/* Container do Modal */}
           <motion.div
             drag={IS_MOBILE ? "y" : false}
+            dragListener={false}
             dragControls={dragControls}
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={{ top: 0, bottom: 0.4 }}
@@ -92,7 +91,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
               transition: { duration: 0.35, ease: [0.4, 0, 1, 1] }
             }}
             style={{ originY: 1 }}
-            className="relative w-full max-w-5xl bg-card border border-border md:rounded-2xl rounded-t-3xl shadow-2xl overflow-y-auto max-h-[92dvh] md:max-h-[90vh] flex flex-col md:flex-row mt-auto md:mt-0"
+            className="relative w-full max-w-5xl bg-card border border-border md:rounded-2xl rounded-t-3xl shadow-2xl overflow-y-auto overscroll-contain max-h-[92dvh] md:max-h-[90vh] flex flex-col md:flex-row mt-auto md:mt-0"
           >
             {/* Drag handle — mobile only */}
             <div className="md:hidden flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing"
@@ -162,7 +161,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
               {/* CTA Final (WhatsApp) */}
               <button
                 onClick={handleWhatsAppClick}
-                className="group relative flex items-center justify-center gap-4 bg-gold text-background w-full py-5 rounded-xl uppercase tracking-[0.3em] font-bold text-xs transition-all duration-500 hover:bg-gold-dark hover:shadow-gold-glow hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative flex items-center justify-center gap-3 bg-gold text-background w-full py-4.5 md:py-5 rounded-xl uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-[11px] md:text-xs transition-all duration-500 hover:bg-gold-dark hover:shadow-gold-glow hover:scale-[1.02] active:scale-[0.98]"
               >
                 <MessageCircle size={18} />
                 Desejo esta experiência

@@ -48,7 +48,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         backfaceVisibility: "hidden",
         transform: "translateZ(0)"
       }}
-      className="relative w-[calc(100vw-2.5rem)] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-[1.75rem] md:rounded-3xl border border-white/5 md:hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center transition-colors duration-700"
+      className="relative w-[calc(100vw-2.5rem)] sm:w-[70vw] md:w-full aspect-square group overflow-hidden rounded-[1.75rem] md:rounded-3xl border border-white/10 md:border-white/5 md:hover:border-gold/25 shadow-2xl bg-black/5 flex-shrink-0 snap-center transition-colors duration-700"
     >
       {/* Watermark number */}
       <span
@@ -213,7 +213,7 @@ const SensationVibes = () => {
         </motion.div>
 
         <div className="md:hidden px-5 mb-4 flex items-center justify-between">
-          <span className="font-body text-[10px] uppercase tracking-[0.32em] text-muted-foreground/55">Arraste para o lado</span>
+          <span className="font-body text-[10px] uppercase tracking-[0.32em] text-muted-foreground/70">Arraste para o lado</span>
           <div className="flex items-center gap-1.5 text-gold/70" aria-hidden="true">
             <span className="w-1.5 h-1.5 rounded-full bg-gold/40" />
             <span className="w-8 h-[1px] bg-gold/40" />
@@ -249,7 +249,7 @@ const SensationVibes = () => {
                   className={`block h-1.5 rounded-full transition-all duration-300 ${
                     activeIndex === index
                       ? "w-6 bg-gold shadow-[0_0_10px_rgba(212,175,55,0.45)]"
-                      : "w-2 bg-foreground/20"
+                      : "w-2 bg-foreground/30"
                   }`}
                 />
               </button>

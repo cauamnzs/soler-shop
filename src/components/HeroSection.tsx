@@ -98,8 +98,8 @@ const HeroSection = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants} className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-            <span className="w-8 h-[1px] bg-gold block"></span>
-            <p className="text-gold font-body text-[9px] md:text-xs lg:text-sm uppercase tracking-[0.28em] md:tracking-[0.4em] whitespace-nowrap">
+            <span className="w-8 h-[1px] bg-gold/80 md:bg-gold block"></span>
+            <p className="text-gold font-body text-[9px] md:text-xs lg:text-sm uppercase tracking-[0.24em] md:tracking-[0.4em] whitespace-normal sm:whitespace-nowrap leading-relaxed">
               Santos / Ilhabela — Envio Nacional
             </p>
           </motion.div>
@@ -137,7 +137,7 @@ const HeroSection = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-5 md:gap-8 pt-5 mt-4 border-t border-border/20"
+            className="flex items-center gap-5 md:gap-8 pt-5 mt-4 border-t border-border/30 md:border-border/20"
           >
             {[
               { end: 500, suffix: "+", label: "Produtos" },
@@ -148,7 +148,7 @@ const HeroSection = () => {
                 <span className="font-heading text-xl md:text-2xl text-foreground font-semibold leading-none mb-1">
                   <CountUp end={stat.end} suffix={stat.suffix} duration={1300} />
                 </span>
-                <span className="font-body text-[9px] uppercase tracking-[0.25em] text-muted-foreground/40">
+                <span className="font-body text-[9px] uppercase tracking-[0.25em] text-muted-foreground/55 md:text-muted-foreground/40">
                   {stat.label}
                 </span>
               </div>

@@ -102,13 +102,13 @@ const Index = () => {
       
       {/* Camada 3: O Site em si */}
       <Header />
-      <main className="relative z-10 pb-24 md:pb-0">
+      <main className="relative z-10 pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-0">
         <HeroSection />
         <SensationVibes />
         <ProductGrid />
 
         {/* Brand Names Strip */}
-        <div className="relative overflow-hidden py-6 border-y border-border/15 group">
+        <div className="relative overflow-hidden py-5 md:py-6 border-y border-border/15 group">
           <div className="flex items-center gap-16 whitespace-nowrap"
             style={{ animation: "marquee 26s linear infinite", animationPlayState: "running" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
@@ -125,7 +125,7 @@ const Index = () => {
                 href={`?brand=${encodeURIComponent(brand)}#products`}
                 data-brand={brand}
                 onClick={() => { try { navigator.vibrate?.(4); } catch {} }}
-                className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.4em] text-foreground/20 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
+                className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.28em] sm:tracking-[0.4em] text-foreground/20 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
               >
                 {brand}
                 <span className="text-gold/20 not-italic text-[8px]" aria-hidden="true">◆</span>
@@ -140,7 +140,10 @@ const Index = () => {
       <Footer />
 
       {/* Mobile Sticky CTA Bar */}
-      <div className="md:hidden fixed bottom-3 left-3 right-3 z-[9960] rounded-2xl border border-white/10 bg-background/90 dark:bg-background/95 backdrop-blur-xl shadow-2xl p-2">
+      <div
+        className="md:hidden fixed bottom-3 left-3 right-3 z-[9960] rounded-2xl border border-white/10 bg-background/90 dark:bg-background/95 backdrop-blur-xl shadow-2xl p-2"
+        style={{ paddingBottom: "calc(0.5rem + env(safe-area-inset-bottom))" }}
+      >
         <div className="grid grid-cols-2 gap-2">
           <a
             href="#products"

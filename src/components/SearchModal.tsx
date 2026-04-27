@@ -23,14 +23,14 @@ const SearchModal = () => {
   }, []);
 
   useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
     if (isOpen) {
       document.body.style.overflow = "hidden";
       setTimeout(() => inputRef.current?.focus(), 120);
     } else {
-      document.body.style.overflow = "";
       setQuery("");
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => { document.body.style.overflow = prevOverflow; };
   }, [isOpen]);
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const SearchModal = () => {
                     exit={{ opacity: 0, y: 6 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="font-body text-[10px] uppercase tracking-[0.4em] text-muted-foreground/35 mb-5">
+                    <p className="font-body text-[10px] uppercase tracking-[0.4em] text-muted-foreground/50 mb-5">
                       {results.length} resultado{results.length !== 1 ? "s" : ""}
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
@@ -182,10 +182,10 @@ const SearchModal = () => {
                     exit={{ opacity: 0 }}
                     className="text-center py-14"
                   >
-                    <p className="font-heading text-2xl text-muted-foreground/25 mb-2">
+                    <p className="font-heading text-2xl text-muted-foreground/45 mb-2">
                       Nenhum resultado
                     </p>
-                    <p className="font-body text-xs text-muted-foreground/25 uppercase tracking-[0.3em]">
+                    <p className="font-body text-xs text-muted-foreground/45 uppercase tracking-[0.3em]">
                       para &ldquo;{query}&rdquo;
                     </p>
                   </motion.div>
@@ -196,7 +196,7 @@ const SearchModal = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <p className="font-body text-xs text-muted-foreground/20 uppercase tracking-[0.35em]">
+                    <p className="font-body text-xs text-muted-foreground/45 uppercase tracking-[0.35em]">
                       {products.length > 0
                         ? `${products.length} produtos disponíveis — comece a digitar`
                         : "Carregando catálogo..."}

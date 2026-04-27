@@ -96,7 +96,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="relative py-12 md:py-20 bg-background/50">
+    <section id="products" className="relative scroll-mt-24 md:scroll-mt-28 py-12 md:py-20 bg-background/50">
       {/* Fade superior suave - continuação de SensationVibes */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para WhyChoose */}
@@ -141,7 +141,7 @@ const ProductGrid = () => {
                 className={`touch-cta relative shrink-0 px-4 md:px-4.5 py-2.5 rounded-full font-body text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 overflow-hidden active:scale-[0.94] ${
                   activeFilter === filter
                     ? "text-background"
-                    : "text-muted-foreground hover:text-foreground border border-foreground/10 hover:border-gold/30"
+                    : "text-muted-foreground hover:text-foreground border border-foreground/15 hover:border-gold/30"
                 }`}
               >
                 {activeFilter === filter && (
@@ -162,7 +162,7 @@ const ProductGrid = () => {
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="flex flex-col">
-                <div className="aspect-square rounded-xl animate-shimmer mb-5" />
+                <div className="aspect-[3/4] md:aspect-square rounded-xl animate-shimmer mb-5" />
                 <div className="flex flex-col items-center gap-2 px-2">
                   <div className="h-3.5 w-2/3 rounded-full animate-shimmer" />
                   <div className="h-3 w-1/2 rounded-full animate-shimmer" />
@@ -215,7 +215,7 @@ const ProductGrid = () => {
               onClick={() => { try { navigator.vibrate?.(6); } catch {} ; openModal(product); }}
             >
               {/* Box da Imagem */}
-              <div className="relative aspect-[3/4] md:aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm md:group-hover:shadow-xl transition-all duration-500 border border-border/40 md:group-hover:border-gold/25">
+              <div className="relative aspect-[3/4] md:aspect-square overflow-hidden bg-secondary/10 rounded-xl mb-5 shadow-sm md:group-hover:shadow-xl transition-all duration-500 border border-border/60 md:border-border/40 md:group-hover:border-gold/25">
                 <img
                   src={product.image}
                   alt={`Imagem do produto ${product.name}`}
@@ -251,7 +251,7 @@ const ProductGrid = () => {
                     e.stopPropagation();
                     openModal(product);
                   }}
-                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background/70 backdrop-blur-md border border-foreground/10 text-foreground p-3.5 sm:p-3 rounded-full
+                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background/70 backdrop-blur-md border border-foreground/20 md:border-foreground/10 text-foreground p-3.5 sm:p-3 rounded-full
                     opacity-100 sm:opacity-0 translate-y-0 sm:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0
                     transition-all duration-500 ease-out md:hover:bg-gold md:hover:text-background md:hover:border-gold md:hover:scale-110 shadow-lg active:scale-95"
                   aria-label={`Ver detalhes de ${product.name}`}
@@ -265,7 +265,7 @@ const ProductGrid = () => {
                 <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 md:group-hover:text-foreground">
                   {product.name}
                 </h3>
-                <p className="font-body text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 mb-2">
+                <p className="font-body text-[10px] uppercase tracking-[0.25em] text-muted-foreground/55 md:text-muted-foreground/40 mb-2">
                   {product.category}
                 </p>
                 <p className="font-body text-base md:text-lg font-medium text-gold">
@@ -286,7 +286,7 @@ const ProductGrid = () => {
           className="text-center mt-12 md:mt-20"
         >
           <a
-            href="#"
+            href="#products"
             onClick={() => { try { navigator.vibrate?.(8); } catch {} }}
             className="touch-cta group inline-flex items-center gap-3 border border-gold/50 text-gold font-body text-xs md:text-sm uppercase tracking-[0.25em] px-8 py-4 rounded-full hover:bg-gold hover:text-background transition-all duration-500 ease-lux hover:shadow-lux-hover active:scale-[0.97] active:bg-gold/10"
           >

@@ -43,7 +43,7 @@ const Footer = () => {
               </span>
             </a>
 
-            <p className="font-body text-xs md:text-sm text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
+            <p className="font-body text-xs md:text-sm text-primary-foreground/65 md:text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
               Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina diária.
             </p>
           </motion.div>
@@ -64,7 +64,7 @@ const Footer = () => {
                   key={link.label}
                   href={link.href}
                   data-cursor-label="Explorar"
-                  className="touch-cta font-body text-sm text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
+                  className="touch-cta font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
                 >
                   {link.label}
                 </a>
@@ -83,7 +83,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="Instagram"
-                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/20 md:border-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 md:text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="Instagram"
               >
                 <Instagram size={20} strokeWidth={1.5} />
@@ -93,7 +93,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="WhatsApp"
-                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/20 md:border-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 md:text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="WhatsApp"
               >
                 <MessageCircle size={20} strokeWidth={1.5} />
@@ -101,7 +101,7 @@ const Footer = () => {
               <a
                 href="mailto:contato@solershop.com.br"
                 data-cursor-label="Email"
-                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
+                className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/20 md:border-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 md:text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="Email"
               >
                 <Mail size={20} strokeWidth={1.5} />
@@ -114,14 +114,14 @@ const Footer = () => {
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               The Soler Club
             </h4>
-            <p className="font-body text-sm text-primary-foreground/50 mb-5 font-light">
+            <p className="font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 mb-5 font-light">
               Acesso antecipado a novidades e ofertas exclusivas.
             </p>
             <form className="relative flex items-center" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Seu endereço de e-mail"
-                className="w-full bg-transparent border-b border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-10 focus:outline-none focus:border-gold transition-all duration-500"
+                className="w-full bg-transparent border-b border-primary-foreground/30 md:border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/45 md:placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-10 focus:outline-none focus:border-gold transition-all duration-500"
               />
               <button
                 type="submit"
@@ -140,16 +140,16 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 1 }}
-          className="border-t border-primary-foreground/10 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="border-t border-primary-foreground/20 md:border-primary-foreground/10 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
-          <div className="flex items-center gap-3 text-primary-foreground/30">
+          <div className="flex items-center gap-3 text-primary-foreground/45 md:text-primary-foreground/30">
             <CreditCard size={24} strokeWidth={1} />
             <span className="font-body text-[11px] tracking-wider uppercase text-center sm:text-left">
               Pix • Visa • Mastercard
             </span>
           </div>
 
-          <p className="font-body text-xs text-primary-foreground/30 tracking-wider font-light">
+          <p className="font-body text-xs text-primary-foreground/45 md:text-primary-foreground/30 tracking-wider font-light text-center md:text-right">
             2026 SOLER SHOP. TODOS OS DIREITOS RESERVADOS.
           </p>
         </motion.div>

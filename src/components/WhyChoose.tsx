@@ -38,7 +38,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={IS_MOBILE ? {} : { willChange: "transform, opacity" }}
-      className="relative p-5 sm:p-8 lg:p-10 rounded-2xl border border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
+      className="relative p-5 sm:p-8 lg:p-10 rounded-2xl border border-border/50 md:border-border/30 group hover:border-gold/30 bg-background/20 backdrop-blur-sm transition-all duration-500 hover:bg-gold/[0.025] overflow-hidden cursor-default"
     >
       {/* Shimmer sweep on hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-lux pointer-events-none" />
@@ -60,7 +60,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       <h3 className="font-heading text-xl md:text-2xl lg:text-3xl text-foreground mb-4 tracking-tight">
         {item.title}
       </h3>
-      <p className="font-body text-muted-foreground/70 text-sm md:text-base leading-relaxed font-light line-clamp-4 md:line-clamp-none">
+      <p className="font-body text-muted-foreground/80 md:text-muted-foreground/70 text-sm md:text-base leading-relaxed font-light line-clamp-4 md:line-clamp-none">
         {item.desc}
       </p>
 
@@ -99,7 +99,7 @@ const WhyChoose = () => {
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 leading-[1.1] break-words">
             A Experiência <span className="italic font-light text-gold">Soler</span>
           </h2>
-          <p className="font-body text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto">
+          <p className="font-body text-muted-foreground/80 md:text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto">
             Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.
           </p>
         </motion.div>
