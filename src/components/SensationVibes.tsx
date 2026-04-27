@@ -64,7 +64,7 @@ const VibeModule = ({ vibe, index }: { vibe: Vibe, index: number }) => {
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
       />
       
-      <div className="absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[75%] bg-gradient-to-t from-black via-black/80 via-[40%] via-black/60 via-[65%] to-transparent" />
       <div 
         className="absolute inset-0 md:backdrop-blur-[1px] mix-blend-overlay opacity-40 md:group-hover:opacity-65 pointer-events-none transition-opacity duration-700"
         style={{ backgroundColor: vibe.color }}
