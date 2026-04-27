@@ -110,7 +110,7 @@ const Index = () => {
         {/* Brand Names Strip */}
         <div className="relative overflow-hidden py-5 md:py-6 border-y border-border/15 group">
           <div className="flex items-center gap-16 whitespace-nowrap"
-            style={{ animation: "marquee 18s linear infinite", animationPlayState: "running" }}
+            style={{ animation: "marquee 12s linear infinite", animationPlayState: "running" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
           >
@@ -125,10 +125,10 @@ const Index = () => {
                 href={`?brand=${encodeURIComponent(brand)}#products`}
                 data-brand={brand}
                 onClick={() => { try { navigator.vibrate?.(4); } catch {} }}
-                className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.28em] sm:tracking-[0.4em] text-foreground/20 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
+                className="touch-cta inline-flex items-center gap-8 font-heading text-xs sm:text-sm uppercase tracking-[0.28em] sm:tracking-[0.4em] text-foreground/40 italic flex-shrink-0 hover:text-gold/70 transition-colors duration-300 active:text-gold"
               >
                 {brand}
-                <span className="text-gold/20 not-italic text-[8px]" aria-hidden="true">◆</span>
+                <span className="text-gold/40 not-italic text-[8px]" aria-hidden="true">◆</span>
               </a>
             ))}
           </div>

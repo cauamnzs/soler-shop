@@ -192,7 +192,7 @@ const SensationVibes = () => {
       {/* Fade superior suave - continuação do Hero */}
       <div className="absolute top-0 left-0 w-full h-40 md:h-56 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-0" />
       {/* Fade inferior suave - transição para ProductGrid */}
-      <div className="absolute bottom-0 left-0 w-full h-40 md:h-56 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-full h-48 md:h-64 bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none z-0" />
       
       <div className="max-w-screen-2xl mx-auto relative z-10 pt-8 md:pt-12">
         <motion.div
