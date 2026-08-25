@@ -97,7 +97,7 @@ const WhyChoose = () => {
             The Soler Heritage
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 leading-[1.1] break-words">
-            A Experiência <span className="italic font-light text-gold">Soler</span>
+            Experiência <span className="italic font-light text-gold">Soler</span>
           </h2>
           <p className="font-body text-muted-foreground/80 md:text-muted-foreground/70 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl mx-auto">
             Não vendemos apenas produtos; entregamos fragmentos de um estilo de vida onde o tempo é o maior luxo.

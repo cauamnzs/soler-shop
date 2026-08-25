@@ -1,19 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { motion, useScroll } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import Lenis from "lenis";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import SensationVibes from "@/components/SensationVibes";
-import ProductGrid from "@/components/ProductGrid";
-import WhyChoose from "@/components/WhyChoose";
-import InstagramFeed from "@/components/InstagramFeed";
-import Footer from "@/components/Footer";
 import Spotlight from "@/components/Spotlight";
 import FluidBackground from "@/components/FluidBackground"; 
 import CustomCursor from "@/components/CustomCursor"; 
 import Preloader from "@/components/Preloader";
-import SearchModal from "@/components/SearchModal";
+
+const ProductGrid = lazy(() => import("@/components/ProductGrid"));
+const WhyChoose = lazy(() => import("@/components/WhyChoose"));
+const InstagramFeed = lazy(() => import("@/components/InstagramFeed"));
+const Footer = lazy(() => import("@/components/Footer"));
+const SearchModal = lazy(() => import("@/components/SearchModal"));
 
 // Tipo global para controle do Lenis
 declare global {
@@ -26,6 +27,10 @@ declare global {
 }
 
 const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+
+const SectionFallback = ({ minHeight = "12rem" }: { minHeight?: string }) => (
+  <div aria-hidden="true" style={{ minHeight }} />
+);
 
 const Index = () => {
   const lenisRef = useRef<Lenis | null>(null);
@@ -79,7 +84,9 @@ const Index = () => {
 
       {/* Camada Zero: O Carregamento Visionário */}
       <Preloader />
-      <SearchModal />
+      <Suspense fallback={null}>
+        <SearchModal />
+      </Suspense>
       
       {/* Camada 1: O Fundo Líquido Vivo — desktop only */}
       {!isMobileDevice && <FluidBackground />}
@@ -105,7 +112,9 @@ const Index = () => {
       <main className="relative z-10">
         <HeroSection />
         <SensationVibes />
-        <ProductGrid />
+        <Suspense fallback={<SectionFallback minHeight="80vh" />}>
+          <ProductGrid />
+        </Suspense>
 
         {/* Brand Names Strip */}
         <div className="relative overflow-hidden py-5 md:py-6 border-y border-border/15 group">
@@ -134,10 +143,16 @@ const Index = () => {
           </div>
         </div>
 
-        <WhyChoose />
-        <InstagramFeed />
+        <Suspense fallback={<SectionFallback minHeight="32rem" />}>
+          <WhyChoose />
+        </Suspense>
+        <Suspense fallback={<SectionFallback minHeight="28rem" />}>
+          <InstagramFeed />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<SectionFallback minHeight="16rem" />}>
+        <Footer />
+      </Suspense>
 
       {/* Mobile Sticky CTA Bar */}
       <div

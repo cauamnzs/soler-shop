@@ -79,6 +79,10 @@ const HeroSection = () => {
           transition={{ duration: 2, ease: "easeOut" }}
           src={heroImage}
           alt="Frasco de perfume de luxo Soler Shop com iluminação cinematográfica"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center"
         />
       </motion.div>
@@ -163,7 +167,11 @@ const HeroSection = () => {
           <div className="absolute inset-0 bg-gold/5 backdrop-blur-[2px] rounded-xl border border-white/10 group-hover:border-gold/30 shadow-2xl overflow-hidden group transition-colors duration-700">
             <img 
               src={heroImage} 
-              alt="Frasco de perfume detalhe" 
+              alt="Frasco de perfume detalhe"
+              width={1920}
+              height={1080}
+              decoding="async"
+              loading="lazy"
               className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />

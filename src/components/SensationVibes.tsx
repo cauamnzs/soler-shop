@@ -204,7 +204,7 @@ const SensationVibes = () => {
           <motion.div variants={headerVariants} className="flex flex-col items-center gap-4 md:gap-6">
             <span className="text-gold font-body text-[10px] uppercase tracking-[0.8em]">Curadoria de Sensações</span>
             <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.1] break-words">
-              A Arte do <br className="lg:hidden" /> <span className="italic font-light text-gold">Sentir</span>
+              Arte do <br className="lg:hidden" /> <span className="italic font-light text-gold">Sentir</span>
             </h2>
             <p className="text-muted-foreground font-body text-base md:text-lg lg:text-xl max-w-2xl font-light leading-relaxed">
               Uma galeria de experiências olfativas. Explore o luxo através das vibrações da natureza em um grid de pura simetria.

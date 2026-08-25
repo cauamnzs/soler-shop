@@ -64,7 +64,7 @@ const InstagramFeed = () => {
         >
           <span className="text-gold/60 font-body text-[10px] uppercase tracking-[0.6em] mb-6 block">Social Curatorship</span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 tracking-tight break-words">
-            Da Comunidade <span className="italic text-gold font-light">Soler</span>
+            Comunidade <span className="italic text-gold font-light">Soler</span>
           </h2>
           <a
             href="https://instagram.com/solershop_"

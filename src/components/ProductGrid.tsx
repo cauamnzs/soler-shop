@@ -1,9 +1,10 @@
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Eye } from "lucide-react";
-import { useState, memo, useMemo, useEffect } from "react";
+import { useState, memo, useMemo, useEffect, lazy, Suspense } from "react";
 import { Product } from "@/types";
-import ProductModal from "./ProductModal";
 import { useProducts } from "@/hooks/useProducts";
+
+const ProductModal = lazy(() => import("./ProductModal"));
 
 const normalizeFilter = (value: string) =>
   value
@@ -296,11 +297,13 @@ const ProductGrid = () => {
         </motion.div>
 
         {/* Modal de Detalhes Cinematográfico */}
-        <ProductModal 
-          product={selectedProduct} 
-          isOpen={isModalOpen} 
-          onClose={closeModal} 
-        />
+        <Suspense fallback={null}>
+          <ProductModal 
+            product={selectedProduct} 
+            isOpen={isModalOpen} 
+            onClose={closeModal} 
+          />
+        </Suspense>
 
       </div>
     </section>

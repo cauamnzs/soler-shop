@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useProducts } from "@/hooks/useProducts";
 import { Product } from "@/types";
-import ProductModal from "./ProductModal";
+
+const ProductModal = lazy(() => import("./ProductModal"));
 
 const quickSuggestions = ["Perfume", "Body Splash", "Novo", "Limitado", "Promoção"];
 
@@ -210,11 +211,13 @@ const SearchModal = () => {
       </AnimatePresence>
 
       {/* Product detail modal from search result */}
-      <ProductModal
-        product={selectedProduct}
-        isOpen={isProductOpen}
-        onClose={() => setIsProductOpen(false)}
-      />
+      <Suspense fallback={null}>
+        <ProductModal
+          product={selectedProduct}
+          isOpen={isProductOpen}
+          onClose={() => setIsProductOpen(false)}
+        />
+      </Suspense>
     </>,
     document.body
   );

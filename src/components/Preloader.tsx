@@ -72,35 +72,29 @@ const Preloader = () => {
   const [phase, setPhase] = useState<"entering" | "loading" | "exiting">("entering");
 
   useEffect(() => {
-    // Organic loading simulation — shorter on mobile for better UX
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const duration = isMobile ? 2000 : 3500;
+    const MAX_VISIBLE_MS = 500;
+    const EXIT_MS = 120;
     const startTime = Date.now();
-    
+
+    setPhase("loading");
+
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
-      const rawProgress = Math.min((elapsed / duration) * 100, 100);
-      
-      // Non-linear progress (ease out)
-      const eased = 100 - Math.pow(1 - rawProgress / 100, 3) * 100;
-      setProgress(Math.min(eased, 99));
-      
-      if (rawProgress < 100) {
+      const rawProgress = Math.min((elapsed / (MAX_VISIBLE_MS - EXIT_MS)) * 100, 100);
+      setProgress(rawProgress);
+
+      if (elapsed < MAX_VISIBLE_MS - EXIT_MS) {
         requestAnimationFrame(updateProgress);
       } else {
+        setProgress(100);
         setPhase("exiting");
-        setTimeout(() => setLoading(false), 800);
+        setTimeout(() => setLoading(false), EXIT_MS);
       }
     };
 
-    // Start loading phase after logo reveal
-    const phaseTimer = setTimeout(() => setPhase("loading"), 1200);
-    const progressTimer = setTimeout(updateProgress, 1200);
+    const progressFrame = requestAnimationFrame(updateProgress);
 
-    return () => {
-      clearTimeout(phaseTimer);
-      clearTimeout(progressTimer);
-    };
+    return () => cancelAnimationFrame(progressFrame);
   }, []);
 
   return (
@@ -111,7 +105,7 @@ const Preloader = () => {
           initial={{ opacity: 1 }}
           exit={{ 
             opacity: 0,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+            transition: { duration: 0.12, ease: [0.16, 1, 0.3, 1] }
           }}
           className="fixed inset-0 z-[10000] bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden"
         >
