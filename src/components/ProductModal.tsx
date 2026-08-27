@@ -1,8 +1,11 @@
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { X, MessageCircle, ShieldCheck, Truck, Zap } from "lucide-react";
 import { Product } from "@/types";
-import { memo, useEffect } from "react";
+import { memo, useEffect, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
+import { getWhatsAppLink } from "@/lib/envConfig";
+
+const AddToCartButton = lazy(() => import("./AddToCartButton"));
 
 // Tipo global Lenis control
 declare global {
@@ -51,8 +54,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
   const handleWhatsAppClick = () => {
     try { navigator.vibrate?.(12); } catch {}
     const message = `Olá! Gostaria de consultar a disponibilidade do ${product.name} (Ref: ${product.id}) que vi no catálogo Soler Shop.`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5513991234567?text=${encodedMessage}`, "_blank");
+    window.open(getWhatsAppLink(message), "_blank");
   };
 
   // Portal: renderiza direto em document.body, escapando todos stacking contexts
@@ -158,15 +160,21 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
                 </div>
               </div>
 
-              {/* CTA Final (WhatsApp) */}
-              <button
-                onClick={handleWhatsAppClick}
-                className="group relative flex items-center justify-center gap-3 bg-gold text-background w-full py-4.5 md:py-5 rounded-xl uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-[11px] md:text-xs transition-all duration-500 hover:bg-gold-dark hover:shadow-gold-glow hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <MessageCircle size={18} />
-                Desejo esta experiência
-                <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-xl" />
-              </button>
+              {/* CTAs: Carrinho + WhatsApp */}
+              <div className="flex flex-col gap-3 md:gap-4">
+                <Suspense fallback={null}>
+                  <AddToCartButton product={product} variant="primary" />
+                </Suspense>
+
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="group relative flex items-center justify-center gap-3 border-2 border-gold/40 text-gold w-full py-4.5 md:py-5 rounded-xl uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-[11px] md:text-xs transition-all duration-500 hover:border-gold hover:bg-gold hover:text-background hover:shadow-gold-glow hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <MessageCircle size={18} />
+                  Consultar no WhatsApp
+                  <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left rounded-xl pointer-events-none" />
+                </button>
+              </div>
               
               <p className="text-center mt-6 text-[9px] text-muted-foreground uppercase tracking-widest opacity-40">
                 Consultar disponibilidade e prazos de envio

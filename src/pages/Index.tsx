@@ -9,6 +9,7 @@ import Spotlight from "@/components/Spotlight";
 import FluidBackground from "@/components/FluidBackground"; 
 import CustomCursor from "@/components/CustomCursor"; 
 import Preloader from "@/components/Preloader";
+import { getWhatsAppLink } from "@/lib/envConfig";
 
 const ProductGrid = lazy(() => import("@/components/ProductGrid"));
 const WhyChoose = lazy(() => import("@/components/WhyChoose"));
@@ -168,7 +169,7 @@ const Index = () => {
             Ver Catálogo
           </a>
           <a
-            href="https://wa.me/5513991234567"
+            href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
@@ -182,7 +183,7 @@ const Index = () => {
 
       {/* Floating WhatsApp Button */}
       <motion.a
-        href="https://wa.me/5513991234567"
+        href={getWhatsAppLink()}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chamar no WhatsApp"

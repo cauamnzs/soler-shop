@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { Instagram, Mail, CreditCard, MessageCircle, ArrowRight } from "lucide-react";
 import solerLogo from "@/assets/soler-logo.png";
+import { getWhatsAppLink, getInstagramLink, getMailtoLink } from "@/lib/envConfig";
 
 const Footer = () => {
   // Cascata para as colunas do rodapé
@@ -79,7 +80,7 @@ const Footer = () => {
             </h4>
             <div className="flex gap-3 flex-wrap">
               <a
-                href="https://instagram.com/solershop_"
+                href={getInstagramLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="Instagram"
@@ -89,7 +90,7 @@ const Footer = () => {
                 <Instagram size={20} strokeWidth={1.5} />
               </a>
               <a
-                href="https://wa.me/5513991234567"
+                href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-label="WhatsApp"
@@ -99,7 +100,7 @@ const Footer = () => {
                 <MessageCircle size={20} strokeWidth={1.5} />
               </a>
               <a
-                href="mailto:contato@solershop.com.br"
+                href={getMailtoLink()}
                 data-cursor-label="Email"
                 className="touch-cta w-11 h-11 rounded-full border border-primary-foreground/20 md:border-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 md:text-primary-foreground/50 hover:border-gold hover:text-gold hover:bg-gold/5 transition-lux duration-500 ease-lux active:scale-95"
                 aria-label="Email"

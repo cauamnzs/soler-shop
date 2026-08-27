@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView, Variants } from "framer-motion";
 import heroImage from "@/assets/hero-perfume.jpg";
+import envConfig from "@/lib/envConfig";
 
 const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
 
@@ -104,7 +105,7 @@ const HeroSection = () => {
           <motion.div variants={itemVariants} className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
             <span className="w-8 h-[1px] bg-gold/80 md:bg-gold block"></span>
             <p className="text-gold font-body text-[9px] md:text-xs lg:text-sm uppercase tracking-[0.24em] md:tracking-[0.4em] whitespace-normal sm:whitespace-nowrap leading-relaxed">
-              Santos / Ilhabela — Envio Nacional
+              {envConfig.business.location}
             </p>
           </motion.div>
 

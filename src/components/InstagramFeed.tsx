@@ -7,6 +7,7 @@ import insta3 from "@/assets/insta-3.jpg";
 import insta4 from "@/assets/insta-4.jpg";
 import insta5 from "@/assets/insta-5.jpg";
 import insta6 from "@/assets/insta-6.jpg";
+import envConfig, { getInstagramLink } from "@/lib/envConfig";
 
 const photos = [insta1, insta2, insta3, insta4, insta5, insta6];
 
@@ -67,7 +68,7 @@ const InstagramFeed = () => {
             Comunidade <span className="italic text-gold font-light">Soler</span>
           </h2>
           <a
-            href="https://instagram.com/solershop_"
+            href={getInstagramLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 text-muted-foreground/60 font-body text-[10px] sm:text-xs hover:text-gold transition-colors duration-500 uppercase tracking-[0.3em] relative
@@ -76,7 +77,7 @@ const InstagramFeed = () => {
               after:transition-transform after:duration-500 after:ease-lux hover:after:scale-x-100 hover:after:origin-left"
           >
             <Instagram size={14} className="group-hover:scale-110 transition-transform duration-500" />
-            Siga-nos @solershop_
+            Siga-nos @{envConfig.contact.instagramHandle}
           </a>
         </motion.div>
 
@@ -92,7 +93,7 @@ const InstagramFeed = () => {
             <motion.a
               key={`mobile-${i}`}
               variants={itemVariants}
-              href="https://instagram.com/solershop_"
+              href={getInstagramLink()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => { try { navigator.vibrate?.(6); } catch {} }}
@@ -110,7 +111,7 @@ const InstagramFeed = () => {
               <div className="absolute inset-x-0 bottom-0 p-4">
                 <div className="flex items-center gap-2 mb-1">
                   <Instagram size={11} className="text-white/60" strokeWidth={1.5} />
-                  <span className="text-white/60 font-body text-[9px] tracking-[0.2em]">@solershop_</span>
+                  <span className="text-white/60 font-body text-[9px] tracking-[0.2em]">@{envConfig.contact.instagramHandle}</span>
                 </div>
                 <span className="text-white/40 font-body text-[8px] uppercase tracking-[0.28em]">
                   {String(i + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
@@ -132,7 +133,7 @@ const InstagramFeed = () => {
             <motion.a
               key={i}
               variants={itemVariants}
-              href="https://instagram.com/solershop_"
+              href={getInstagramLink()}
               target="_blank"
               rel="noopener noreferrer"
               className={`overflow-hidden rounded-xl group relative block bg-gold/5 border border-white/5 hover:border-gold/20 transition-colors duration-500 ${
