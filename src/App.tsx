@@ -7,11 +7,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { CartProvider, CartDrawerGlobalTrigger } from "@/contexts/CartContext";
 import LeadCaptureModal from "@/components/LeadCaptureModal";
-import Index from "./pages/Index.tsx";
-import ProductDetail from "./pages/ProductDetail.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import GlobalShell from "@/components/GlobalShell";
+import Index from "@/pages/Index";
+import ProductDetail from "@/pages/ProductDetail";
+import NotFound from "@/pages/NotFound";
 
-const Cart = lazy(() => import("./pages/Cart.tsx"));
+const Cart = lazy(() => import("@/pages/Cart"));
+const Checkout = lazy(() => import("@/pages/Checkout"));
+const OrderSuccess = lazy(() => import("@/pages/OrderSuccess"));
+const OrderFailure = lazy(() => import("@/pages/OrderFailure"));
 
 const queryClient = new QueryClient();
 
@@ -23,6 +27,10 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            {/* Global Shell: decoradores que PERSISTEM em todas as rotas.
+                Renderizado ANTES das Routes — NUNCA desmonta ao trocar de página.
+                Contém: FluidBackground, Spotlight, CustomCursor, Grain Overlay, Scroll Progress Bar */}
+            <GlobalShell />
             {/* Drawer global singleton — 1 instância para todas as páginas */}
             <CartDrawerGlobalTrigger />
             {/* Lead Capture: abre após 35s, persistência localStorage */}
@@ -32,6 +40,9 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order/success" element={<OrderSuccess />} />
+                <Route path="/order/failure" element={<OrderFailure />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
