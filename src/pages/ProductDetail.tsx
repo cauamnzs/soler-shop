@@ -153,7 +153,6 @@ const ProductDetail = () => {
                     width={800}
                     height={800}
                     className="w-full h-full object-cover object-center"
-                    priority
                   />
                   {product.tag && (
                     <motion.span
@@ -163,8 +162,8 @@ const ProductDetail = () => {
                       className="absolute top-5 left-5 md:top-6 left-6 backdrop-blur-md text-[10px] md:text-xs font-body font-bold uppercase tracking-[0.22em] px-4 py-2 md:px-5 md:py-2.5 rounded-full border bg-card/90 text-foreground shadow-lg"
                     >
                       {product.tag === "Novo" ? (
-                        <span className="inline-flex items-center gap-1.5 text-emerald-500 border-emerald-500/25 bg-emerald-500/10 px-4 py-2">
-                          Novo<span className="text-[7px] animate-pulse opacity-60">✦</span>
+                        <span className="inline-flex items-center gap-1.5 text-gold border-gold/25 bg-gold/10 px-4 py-2">
+                          Novo<span className="text-[7px] animate-pulse opacity-60">&bull;</span>
                         </span>
                       ) : product.tag === "Limitado" ? (
                         <span className="bg-gold/20 border-gold/30 text-gold px-4 py-2 inline-flex items-center">
@@ -189,13 +188,13 @@ const ProductDetail = () => {
                       <span className="text-gold font-body text-[10px] md:text-xs uppercase tracking-[0.4em] mb-3 md:mb-5 block opacity-60">
                         {product.category} — Ref: {product.id}
                       </span>
-                      <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground mb-5 md:mb-7 leading-[1.05] break-words">
+                      <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground mb-5 md:mb-7 leading-[1.05] break-words line-clamp-2 lg:line-clamp-none">
                         {product.name}
                       </h1>
                       <p className="text-2xl sm:text-3xl md:text-4xl font-body font-semibold text-gradient-gold mb-5 md:mb-8">
                         {product.price}
                       </p>
-                      <p className="font-body text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed font-light">
+                      <p className="font-body text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed font-light line-clamp-4 md:line-clamp-none">
                         {product.description}
                       </p>
                     </div>
@@ -246,6 +245,32 @@ const ProductDetail = () => {
       <Suspense fallback={<div style={{ minHeight: "16rem" }} />}>
         <Footer />
       </Suspense>
+
+      {/* Mobile Sticky CTA Bar */}
+      <div
+        className="md:hidden fixed bottom-3 left-3 right-3 z-[9960] rounded-2xl border border-border/15 bg-background/90 dark:bg-background/95 backdrop-blur-xl shadow-2xl p-2"
+        style={{ paddingBottom: "calc(0.5rem + env(safe-area-inset-bottom))" }}
+      >
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            to="/#products"
+            onClick={() => { try { navigator.vibrate?.(6); } catch {} }}
+            className="touch-cta inline-flex items-center justify-center rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-foreground border border-foreground/15 bg-foreground/[0.04] active:scale-[0.96] active:bg-foreground/[0.08] transition-transform duration-75 min-h-[44px]"
+          >
+            Ver Cat&aacute;logo
+          </Link>
+          <a
+            href={product ? getWhatsAppLink(`Ol&aacute;! Gostaria de consultar a disponibilidade do ${product.name} (Ref: ${product.id}) que vi no site Soler Shop.`) : getWhatsAppLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
+            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_rgba(212,175,55,0.35)] min-h-[44px]"
+          >
+            <MessageCircle size={14} strokeWidth={1.7} />
+            WhatsApp
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

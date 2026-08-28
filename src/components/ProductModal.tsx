@@ -61,7 +61,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
   const modalContent = (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4 md:p-8">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8">
           {/* Overlay sólido - barreira visual absoluta (portal garante isolamento total) */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -104,7 +104,7 @@ const ProductModal = ({ product, isOpen, onClose }: ProductModalProps) => {
             {/* Botão de Fechar */}
             <button
               onClick={onClose}
-              className="touch-cta absolute top-4 right-4 z-50 w-11 h-11 flex items-center justify-center bg-background/60 hover:bg-gold/10 text-muted-foreground hover:text-gold border border-border/40 hover:border-gold/30 rounded-full transition-all duration-300 backdrop-blur-md active:scale-90"
+              className="touch-cta absolute top-4 right-4 z-[100] w-11 h-11 flex items-center justify-center bg-background/60 hover:bg-gold/10 text-muted-foreground hover:text-gold border border-border/40 hover:border-gold/30 rounded-full transition-all duration-300 backdrop-blur-md active:scale-90 shadow-lg"
               aria-label="Fechar Modal"
             >
               <X size={18} strokeWidth={1.5} />

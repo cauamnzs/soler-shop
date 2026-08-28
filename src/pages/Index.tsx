@@ -79,7 +79,7 @@ const Index = () => {
       
       {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-dark via-gold to-gold-light z-[10001] origin-left pointer-events-none"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-dark via-gold to-gold-light z-[9965] origin-left pointer-events-none"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -96,7 +96,7 @@ const Index = () => {
       {!isMobileDevice && <Spotlight />}
 
       {/* Camada Visionária: O Cursor Personalizado (Apenas Desktop) */}
-      <CustomCursor />
+      {!isMobileDevice && <CustomCursor />}
       
       {/* Overlay de Grain Global — desktop only (expensive fixed SVG filter) */}
       {!isMobileDevice && (
@@ -118,9 +118,9 @@ const Index = () => {
         </Suspense>
 
         {/* Brand Names Strip */}
-        <div className="relative overflow-hidden py-5 md:py-6 border-y border-border/15 group">
-          <div className="flex items-center gap-16 whitespace-nowrap"
-            style={{ animation: "marquee 12s linear infinite", animationPlayState: "running" }}
+        <div className="relative overflow-x-hidden overflow-y-visible py-5 md:py-6 border-y border-border/15 group">
+          <div className="flex items-center gap-8 sm:gap-12 md:gap-16 whitespace-nowrap min-w-max"
+            style={{ animation: "marquee 18s linear infinite", animationPlayState: "running" }}
             onMouseEnter={e => (e.currentTarget.style.animationPlayState = "paused")}
             onMouseLeave={e => (e.currentTarget.style.animationPlayState = "running")}
           >
@@ -192,7 +192,7 @@ const Index = () => {
         transition={{ delay: 5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="hidden md:flex fixed bottom-6 right-6 z-[9960] w-14 h-14 bg-gold rounded-full items-center justify-center shadow-lux-hover group"
+        className="hidden md:flex fixed bottom-6 right-6 z-[9950] w-14 h-14 bg-gold rounded-full items-center justify-center shadow-lux-hover group"
       >
         {/* Tooltip */}
         <span className="absolute right-full mr-4 whitespace-nowrap bg-foreground text-background font-body text-[10px] uppercase tracking-[0.2em] px-3 py-2 rounded-full opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none shadow-lg">

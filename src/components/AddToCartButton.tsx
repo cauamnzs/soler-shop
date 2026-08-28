@@ -5,6 +5,7 @@ import { Product } from "@/types";
 import { cn } from "@/lib/utils";
 import { toast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
 
 type Variant = "primary" | "secondary";
 
@@ -25,8 +26,11 @@ const AddToCartButton = ({
 }: AddToCartButtonProps) => {
   const [phase, setPhase] = useState<"idle" | "adding" | "success">("idle");
   const navigate = useNavigate();
+  const { addItem } = useCart();
 
-  const goToCart = () => navigate("/cart");
+  const goToCart = () => {
+    window.dispatchEvent(new CustomEvent("soler:cart-drawer:open"));
+  };
 
   const handleClick = async () => {
     if (phase !== "idle") {
@@ -36,40 +40,19 @@ const AddToCartButton = ({
 
     setPhase("adding");
 
-    // Stub: simula latência de rede (450ms) — no Sprint M será substituído
-    // por `cartContext.addItem(product, quantity)` real.
-    await new Promise((r) => setTimeout(r, 450));
+    // Latência UX (180ms) — feedback humano antes de aplicar o state
+    await new Promise((r) => setTimeout(r, 180));
 
     try {
-      // Callback opcional injetado (para testes futuros / Storybook)
-      onAdd?.(product, quantity);
+      const qty = Math.max(1, Math.floor(quantity) || 1);
+      addItem(product, qty);
 
-      // Dispara evento customizado para o CartContext (quando existir)
-      // ouvir → window.addEventListener("soler:cart:add", ...)
-      window.dispatchEvent(
-        new CustomEvent("soler:cart:add", {
-          detail: { product, quantity: quantity },
-        })
-      );
-
-      // Também persiste um preview no localStorage (stub não tipado)
-      // para o Sprint M já ter um state inicial para migrar.
-      try {
-        const existingRaw = localStorage.getItem("soler-cart-preview");
-        const existing: Array<{ product: Product; quantity: number }> = existingRaw
-          ? JSON.parse(existingRaw)
-          : [];
-        const idx = existing.findIndex((x) => x.product.id === product.id);
-        if (idx >= 0) existing[idx].quantity += quantity;
-        else existing.push({ product, quantity });
-        localStorage.setItem("soler-cart-preview", JSON.stringify(existing));
-      } catch {
-        // noop
-      }
+      // Callback opcional injetado
+      onAdd?.(product, qty);
 
       toast({
         title: "Adicionado ao carrinho ✨",
-        description: `${product.name} — Qtd: ${quantity}`,
+        description: `${product.name} — Qtd: ${qty}`,
         action: (
           <button
             onClick={goToCart}
@@ -99,7 +82,7 @@ const AddToCartButton = ({
     : "bg-transparent text-gold border-2 border-gold/40 hover:border-gold hover:bg-gold hover:text-background";
 
   const successCls =
-    "bg-emerald-500 text-white shadow-[0_8px_30px_rgba(16,185,129,0.3)] hover:bg-emerald-600";
+    "bg-gold text-background shadow-[0_8px_30px_rgba(212,175,55,0.45)] hover:bg-gold-dark hover:shadow-lux-hover";
 
   const addingCls = isPrimary
     ? "bg-gold/80 text-background/70 cursor-wait"

@@ -4,7 +4,6 @@ import solerLogo from "@/assets/soler-logo.png";
 import { getWhatsAppLink, getInstagramLink, getMailtoLink } from "@/lib/envConfig";
 
 const Footer = () => {
-  // Cascata para as colunas do rodapé
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -13,7 +12,6 @@ const Footer = () => {
     },
   };
 
-  // Animação individual de cada coluna surgindo
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -25,9 +23,11 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-primary-foreground overflow-hidden relative z-50">
-      {/* Gold accent line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-      <div className="max-w-7xl mx-auto section-padding py-10 md:py-16 pb-32 md:pb-16">
+      <div
+        className="max-w-7xl mx-auto section-padding py-10 md:pb-16"
+        style={{ paddingBottom: "calc(10rem + env(safe-area-inset-bottom))" }}
+      >
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -35,9 +35,8 @@ const Footer = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16"
         >
-          {/* Marca / Sobre */}
           <motion.div variants={itemVariants} className="flex flex-col">
-            <a href="/" data-cursor-label="Início" className="touch-cta flex items-center gap-3 mb-5 inline-block active:opacity-80">
+            <a href="/" data-cursor-label="In&iacute;cio" className="touch-cta flex items-center gap-3 mb-5 inline-block active:opacity-80">
               <img src={solerLogo} alt="Soler Shop" className="h-10 w-10 md:h-12 md:w-12 brightness-0 invert opacity-90" />
               <span className="font-heading text-xl md:text-2xl tracking-wide text-primary-foreground">
                 Soler <span className="italic font-light">Shop</span>
@@ -45,18 +44,17 @@ const Footer = () => {
             </a>
 
             <p className="font-body text-xs md:text-sm text-primary-foreground/65 md:text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
-              Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina diária.
+              Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina di&aacute;ria.
             </p>
           </motion.div>
 
-          {/* Navegação */}
           <motion.div variants={itemVariants}>
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
-              Navegação
+              Navega&ccedil;&atilde;o
             </h4>
             <div className="flex flex-col space-y-3">
               {[
-                { label: "Catálogo", href: "#products" },
+                { label: "Cat&aacute;logo", href: "#products" },
                 { label: "Perfumes", href: "?filter=Perfumes#products" },
                 { label: "Body Splash", href: "?filter=Body%20Splash#products" },
                 { label: "Instagram", href: "#instagram" },
@@ -65,7 +63,7 @@ const Footer = () => {
                   key={link.label}
                   href={link.href}
                   data-cursor-label="Explorar"
-                  className="touch-cta font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
+                  className="touch-cta min-h-[44px] flex items-center font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
                 >
                   {link.label}
                 </a>
@@ -73,7 +71,6 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Redes Sociais */}
           <motion.div variants={itemVariants}>
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               Conecte-se
@@ -110,7 +107,6 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Newsletter */}
           <motion.div variants={itemVariants}>
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
               The Soler Club
@@ -121,21 +117,20 @@ const Footer = () => {
             <form className="relative flex items-center" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="Seu endereço de e-mail"
-                className="w-full bg-transparent border-b border-primary-foreground/30 md:border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/45 md:placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-10 focus:outline-none focus:border-gold transition-all duration-500"
+                placeholder="Seu endere&ccedil;o de e-mail"
+                className="w-full bg-transparent border-b border-primary-foreground/30 md:border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/45 md:placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-12 focus:outline-none focus:border-gold transition-all duration-500 min-h-[44px]"
               />
               <button
                 type="submit"
                 aria-label="Assinar newsletter"
-                className="touch-cta absolute right-0 bottom-2 w-8 h-8 flex items-center justify-center rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-background hover:border-gold transition-all duration-300 ease-lux active:scale-95"
+                className="touch-cta absolute right-0 bottom-1.5 w-11 h-11 flex items-center justify-center rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-background hover:border-gold transition-all duration-300 ease-lux active:scale-95"
               >
-                <ArrowRight size={12} strokeWidth={2} />
+                <ArrowRight size={14} strokeWidth={2} />
               </button>
             </form>
           </motion.div>
         </motion.div>
 
-        {/* Linha de Baixo (Bottom Bar) */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -146,7 +141,7 @@ const Footer = () => {
           <div className="flex items-center gap-3 text-primary-foreground/45 md:text-primary-foreground/30">
             <CreditCard size={24} strokeWidth={1} />
             <span className="font-body text-[11px] tracking-wider uppercase text-center sm:text-left">
-              Pix • Visa • Mastercard
+              Pix &bull; Visa &bull; Mastercard
             </span>
           </div>
 

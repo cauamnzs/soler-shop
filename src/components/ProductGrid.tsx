@@ -133,28 +133,40 @@ const ProductGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex gap-2 md:gap-2.5 justify-start md:justify-center mb-10 md:mb-14 px-4 overflow-x-auto scrollbar-hide whitespace-nowrap"
+            className="relative w-full mb-10 md:mb-14"
           >
-            {filterOptions.map(filter => (
-              <button
-                key={filter}
-                onClick={() => { try { navigator.vibrate?.(4); } catch {}; setActiveFilter(filter); }}
-                className={`touch-cta relative shrink-0 px-4 md:px-4.5 py-2.5 rounded-full font-body text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 overflow-hidden active:scale-[0.94] ${
-                  activeFilter === filter
-                    ? "text-background"
-                    : "text-muted-foreground hover:text-foreground border border-foreground/15 hover:border-gold/30"
-                }`}
-              >
-                {activeFilter === filter && (
+            <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" aria-hidden="true" />
+            <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" aria-hidden="true" />
+            <div className="flex gap-2 md:gap-2.5 justify-start px-4 overflow-x-auto scrollbar-hide whitespace-nowrap">
+              {filterOptions.map(filter => (
+                <button
+                  key={filter}
+                  onClick={() => { try { navigator.vibrate?.(4); } catch {}; setActiveFilter(filter); }}
+                  className={`touch-cta relative shrink-0 px-4 md:px-4.5 py-2.5 rounded-full font-body text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 overflow-hidden active:scale-[0.94] z-0 ${
+                    activeFilter === filter
+                      ? "text-background"
+                      : "text-muted-foreground hover:text-foreground border border-foreground/15 hover:border-gold/30"
+                  }`}
+                >
+                  <span className="relative z-10">{filter}</span>
+                </button>
+              ))}
+              {/* Singleton animado do pill ativo - FORA dos botões evita máscara overflow */}
+              <AnimatePresence>
+                {activeFilter && (
                   <motion.span
+                    key={activeFilter}
                     layoutId="filter-active-pill"
-                    className="absolute inset-0 bg-gold rounded-full"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    className="absolute top-0 left-0 h-full bg-gold rounded-full pointer-events-none -z-0 shadow-[0_4px_20px_rgba(212,175,55,0.2)]"
+                    initial={{ opacity: activeFilter !== "Todos" && filterOptions.includes(activeFilter) ? 0 : undefined }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.55, stiffness: 240, damping: 24 }}
                   />
                 )}
-                <span className="relative">{filter}</span>
-              </button>
-            ))}
+              </AnimatePresence>
+            </div>
           </motion.div>
         )}
 
@@ -233,7 +245,7 @@ const ProductGrid = () => {
                 {product.tag && (
                   <span className={`absolute top-3 left-3 backdrop-blur-md text-[10px] font-body font-medium uppercase tracking-[0.15em] px-3 py-1.5 rounded-full border ${
                     product.tag === "Novo"
-                      ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/25"
+                      ? "bg-gold/15 text-gold border-gold/25"
                       : product.tag === "Limitado"
                       ? "bg-gold/15 text-gold border-gold/25"
                       : "bg-background/80 text-foreground/80 border-foreground/8 backdrop-blur-md"
@@ -263,7 +275,7 @@ const ProductGrid = () => {
 
               {/* Textos do Produto (Minimalista) */}
               <div className="flex flex-col items-center text-center px-2">
-                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 md:group-hover:text-foreground">
+                <h3 className="font-body text-sm md:text-base font-light text-muted-foreground leading-snug mb-1.5 transition-colors duration-300 md:group-hover:text-foreground line-clamp-2 md:line-clamp-1 min-h-[2.5em]">
                   {product.name}
                 </h3>
                 <p className="font-body text-[10px] uppercase tracking-[0.25em] text-muted-foreground/55 md:text-muted-foreground/40 mb-2">

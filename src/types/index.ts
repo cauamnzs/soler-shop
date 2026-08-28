@@ -28,3 +28,19 @@ export interface Particle {
   drift: number;
   layer: ParticleLayer;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   PACOTE M — Carrinho
+   ══════════════════════════════════════════════════════════════════ */
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+  addedAt: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+  version: 1;
+  updatedAt: number;
+}
