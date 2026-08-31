@@ -6,43 +6,76 @@
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
-
-  <!--
-    ════════════════════════════════════════════════════════════
-    ROTAS DINÂMICAS (POPULAR EM BUILD OU SERVER-SIDE)
-    Substituir placeholders abaixo durante geração dinâmica:
-      - `src/scripts/generate-sitemap.mjs` (build time) via `products.map()`
-      - OU endpoint `/api/sitemap.xml` (runtime Supabase)
-    ════════════════════════════════════════════════════════════
-
-    Categorias:
-    <url><loc>https://solershop.com.br/category/fragrances</loc><changefreq>weekly</changefreq><priority>0.80</priority></url>
-    <url><loc>https://solershop.com.br/category/bodycare</loc><changefreq>weekly</changefreq><priority>0.80</priority></url>
-    <url><loc>https://solershop.com.br/category/lips</loc><changefreq>weekly</changefreq><priority>0.80</priority></url>
-    <url><loc>https://solershop.com.br/category/jewelry</loc><changefreq>weekly</changefreq><priority>0.80</priority></url>
-    <url><loc>https://solershop.com.br/category/gifts</loc><changefreq>weekly</changefreq><priority>0.80</priority></url>
-
-    Produtos (exemplo por ID do Supabase / slug SEO):
-    {{ #each products as product }}
-    <url>
-      <loc>https://solershop.com.br/product/{{product.slug}}</loc>
-      <lastmod>{{product.updatedAt}}</lastmod>
-      <image:image>
-        <image:loc>{{product.image}}</image:loc>
-        <image:title><![CDATA[{{product.name}}]]></image:title>
-        <image:caption><![CDATA[{{product.tagline}}]]></image:caption>
-        <image:license>https://solershop.com.br/</image:license>
-      </image:image>
-      <changefreq>weekly</changefreq>
-      <priority>0.70</priority>
-    </url>
-    {{ /each }}
-  -->
-
   <url>
-    <loc>https://solershop.com.br/</loc>
+    <loc>https://solershop.com.br/product/SOL-001</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.60</priority>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-002</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-003</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-004</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-005</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-006</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-007</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-008</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/product/SOL-009</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/politica-de-privacidade</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/termos-de-uso</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  <url>
+    <loc>https://solershop.com.br/trocas-e-devolucoes</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.30</priority>
   </url>
 </urlset>

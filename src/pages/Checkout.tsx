@@ -76,6 +76,23 @@ const PixIcon = ({
 type Step = 1 | 2 | 3;
 type PaymentMethod = "card" | "pix" | "ticket";
 
+interface ProcessPaymentResponse {
+  ok: boolean;
+  status?: string;
+  orderNumber?: string;
+  paymentId?: string | number;
+  qrCodeBase64?: string;
+  qrCodeRaw?: string;
+  pixExpiresAt?: string;
+  boletoUrl?: string;
+  total?: number;
+  installments?: number;
+  installmentValue?: number;
+  message?: string;
+  code?: string;
+  sandbox?: boolean;
+}
+
 interface DadosPessoais {
   nomeCompleto: string;
   cpf: string;
@@ -1241,7 +1258,7 @@ const Checkout = () => {
 
       // (C) Chamada backend serverless.
       let httpStatus = 0;
-      let json: any = null;
+      let json: ProcessPaymentResponse | null = null;
       try {
         const res = await fetch("/api/checkout/process-payment", {
           method: "POST",

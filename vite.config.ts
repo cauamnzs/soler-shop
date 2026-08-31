@@ -19,4 +19,24 @@ export default defineConfig(({ mode }) => ({
     },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-icons": ["lucide-react"],
+          "vendor-query": ["@tanstack/react-query"],
+          "vendor-lenis": ["lenis"],
+          "vendor-radix": [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-toast",
+            "@radix-ui/react-scroll-area",
+            "@radix-ui/react-tabs",
+            "@radix-ui/react-select",
+          ],
+        },
+      },
+    },
+  },
 }));

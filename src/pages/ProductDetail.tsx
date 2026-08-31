@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useProductById } from "@/hooks/useProductById";
 import { getWhatsAppLink } from "@/lib/envConfig";
+import { applyPageMeta, injectJsonLd, removeJsonLd, SITE_URL } from "@/lib/seo";
+import { parsePrice } from "@/lib/price";
 
 const AddToCartButton = lazy(() => import("@/components/AddToCartButton"));
 
@@ -15,11 +17,69 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (product?.name) {
-      document.title = `${product.name} — Soler Shop`;
+      const description =
+        product.description?.slice(0, 160) ||
+        `${product.name} — ${product.category}. Compre na Soler Shop Importados.`;
+      applyPageMeta({
+        title: `${product.name} — Soler Shop`,
+        description,
+        path: `/product/${product.id}`,
+        image: typeof product.image === "string" ? product.image : undefined,
+        type: "product",
+      });
+
+      const price = parsePrice(product.price);
+      injectJsonLd("jsonld-product", {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        description: product.description,
+        image: typeof product.image === "string" ? product.image : undefined,
+        sku: product.id,
+        brand: { "@type": "Brand", name: "Soler Shop Importados" },
+        category: product.category,
+        offers: {
+          "@type": "Offer",
+          url: `${SITE_URL}/product/${product.id}`,
+          priceCurrency: "BRL",
+          price: price.toFixed(2),
+          availability: "https://schema.org/InStock",
+          seller: { "@type": "Organization", name: "Soler Shop Importados" },
+        },
+      });
+      injectJsonLd("jsonld-breadcrumb", {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: product.category,
+            item: `${SITE_URL}/#products`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: product.name,
+            item: `${SITE_URL}/product/${product.id}`,
+          },
+        ],
+      });
     } else if (!isLoading) {
-      document.title = "Produto — Soler Shop";
+      applyPageMeta({
+        title: "Produto — Soler Shop",
+        path: id ? `/product/${id}` : "/product",
+      });
+      removeJsonLd("jsonld-product");
+      removeJsonLd("jsonld-breadcrumb");
     }
-  }, [product?.name, isLoading]);
+
+    return () => {
+      removeJsonLd("jsonld-product");
+      removeJsonLd("jsonld-breadcrumb");
+    };
+  }, [product, isLoading, id]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });

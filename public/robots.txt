@@ -4,6 +4,7 @@ Disallow: /checkout
 Disallow: /order/
 Disallow: /api/
 Disallow: /cart
+Disallow: /admin
 Disallow: /*?s=*
 
 User-agent: Bingbot
@@ -12,6 +13,7 @@ Disallow: /checkout
 Disallow: /order/
 Disallow: /api/
 Disallow: /cart
+Disallow: /admin
 
 User-agent: Twitterbot
 Allow: /
@@ -19,6 +21,7 @@ Disallow: /checkout
 Disallow: /order/
 Disallow: /api/
 Disallow: /cart
+Disallow: /admin
 
 User-agent: facebookexternalhit
 Allow: /
@@ -26,6 +29,7 @@ Disallow: /checkout
 Disallow: /order/
 Disallow: /api/
 Disallow: /cart
+Disallow: /admin
 
 User-agent: *
 Allow: /
@@ -33,5 +37,6 @@ Disallow: /checkout
 Disallow: /order/
 Disallow: /api/
 Disallow: /cart
+Disallow: /admin
 
 Sitemap: https://solershop.com.br/sitemap.xml
