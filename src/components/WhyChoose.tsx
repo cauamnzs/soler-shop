@@ -52,7 +52,7 @@ const FeatureCard = ({ item, index }: { item: typeof highlights[0]; index: numbe
       </span>
 
       {/* Icon */}
-      <div className="w-11 h-11 mb-5 md:mb-7 flex items-center justify-center text-gold group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_rgba(212,175,55,0.55)] transition-all duration-500">
+      <div className="w-11 h-11 mb-5 md:mb-7 flex items-center justify-center text-gold group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_hsl(var(--gold)/0.55)] transition-all duration-500">
         <item.icon strokeWidth={1} size={28} />
       </div>
 

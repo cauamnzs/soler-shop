@@ -264,7 +264,7 @@ const ProductDetail = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
-            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_rgba(212,175,55,0.35)] min-h-[44px]"
+            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_hsl(var(--gold)/0.35)] min-h-[44px]"
           >
             <MessageCircle size={14} strokeWidth={1.7} />
             WhatsApp

@@ -119,7 +119,7 @@ const Preloader = () => {
             transition={{ duration: 4, ease: "easeOut" }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)",
+              background: "radial-gradient(circle, hsl(var(--gold) / 0.15) 0%, transparent 70%)",
             }}
           />
 
@@ -130,7 +130,7 @@ const Preloader = () => {
             transition={{ duration: 3, delay: 0.5 }}
             className="absolute bottom-0 left-0 right-0 h-1/2"
             style={{
-              background: "linear-gradient(to top, rgba(212,175,55,0.08), transparent)",
+              background: "linear-gradient(to top, hsl(var(--gold) / 0.08), transparent)",
             }}
           />
 
@@ -244,7 +244,7 @@ const Preloader = () => {
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
+              background: "radial-gradient(ellipse at center, transparent 40%, hsl(var(--background) / 0.85) 100%)",
             }}
           />
         </motion.div>

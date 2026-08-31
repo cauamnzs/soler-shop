@@ -24,13 +24,13 @@ const layerConfigs = {
     opacity: [0.15, 0.35, 0.15], 
     blur: "blur-none", 
     scale: [0.9, 1.1, 0.9],
-    shadow: "0 0 10px rgba(212, 175, 55, 0.15)" 
+    shadow: "0 0 10px hsl(var(--gold) / 0.15)" 
   },
   front: { 
     opacity: [0.2, 0.6, 0.2], 
     blur: "blur-[3px]", 
     scale: [1, 1.2, 1],
-    shadow: "0 0 15px rgba(212, 175, 55, 0.6)" 
+    shadow: "0 0 15px hsl(var(--gold) / 0.6)" 
   }
 };
 

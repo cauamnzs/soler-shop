@@ -133,7 +133,7 @@ const HeroSection = () => {
             href="#products"
             data-cursor-label="Explorar"
             onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
-            className="touch-cta group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-auto gap-3 bg-gold text-background px-7 py-4 md:py-4 uppercase tracking-[0.2em] font-semibold text-[11px] md:text-sm transition-lux duration-500 shadow-[0_8px_30px_rgba(212,175,55,0.32)] hover:shadow-lux-hover active:brightness-90 active:scale-[0.97] rounded-xl"
+            className="touch-cta group relative overflow-hidden inline-flex items-center justify-center w-full sm:w-auto gap-3 bg-gold text-background px-7 py-4 md:py-4 uppercase tracking-[0.2em] font-semibold text-[11px] md:text-sm transition-lux duration-500 shadow-[0_8px_30px_hsl(var(--gold)/0.32)] hover:shadow-lux-hover active:brightness-90 active:scale-[0.97] rounded-xl"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-lux pointer-events-none" />
             <span className="leading-none">Explorar Produtos</span>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Mail, Sparkles, Check } from "lucide-react";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
@@ -8,10 +9,18 @@ import { cn } from "@/lib/utils";
 const STORAGE_KEY = "soler-lead-closed";
 const AUTO_OPEN_DELAY_MS = 35000;
 
+const emailSchema = z
+  .string()
+  .trim()
+  .min(1, "Informe seu e-mail.")
+  .email("Informe um e-mail válido.");
+
+type LeadPhase = "idle" | "loading" | "success";
+
 const LeadCaptureModal = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [phase, setPhase] = useState<"idle" | "loading" | "success">("idle");
+  const [phase, setPhase] = useState<LeadPhase>("idle");
   const { toast } = useToast();
 
   const closePermanently = useCallback(() => {
@@ -61,15 +70,15 @@ const LeadCaptureModal = () => {
     document.body.style.overflow = "hidden";
 
     try {
-      const control = (window as unknown as { lenisControl?: { pause: () => void; start: () => void } }).lenisControl;
-      control?.pause?.();
+      const control = (window as unknown as { lenisControl?: { stop: () => void; start: () => void } }).lenisControl;
+      control?.stop?.();
     } catch { /* noop */ }
 
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
       try {
-        const control = (window as unknown as { lenisControl?: { pause: () => void; start: () => void } }).lenisControl;
+        const control = (window as unknown as { lenisControl?: { stop: () => void; start: () => void } }).lenisControl;
         control?.start?.();
       } catch { /* noop */ }
     };
@@ -78,11 +87,12 @@ const LeadCaptureModal = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const trimmed = email.trim().toLowerCase();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-    if (!valid) {
+    const parsed = emailSchema.safeParse(trimmed);
+    if (!parsed.success) {
+      const firstIssue = parsed.error.issues[0]?.message ?? "Informe um e-mail válido.";
       toast({
         title: "E-mail inválido",
-        description: "Por favor, informe um e-mail válido para receber as ofertas.",
+        description: firstIssue,
         variant: "destructive",
         duration: 3200,
       });
@@ -130,7 +140,7 @@ const LeadCaptureModal = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98, transition: { duration: 0.25 } }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-md sm:max-w-lg overflow-hidden rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl md:backdrop-blur-2xl shadow-[-12px_0_60px_-12px_rgba(0,0,0,0.35),0_0_0_1px_hsl(var(--border)_/_0.3)]"
+            className="relative w-full max-w-md sm:max-w-lg overflow-hidden rounded-3xl border border-border/50 bg-card/40 backdrop-blur-xl md:backdrop-blur-2xl shadow-[-12px_0_60px_-12px_hsl(var(--charcoal)_/_0.35),0_0_0_1px_hsl(var(--border)_/_0.3)]"
           >
             <button
               onClick={closePermanently}
@@ -148,7 +158,7 @@ const LeadCaptureModal = () => {
                 initial={{ opacity: 0, y: -10, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.55, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-[0_0_30px_hsl(var(--gold)_/_0.2)]"
               >
                 <Sparkles size={28} className="text-gold" strokeWidth={1.6} />
               </motion.div>
@@ -216,8 +226,8 @@ const LeadCaptureModal = () => {
                   className={cn(
                     "w-full h-12 sm:h-14 rounded-2xl uppercase tracking-[0.22em] md:tracking-[0.28em] text-[11px] md:text-xs font-bold transition-lux duration-500 ease-lux active:scale-[0.98] group relative overflow-hidden min-h-[48px]",
                     phase === "success"
-                      ? "bg-gold text-background shadow-[0_8px_30px_rgba(212,175,55,0.45)]"
-                      : "bg-gold text-background shadow-[0_8px_30px_rgba(212,175,55,0.32)] hover:bg-gold-dark hover:shadow-lux-hover"
+                      ? "bg-gold text-background shadow-[0_8px_30px_hsl(var(--gold)_/_0.45)]"
+                      : "bg-gold text-background shadow-[0_8px_30px_hsl(var(--gold)_/_0.32)] hover:bg-gold-dark hover:shadow-lux-hover"
                   )}
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-900 ease-lux pointer-events-none" />
@@ -229,7 +239,7 @@ const LeadCaptureModal = () => {
                           <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
                           <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
                         </svg>
-                        Confirmando&hellip;
+                        Confirmando…
                       </>
                     )}
                     {phase === "success" && (

@@ -24,8 +24,8 @@ const Spotlight = () => {
   }, [mouseX, mouseY]);
 
   // Templates de movimento declarados no nível superior
-  const mainGradient = useMotionTemplate`radial-gradient(650px circle at ${springX}px ${springY}px, rgba(212, 175, 55, 0.15), transparent 80%)`;
-  const interactiveGlow = useMotionTemplate`radial-gradient(350px circle at ${springX}px ${springY}px, rgba(212, 175, 55, 0.25), transparent 70%)`;
+  const mainGradient = useMotionTemplate`radial-gradient(650px circle at ${springX}px ${springY}px, hsl(var(--gold) / 0.15), transparent 80%)`;
+  const interactiveGlow = useMotionTemplate`radial-gradient(350px circle at ${springX}px ${springY}px, hsl(var(--gold) / 0.25), transparent 70%)`;
   const grainMask = useMotionTemplate`radial-gradient(500px circle at ${springX}px ${springY}px, black, transparent 80%)`;
 
   return (

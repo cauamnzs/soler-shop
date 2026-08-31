@@ -248,7 +248,7 @@ const SensationVibes = () => {
                 <span
                   className={`block h-1.5 rounded-full transition-all duration-300 ${
                     activeIndex === index
-                      ? "w-6 bg-gold shadow-[0_0_10px_rgba(212,175,55,0.45)]"
+                      ? "w-6 bg-gold shadow-[0_0_10px_hsl(var(--gold)/0.45)]"
                       : "w-2 bg-foreground/30"
                   }`}
                 />

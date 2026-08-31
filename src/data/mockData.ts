@@ -21,28 +21,28 @@ export const vibes: Vibe[] = [
     title: "Ocaso Romântico",
     description: "Dourado Quente e Âmbar. Uma fragrância que captura o último raio de sol.",
     image: vibe1,
-    color: "rgba(212, 175, 55, 0.15)",
+    color: "hsl(var(--gold) / 0.15)",
   },
   {
     id: "vibe-2",
     title: "Amanhecer Fresco",
     description: "Cítrico e Off-White. A pureza do orvalho matinal em um frasco de cristal.",
     image: vibe2,
-    color: "rgba(250, 249, 246, 0.15)",
+    color: "hsl(var(--foreground) / 0.15)",
   },
   {
     id: "vibe-3",
     title: "Mistério Noturno",
     description: "Amadeirado e Prata. O enigma das noites cosmopolitas revelado.",
     image: vibe3,
-    color: "rgba(0, 0, 0, 0.2)",
+    color: "hsl(var(--background) / 0.5)",
   },
   {
     id: "vibe-4",
     title: "Aura Clássica",
     description: "Neutro e Dourado suave. A quintessência da elegância atemporal.",
     image: vibe4,
-    color: "rgba(212, 175, 55, 0.1)",
+    color: "hsl(var(--gold) / 0.1)",
   }
 ];
 

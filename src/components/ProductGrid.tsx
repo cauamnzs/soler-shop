@@ -157,7 +157,7 @@ const ProductGrid = () => {
                   <motion.span
                     key={activeFilter}
                     layoutId="filter-active-pill"
-                    className="absolute top-0 left-0 h-full bg-gold rounded-full pointer-events-none -z-0 shadow-[0_4px_20px_rgba(212,175,55,0.2)]"
+                    className="absolute top-0 left-0 h-full bg-gold rounded-full pointer-events-none -z-0 shadow-[0_4px_20px_hsl(var(--gold)/0.2)]"
                     initial={{ opacity: activeFilter !== "Todos" && filterOptions.includes(activeFilter) ? 0 : undefined }}
                     animate={{
                       opacity: 1,

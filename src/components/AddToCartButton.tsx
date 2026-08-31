@@ -78,11 +78,11 @@ const AddToCartButton = ({
   const isPrimary = variant === "primary";
 
   const baseIdleCls = isPrimary
-    ? "bg-gold text-background shadow-[0_8px_30px_rgba(212,175,55,0.32)] hover:bg-gold-dark hover:shadow-lux-hover"
+    ? "bg-gold text-background shadow-[0_8px_30px_hsl(var(--gold)_/_0.32)] hover:bg-gold-dark hover:shadow-lux-hover"
     : "bg-transparent text-gold border-2 border-gold/40 hover:border-gold hover:bg-gold hover:text-background";
 
   const successCls =
-    "bg-gold text-background shadow-[0_8px_30px_rgba(212,175,55,0.45)] hover:bg-gold-dark hover:shadow-lux-hover";
+    "bg-gold text-background shadow-[0_8px_30px_hsl(var(--gold)_/_0.45)] hover:bg-gold-dark hover:shadow-lux-hover";
 
   const addingCls = isPrimary
     ? "bg-gold/80 text-background/70 cursor-wait"

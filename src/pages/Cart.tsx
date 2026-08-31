@@ -158,8 +158,8 @@ const FreeShippingBar = () => {
           className={cn(
             "absolute inset-y-0 left-0 rounded-full",
             hasFreeShipping
-              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_16px_rgba(212,175,55,0.55)]"
-              : "bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_14px_rgba(212,175,55,0.5)]"
+              ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_16px_hsl(var(--gold)_/_0.55)]"
+              : "bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_14px_hsl(var(--gold)_/_0.5)]"
           )}
         />
       </div>
@@ -199,8 +199,7 @@ const Cart = () => {
 
   const goCheckout = () => {
     try { navigator.vibrate?.(10); } catch { /* noop */ }
-    // /checkout será implementado no PACOTE G — por enquanto volta pra home se não existir
-    navigate("/");
+    navigate("/checkout");
   };
 
   const goShopping = () => navigate("/");
@@ -333,7 +332,7 @@ const Cart = () => {
                     <span className="uppercase tracking-[0.18em] text-muted-foreground">Frete</span>
                     {hasFreeShipping ? (
                       <span className="tabular-nums text-gold font-medium uppercase tracking-widest text-[11px] flex items-center gap-1.5">
-                        <Truck size={13} strokeWidth={2} /> Gr&aacute;tis
+                        <Truck size={13} strokeWidth={2} /> Grátis
                       </span>
                     ) : (
                       <span className="tabular-nums">{formatPrice(shipping)}</span>
@@ -363,7 +362,7 @@ const Cart = () => {
                 <div className="px-5 sm:px-6 md:px-7 pb-2">
                   <Button
                     onClick={goCheckout}
-                    className="w-full bg-gold text-background uppercase tracking-[0.22em] md:tracking-[0.28em] text-[11px] md:text-xs font-bold py-5 md:py-6 rounded-2xl hover:bg-gold-dark hover:shadow-lux-hover transition-lux duration-500 ease-lux active:scale-[0.98] group relative overflow-hidden shadow-[0_8px_32px_rgba(212,175,55,0.25)]"
+                    className="w-full bg-gold text-background uppercase tracking-[0.22em] md:tracking-[0.28em] text-[11px] md:text-xs font-bold py-5 md:py-6 rounded-2xl hover:bg-gold-dark hover:shadow-lux-hover transition-lux duration-500 ease-lux active:scale-[0.98] group relative overflow-hidden shadow-[0_8px_32px_hsl(var(--gold)_/_0.25)]"
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-900 ease-lux pointer-events-none" />
                     <span className="relative z-10 flex items-center justify-center gap-2.5 md:gap-3">
@@ -429,14 +428,14 @@ const Cart = () => {
             onClick={() => { try { navigator.vibrate?.(6); } catch {} }}
             className="touch-cta inline-flex items-center justify-center rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-foreground border border-foreground/15 bg-foreground/[0.04] active:scale-[0.96] active:bg-foreground/[0.08] transition-transform duration-75 min-h-[44px]"
           >
-            Ver Cat&aacute;logo
+            Ver Catálogo
           </Link>
           <a
             href={getWhatsAppLink("Olá! Estou com dúvidas sobre o meu carrinho na Soler Shop.")}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
-            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_rgba(212,175,55,0.35)] min-h-[44px]"
+            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_hsl(var(--gold)_/_0.35)] min-h-[44px]"
           >
             <MessageCircle size={14} strokeWidth={1.7} />
             WhatsApp

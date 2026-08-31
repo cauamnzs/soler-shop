@@ -1,3 +1,9 @@
+import {
+  FREE_SHIPPING_THRESHOLD_BRL,
+  SHIPPING_FLAT_RATE_BRL,
+  brlToCents,
+} from "@/lib/price";
+
 const getEnv = (key: string, fallback = ""): string => {
   const value = (import.meta as unknown as { env?: Record<string, string> }).env?.[key];
   return value ?? fallback;
@@ -19,11 +25,15 @@ const envConfig = {
     cnpj: getEnv("VITE_BUSINESS_CNPJ", ""),
   },
   shipping: {
-    flatRate: getEnv("VITE_SHIPPING_FLAT_RATE", "2990"),
-    freeThreshold: getEnv("VITE_FREE_SHIPPING_THRESHOLD", "49900"),
+    flatRate: getEnv("VITE_SHIPPING_FLAT_RATE", String(brlToCents(SHIPPING_FLAT_RATE_BRL))),
+    freeThreshold: getEnv("VITE_FREE_SHIPPING_THRESHOLD", String(brlToCents(FREE_SHIPPING_THRESHOLD_BRL))),
   },
   mercadoPago: {
-    publicKey: getEnv("VITE_MERCADO_PAGO_PUBLIC_KEY", ""),
+    publicKey: (() => {
+      const canonical = getEnv("VITE_MP_PUBLIC_KEY", "");
+      if (canonical) return canonical;
+      return getEnv("VITE_MERCADO_PAGO_PUBLIC_KEY", "");
+    })(),
   },
   admin: {
     emails: getEnv("VITE_ADMIN_EMAILS", ""),

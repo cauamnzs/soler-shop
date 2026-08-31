@@ -57,7 +57,7 @@ const CustomCursor = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[99999] hidden md:block">
+    <div className="fixed inset-0 pointer-events-none z-[100010] hidden md:block">
       {/* O Anel Externo (Outer Ring) */}
       <motion.div
         className="absolute w-8 h-8 border border-gold/40 rounded-full"
@@ -68,7 +68,7 @@ const CustomCursor = () => {
           translateY: "-50%",
           scale: isHovering ? 2.5 : isClicking ? 0.8 : 1,
           opacity: isHovering ? 0.6 : 0.4,
-          backgroundColor: isHovering ? "rgba(212, 175, 55, 0.05)" : "transparent",
+          backgroundColor: isHovering ? "hsl(var(--gold) / 0.05)" : "transparent",
           willChange: "transform, scale, opacity",
         }}
         transition={{ type: "spring", stiffness: 250, damping: 25 }}

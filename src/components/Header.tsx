@@ -57,8 +57,8 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-[9970] transition-all duration-500 ease-lux ${scrolled ? 'shadow-[0_4px_32px_rgba(0,0,0,0.14)] dark:shadow-[0_4px_32px_rgba(0,0,0,0.5)]' : ''}`} style={{ backdropFilter: 'blur(24px) saturate(180%)', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}>
-      <div className={`absolute inset-0 transition-all duration-500 border-b border-border/30 dark:border-border/[0.08] ${scrolled ? 'bg-card/75 dark:bg-background/55' : 'bg-card/50 dark:bg-background/30'} shadow-[0_1px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_20px_rgba(0,0,0,0.3)]`} />
+    <header className={`sticky top-0 z-[9970] transition-all duration-500 ease-lux ${scrolled ? 'shadow-[0_4px_32px_hsl(var(--charcoal)_/_0.14)] dark:shadow-[0_4px_32px_hsl(var(--charcoal)_/_0.5)]' : ''}`} style={{ backdropFilter: 'blur(24px) saturate(180%)', WebkitBackdropFilter: 'blur(24px) saturate(180%)' }}>
+      <div className={`absolute inset-0 transition-all duration-500 border-b border-border/30 dark:border-border/[0.08] ${scrolled ? 'bg-card/75 dark:bg-background/55' : 'bg-card/50 dark:bg-background/30'} shadow-[0_1px_20px_hsl(var(--charcoal)_/_0.04)] dark:shadow-[0_1px_20px_hsl(var(--charcoal)_/_0.3)]`} />
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/60 dark:via-foreground/10 to-transparent" />
       <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-14 md:h-16 lg:h-18' : 'h-16 md:h-20 lg:h-24'}`}>

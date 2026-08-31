@@ -1,14 +1,37 @@
 User-agent: Googlebot
 Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /api/
+Disallow: /cart
+Disallow: /*?s=*
 
 User-agent: Bingbot
 Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /api/
+Disallow: /cart
 
 User-agent: Twitterbot
 Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /api/
+Disallow: /cart
 
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /api/
+Disallow: /cart
 
 User-agent: *
 Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /api/
+Disallow: /cart
+
+Sitemap: https://solershop.com.br/sitemap.xml

@@ -33,10 +33,10 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 md:gap-12 lg:gap-16"
         >
-          <motion.div variants={itemVariants} className="flex flex-col">
-            <a href="/" data-cursor-label="In&iacute;cio" className="touch-cta flex items-center gap-3 mb-5 inline-block active:opacity-80">
+          <motion.div variants={itemVariants} className="flex flex-col sm:col-span-2 md:col-span-3 xl:col-span-2">
+            <a href="/" data-cursor-label="Início" className="touch-cta flex items-center gap-3 mb-5 inline-block active:opacity-80">
               <img src={solerLogo} alt="Soler Shop" className="h-10 w-10 md:h-12 md:w-12 brightness-0 invert opacity-90" />
               <span className="font-heading text-xl md:text-2xl tracking-wide text-primary-foreground">
                 Soler <span className="italic font-light">Shop</span>
@@ -44,17 +44,17 @@ const Footer = () => {
             </a>
 
             <p className="font-body text-xs md:text-sm text-primary-foreground/65 md:text-primary-foreground/50 leading-relaxed font-light break-words max-w-xs">
-              Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina di&aacute;ria.
+              Produtos importados premium cuidadosamente selecionados. Trazendo exclusividade e luxo para a sua rotina diária.
             </p>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
-              Navega&ccedil;&atilde;o
+              Navegação
             </h4>
             <div className="flex flex-col space-y-3">
               {[
-                { label: "Cat&aacute;logo", href: "#products" },
+                { label: "Catálogo", href: "#products" },
                 { label: "Perfumes", href: "?filter=Perfumes#products" },
                 { label: "Body Splash", href: "?filter=Body%20Splash#products" },
                 { label: "Instagram", href: "#instagram" },
@@ -63,6 +63,28 @@ const Footer = () => {
                   key={link.label}
                   href={link.href}
                   data-cursor-label="Explorar"
+                  className="touch-cta min-h-[44px] flex items-center font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <h4 className="font-heading text-sm uppercase tracking-[0.3em] mb-6 text-primary-foreground/90">
+              Institucional
+            </h4>
+            <div className="flex flex-col space-y-3">
+              {[
+                { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+                { label: "Termos de Uso", href: "/termos-de-uso" },
+                { label: "Trocas e Devoluções", href: "/trocas-e-devolucoes" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  data-cursor-label="Política"
                   className="touch-cta min-h-[44px] flex items-center font-body text-sm text-primary-foreground/65 md:text-primary-foreground/50 font-light w-fit transition-lux duration-500 hover:text-gold hover:translate-x-1 active:text-gold"
                 >
                   {link.label}
@@ -117,7 +139,7 @@ const Footer = () => {
             <form className="relative flex items-center" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="Seu endere&ccedil;o de e-mail"
+                placeholder="Seu endereço de e-mail"
                 className="w-full bg-transparent border-b border-primary-foreground/30 md:border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/45 md:placeholder:text-primary-foreground/30 font-body text-sm px-2 py-3 pr-12 focus:outline-none focus:border-gold transition-all duration-500 min-h-[44px]"
               />
               <button

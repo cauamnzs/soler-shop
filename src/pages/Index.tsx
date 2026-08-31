@@ -1,13 +1,10 @@
 import { useEffect, useRef, lazy, Suspense } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import Lenis from "lenis";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import SensationVibes from "@/components/SensationVibes";
-import Spotlight from "@/components/Spotlight";
-import FluidBackground from "@/components/FluidBackground"; 
-import CustomCursor from "@/components/CustomCursor"; 
 import Preloader from "@/components/Preloader";
 import { getWhatsAppLink } from "@/lib/envConfig";
 
@@ -27,15 +24,12 @@ declare global {
   }
 }
 
-const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
-
 const SectionFallback = ({ minHeight = "12rem" }: { minHeight?: string }) => (
   <div aria-hidden="true" style={{ minHeight }} />
 );
 
 const Index = () => {
   const lenisRef = useRef<Lenis | null>(null);
-  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     if (window.innerWidth < 768) return; // Native touch scroll is smoother on mobile
@@ -76,37 +70,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative bg-background selection:bg-gold/20 overflow-x-hidden">
-      
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-dark via-gold to-gold-light z-[9965] origin-left pointer-events-none"
-        style={{ scaleX: scrollYProgress }}
-      />
-
       {/* Camada Zero: O Carregamento Visionário */}
       <Preloader />
       <Suspense fallback={null}>
         <SearchModal />
       </Suspense>
-      
-      {/* Camada 1: O Fundo Líquido Vivo — desktop only */}
-      {!isMobileDevice && <FluidBackground />}
-      
-      {/* Camada 2: A Lanterna do Mouse — desktop only (no mouse on mobile) */}
-      {!isMobileDevice && <Spotlight />}
-
-      {/* Camada Visionária: O Cursor Personalizado (Apenas Desktop) */}
-      {!isMobileDevice && <CustomCursor />}
-      
-      {/* Overlay de Grain Global — desktop only (expensive fixed SVG filter) */}
-      {!isMobileDevice && (
-        <div 
-          className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.025] dark:opacity-[0.012] mix-blend-overlay dark:mix-blend-soft-light"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-          }}
-        />
-      )}
       
       {/* Camada 3: O Site em si */}
       <Header />
@@ -173,7 +141,7 @@ const Index = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => { try { navigator.vibrate?.(10); } catch {} }}
-            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_rgba(212,175,55,0.35)]"
+            className="touch-cta inline-flex items-center justify-center gap-2 rounded-xl py-3.5 text-[10px] uppercase tracking-[0.22em] font-body text-background bg-gold active:scale-[0.96] active:brightness-90 transition-transform duration-75 shadow-[0_2px_12px_hsl(var(--gold)_/_0.35)]"
           >
             <MessageCircle size={14} strokeWidth={1.7} />
             WhatsApp

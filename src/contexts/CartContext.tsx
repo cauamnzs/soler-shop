@@ -9,6 +9,11 @@ import {
   useState,
 } from "react";
 import { CartItem, CartState, Product } from "@/types";
+import {
+  FREE_SHIPPING_THRESHOLD_BRL,
+  parsePrice as _parsePrice,
+  formatPrice as _formatPrice,
+} from "@/lib/price";
 
 /* ══════════════════════════════════════════════════════════════════
    CONSTANTES
@@ -16,29 +21,15 @@ import { CartItem, CartState, Product } from "@/types";
 
 const STORAGE_KEY = "soler-cart";
 const STORAGE_VERSION = 1;
-const FREE_SHIPPING_THRESHOLD = 299;
+const FREE_SHIPPING_THRESHOLD = FREE_SHIPPING_THRESHOLD_BRL;
 
 /* ══════════════════════════════════════════════════════════════════
-   UTILITÁRIOS DE PREÇO (centralizados)
+   UTILITÁRIOS DE PREÇO (fonte única: src/lib/price.ts)
+   Re-exportados para manter compatibilidade com consumers existentes.
    ══════════════════════════════════════════════════════════════════ */
 
-export const parsePrice = (formatted: string | number | null | undefined): number => {
-  if (typeof formatted === "number") return isFinite(formatted) ? formatted : 0;
-  if (typeof formatted !== "string" || !formatted.trim()) return 0;
-  const digits = formatted.replace(/[^\d,]/g, "").replace(",", ".");
-  const n = parseFloat(digits);
-  return isFinite(n) ? n : 0;
-};
-
-export const formatPrice = (value: number): string => {
-  const v = isFinite(value) && value >= 0 ? value : 0;
-  return v.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-    minimumFractionDigits: 2,
-  });
-};
-
+export const parsePrice = _parsePrice;
+export const formatPrice = _formatPrice;
 export const FREE_SHIPPING = FREE_SHIPPING_THRESHOLD;
 
 /* ══════════════════════════════════════════════════════════════════

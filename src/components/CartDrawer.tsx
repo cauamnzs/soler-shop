@@ -64,14 +64,14 @@ const DrawerItemRow = ({
             <h4 className="font-body text-xs md:text-sm text-foreground truncate group-hover/name:text-gold transition-colors duration-300 line-clamp-2">
               {item.product.name}
             </h4>
-            <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/55 mt-0.5">
+            <p className="font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 mt-0.5">
               {item.product.category}
             </p>
           </a>
           <button
             onClick={onRemove}
             aria-label={`Remover ${item.product.name}`}
-            className="touch-cta shrink-0 w-11 h-11 flex items-center justify-center rounded-full text-muted-foreground/50 hover:text-destructive hover:bg-destructive/10 transition-all duration-300 active:scale-90 relative z-10"
+            className="touch-cta shrink-0 w-11 h-11 flex items-center justify-center rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-300 active:scale-90 relative z-10"
           >
             <Trash2 size={16} strokeWidth={1.8} />
           </button>
@@ -99,7 +99,7 @@ const DrawerItemRow = ({
           </div>
 
           <div className="text-right">
-            <p className="font-body text-xs text-muted-foreground/50 line-through tabular-nums">
+            <p className="font-body text-xs text-muted-foreground/70 line-through tabular-nums">
               {unitPrice !== lineTotal ? formatPrice(unitPrice * (item.quantity + 0)) : undefined}
             </p>
             <p className="font-body text-sm md:text-base font-medium text-gold tabular-nums">
@@ -119,7 +119,7 @@ const EmptyState = ({ onClose }: { onClose: () => void }) => (
     className="flex flex-col items-center justify-center py-16 px-6 text-center shrink-0"
   >
     <div className="w-20 h-20 rounded-full bg-card/60 border border-border/70 backdrop-blur-md flex items-center justify-center mb-6 shadow-soft-depth">
-      <ShoppingBag size={32} strokeWidth={1.3} className="text-muted-foreground/50" />
+      <ShoppingBag size={32} strokeWidth={1.3} className="text-muted-foreground/70" />
     </div>
     <h3 className="font-heading text-2xl text-foreground mb-2">
       Seu carrinho está <span className="italic text-gold font-light">vazio</span>
@@ -174,7 +174,7 @@ const FreeShippingBar = () => {
           initial={{ width: 0 }}
           animate={{ width: `${freeShippingProgress}%` }}
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_10px_rgba(212,175,55,0.45)]"
+          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light shadow-[0_0_10px_hsl(var(--gold)_/_0.45)]"
         />
       </div>
     </div>
@@ -219,8 +219,8 @@ const CartDrawer = ({ open, onOpenChange }: CartDrawerProps) => {
         className={cn(
           "w-full sm:max-w-md md:max-w-lg !px-0 !py-0",
           "border-l border-border/70",
-          "bg-card/35 backdrop-blur-xl md:backdrop-blur-2xl saturate-[180%]",
-          "shadow-[-12px_0_60px_-12px_rgba(0,0,0,0.35)]",
+          "bg-background",
+          "shadow-[-12px_0_60px_-12px_hsl(var(--background)_/_0.55),0_0_0_1px_hsl(var(--border)_/_0.5)]",
           "flex flex-col !h-dvh"
         )}
       >
@@ -279,7 +279,7 @@ const CartDrawer = ({ open, onOpenChange }: CartDrawerProps) => {
                 <div className="pt-4 pb-2 flex justify-end">
                   <button
                     onClick={clear}
-                    className="touch-cta min-h-[44px] flex items-center gap-1.5 font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 hover:text-destructive transition-colors duration-300 active:scale-95 px-3"
+                    className="touch-cta min-h-[44px] flex items-center gap-1.5 font-body text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-destructive transition-colors duration-300 active:scale-95 px-3"
                   >
                     <Trash2 size={12} /> Esvaziar carrinho
                   </button>
@@ -291,7 +291,7 @@ const CartDrawer = ({ open, onOpenChange }: CartDrawerProps) => {
 
         {hydrated && items.length > 0 && (
           <SheetFooter className="w-full gap-0 !px-0 !py-0 shrink-0">
-            <div className="w-full border-t border-border/70 bg-card/40 backdrop-blur-xl px-5 sm:px-6 md:px-8 pt-5 pb-6 md:pb-7 space-y-4">
+            <div className="w-full border-t border-border/70 bg-background px-5 sm:px-6 md:px-8 pt-5 md:pb-6 pb-[max(2rem,env(safe-area-inset-bottom))] space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between font-body text-xs md:text-sm text-foreground/80">
                   <span className="uppercase tracking-[0.18em] text-muted-foreground">Subtotal</span>
