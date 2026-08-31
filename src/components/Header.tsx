@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Search, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
-import solerLogo from "@/assets/soler-logo.png";
+import solerLogo from "@/assets/soler-logo.svg";
 
 const CartIcon = lazy(() => import("./CartIcon"));
 

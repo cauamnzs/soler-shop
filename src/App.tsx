@@ -11,9 +11,25 @@ import LeadCaptureModal from "@/components/LeadCaptureModal";
 import GlobalShell from "@/components/GlobalShell";
 import CookieBanner from "@/components/CookieBanner";
 import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
-import Index from "@/pages/Index";
-import ProductDetail from "@/pages/ProductDetail";
 import NotFound from "@/pages/NotFound";
+
+const Index = lazy(() => import("@/pages/Index"));
+const ProductDetail = lazy(() => import("@/pages/ProductDetail"));
+
+const PageLoader = () => (
+  <div className="fixed inset-0 z-[99950] bg-background flex items-center justify-center">
+    <div className="relative flex flex-col items-center gap-5">
+      <div className="relative w-14 h-14 md:w-16 md:h-16">
+        <div className="absolute inset-0 rounded-full border border-gold/25" />
+        <div className="absolute inset-0 rounded-full border-2 border-t-gold border-l-gold/80 border-r-transparent border-b-transparent animate-spin" style={{ animationDuration: "1.1s", animationTimingFunction: "cubic-bezier(0.4,0,0.2,1)" }} />
+        <div className="absolute inset-[14px] md:inset-[16px] rounded-full bg-gold/30 animate-pulse" />
+      </div>
+      <div className="font-heading text-[10px] md:text-xs uppercase tracking-[0.5em] text-muted-foreground/70">
+        Soler
+      </div>
+    </div>
+  </div>
+);
 
 const Cart = lazy(() => import("@/pages/Cart"));
 const Checkout = lazy(() => import("@/pages/Checkout"));
@@ -52,7 +68,7 @@ const App = () => (
               <LeadCaptureModal />
               {/* Cookie Consent: banner fixo, persistência localStorage, preferências */}
               <CookieBanner />
-              <Suspense fallback={<div className="min-h-screen bg-background" />}>
+              <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/product/:id" element={<ProductDetail />} />

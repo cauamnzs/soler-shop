@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
-import solerLogo from "@/assets/soler-logo.png";
+import solerLogo from "@/assets/soler-logo.svg";
 
 // Letter-by-letter reveal animation
 const LetterReveal = ({ text, delay = 0 }: { text: string; delay?: number }) => {

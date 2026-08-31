@@ -60,14 +60,22 @@ interface ProcessPaymentError {
   sandbox: boolean;
 }
 
-const ALLOWED_ORIGINS = [
-  /^http:\/\/localhost:\d+$/,
-  /^https?:\/\/127\.0\.0\.1:\d+$/,
+const PRODUCTION_ORIGINS = [
+  "https://solershop.com.br",
+  "https://www.solershop.com.br",
 ];
+
+const VERCEL_PREVIEW_PATTERN = /^https:\/\/solershop-[\w-]+\.vercel\.app$/;
+const VERCEL_TEAM_PATTERN = /^https:\/\/[\w-]+-git-[a-f0-9]+-solershop\.vercel\.app$/;
+const LOCALHOST_PATTERN = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
 
 const isValidOrigin = (origin: string | undefined): boolean => {
   if (!origin) return true;
-  return ALLOWED_ORIGINS.some((r) => r.test(origin)) || origin.endsWith(".vercel.app") || origin.includes("solershop");
+  if (PRODUCTION_ORIGINS.includes(origin)) return true;
+  if (LOCALHOST_PATTERN.test(origin)) return true;
+  if (VERCEL_PREVIEW_PATTERN.test(origin)) return true;
+  if (VERCEL_TEAM_PATTERN.test(origin)) return true;
+  return false;
 };
 
 const extract = (headers: Record<string, string | string[] | undefined>, key: string): string | undefined => {

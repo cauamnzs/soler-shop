@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Soler Shop Logo Icon">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(45, 50%, 82%)" />
+      <stop offset="35%" stop-color="hsl(45, 65%, 60%)" />
+      <stop offset="55%" stop-color="hsl(44, 72%, 52%)" />
+      <stop offset="75%" stop-color="hsl(42, 80%, 60%)" />
+      <stop offset="100%" stop-color="hsl(48, 55%, 78%)" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="hsl(0, 0%, 6%)" />
+  <g transform="translate(256,262)">
+    <circle r="202" fill="none" stroke="url(#gold)" stroke-width="5" opacity="0.4" />
+    <circle r="180" fill="none" stroke="url(#gold)" stroke-width="2" opacity="0.22" stroke-dasharray="4 12" />
+
+    <g transform="translate(0,-24)">
+      <path
+        d="M-128,88 L-128,-92 Q-128,-136 -84,-136 L-40,-136 Q-4,-132 12,-100 Q24,-80 20,-52 Q14,-16 -28,-8 L-72,-4 L-72,-36 Q-72,-68 -44,-68 L-68,-68 L-100,-60 L-100,-68 L-120,-68 L-120,88 Z
+           M-72,-8 L-100,-12 L-100,44 L-72,44 Z M-100,60 L-100,88 L-72,88 L-72,60 Z"
+        fill="url(#gold)"
+      />
+      <path
+        d="M76,-136 L52,-136 Q-4,-128 -28,-64 Q-44,-16 -20,20 Q-8,52 24,72 Q56,92 104,92 L156,92 L156,60 L112,60 Q88,60 72,44 L104,44 Q140,40 140,8 Q140,-56 116,-80 Q104,-96 100,-116 Q92,-132 76,-136 Z
+           M60,-20 Q80,-36 80,-60 Q80,-84 64,-96 Q44,-104 16,-104 L-8,-104 L44,-20 Z"
+        fill="url(#gold)"
+      />
+    </g>
+
+    <path
+      d="M-176,180 Q-112,160 -64,180 Q0,160 64,180 Q112,160 176,180"
+      fill="none" stroke="hsl(42, 55%, 52%)" stroke-width="4" stroke-linecap="round" opacity="0.9"
+    />
+  </g>
+</svg>

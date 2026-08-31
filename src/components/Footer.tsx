@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { Instagram, Mail, CreditCard, MessageCircle, ArrowRight } from "lucide-react";
-import solerLogo from "@/assets/soler-logo.png";
+import solerLogo from "@/assets/soler-logo.svg";
 import { getWhatsAppLink, getInstagramLink, getMailtoLink } from "@/lib/envConfig";
 
 const Footer = () => {
