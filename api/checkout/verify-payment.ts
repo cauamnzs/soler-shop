@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-export const config = { runtime: "nodejs18.x" as const };
+export const config = { runtime: "nodejs18.x" };
 
 interface VercelRequest {
   method?: string;
