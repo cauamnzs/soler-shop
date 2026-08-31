@@ -1,4 +1,4 @@
-import { checkoutRequestSchema, computeServerTotals, type CheckoutRequest } from "../_lib/checkout-shared";
+import { checkoutRequestSchema, computeServerTotals, type CheckoutRequest } from "../_lib/checkout-shared.js";
 import crypto from "node:crypto";
 
 export const config = { runtime: "nodejs" };
